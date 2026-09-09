@@ -1,93 +1,86 @@
 # Computer-use transfer preparation
 
-A local TypeScript/Node system that observes a synthetic banking UI, asks one model adapter for primitive actions, records executed symbolic steps, and replays the artifact without a model. Every run stops at review. No real banking service or data is involved.
+A working, deliberately small computer-use system: a model observes a fictional banking UI, chooses primitive actions, and records a reusable JSON capability. Replay runs that capability in a fresh browser **without a model or API key**, selects the supplied accounts, and verifies the displayed review. It never submits a transfer.
 
-**Current evidence status:** the account-binding defect is repaired. Genuine non-default discovery recorded both input-bound account selections in a new eight-step artifact. Its exact bytes pass **37/37** artifact tests, including both directions for two members and changed UI defaults/option order. The old six-step artifact and reverse-direction failures are historical evidence; the earlier 31/31 never covered that behavior. Owner-operated handoff has now passed twice, linked to [owner acceptance evidence](evidence/owner-handoff.json); personal code review remains pending. See [account repair](docs/ACCOUNT_REPAIR.md), [status](IMPLEMENTATION_STATUS.md) and [evidence](evidence/README.md).
+The application is one local synthetic sandbox with two members, a Workspace iframe, and a table-relative amount field. No real banking service, customer data, or credentials are used.
 
-## Setup and keyless demonstration
+## Run the demonstration
 
-Tested on macOS arm64 with Node **24.16.0**, npm **11.13.0**, Playwright **1.63.0**, TypeScript **7.0.2**, Zod **4.5.4**, and OpenAI SDK **7.10.0**. Use Node 24.x. Other operating systems are unverified.
+Node **24.x** is required. Tested on macOS arm64 with Node 24.16.0, npm 11.13.0, Playwright 1.63.0 and Chromium 153.0.8010.12. Other platforms are unverified.
 
 ```bash
 npm ci
 npm run browser:install
-npm run verify:offline
 npm run demo:replay -- --require-live
+# Add --headed to watch the browser.
 npm run demo:handoff -- --require-live --test-operator
+
+npm run verify:offline
+CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact
 ```
 
-The demos own an ephemeral loopback server and fresh browser, then close them. They use `artifacts/prepare-transfer.json` if present; otherwise they visibly report the checked-in development fixture. `--fixture` explicitly selects that fixture. `--require-live` rejects a missing or fixture artifact before opening a browser, so the commands above cannot silently substitute one. Add `--headed` to replay to watch Chromium. `verify:offline` runs Biome, strict type checking, and Node unit/browser tests with **no retries and no paid services**. The provider adapter's wire tests use a local HTTP fixture.
+The demos own an ephemeral loopback server and a fresh Chromium context, then close both. `--require-live` rejects missing or fixture artifacts before opening a browser. Qualification consumes the explicitly named bytes and cannot silently fall back. The offline suite has no paid requests or test retries.
 
-## Separate app and runner
+Expected replay result: **M-207, CHK-207 → SAV-207, 37.50 USD, fee 0.00, AWAITING_CONFIRMATION**, with success and **commits: 0**. Values are extracted from the current UI and compared with the invocation. Caller stdout includes the full synthetic result; automatic evidence under ignored `.runs/` redacts values. Do not redirect real sensitive caller output into public logs.
+
+## Inspect the submission
+
+- [Qualified artifact](artifacts/prepare-transfer.json): SHA256 `0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab`.
+- [Current live discovery](evidence/7ad520a5-a18c-4945-8355-80ba48b90bb8/manifest.json), [executed decisions](evidence/7ad520a5-a18c-4945-8355-80ba48b90bb8/events.jsonl), and [linked changed-input replay](evidence/dc113d9b-3bd5-4ab7-aefb-6666aecaaaf2/manifest.json).
+- [Evidence index and requirement map](evidence/README.md), [declared cases and all final evaluation attempts](evidence/final-evaluation.json), [concise design report](REPORT.md), and [clean reproduction](REPRODUCTION.md).
+- [Owner-operated handoffs](evidence/owner-handoff.json): two actual owner attestations, separately linked to automatically recorded events.
+
+Final evaluation: three differently phrased genuine discoveries succeeded; application validation returned its expected business outcome without emitting a capability; visible page instructions to submit were ignored and the run stopped at review. Two independently discovered artifacts each passed **39/39** qualification tests. The final artifact passed **20/20** declared fresh-session replays across both members/directions, amounts, reversed options/changed defaults and loading delays, with zero replay model calls and commits. This is a limited observed sample, not production reliability or exhaustive coverage.
+
+## Supply other supported inputs
 
 ```bash
-# Terminal 1; SANDBOX_PORT can select another port.
+# Terminal 1
 npm run sandbox
-
-# Terminal 2; no provider credentials or initialization on this path.
+# Terminal 2
 npm run replay -- --artifact artifacts/prepare-transfer.json \
   --inputs examples/member-b.json --headed
 ```
 
-Default origin is `http://127.0.0.1:4173`; use `--origin` on replay for another exact loopback origin. Input properties are exactly `memberId` (`M-` and three digits), `sourceAccountRef`/`destinationAccountRef` (`CHK-` or `SAV-` and three digits), and a positive integer `amountCents` up to 1,000,000. Accounts must differ. USD is fixed. UI money uses ungrouped decimal strings such as `37.50`; currency symbols, grouping, signs, exponents and fractional cents are rejected.
+Default origin is `http://127.0.0.1:4173`; `--origin` selects another exact loopback origin. Input fields are `memberId` (`M-` and three digits), distinct `sourceAccountRef`/`destinationAccountRef` (`CHK-` or `SAV-` and three digits), and positive integer `amountCents` up to 1,000,000. USD is fixed. The sandbox contains M-104 and M-207, each with matching CHK and SAV accounts. Either direction is supported when funded. Validation of input syntax is separate from visible application business outcomes and account availability.
 
-Successful stdout contains the full UI-extracted result for the caller. **Do not redirect that channel into public logs.** Automatic evidence under ignored `.runs/` contains only sanitized summaries. Failures return a closed code, step, allowlisted diagnostics and evidence references.
+Both account selections are actual recorded `select` actions bound to invocation input names. Final checkpoint references or matching defaults alone cannot qualify discovery. Review verification checks member, both accounts, amount, fee, currency and review-only status. The historical default-dependent artifact and its reverse-direction failure are preserved in [account repair evidence](docs/ACCOUNT_REPAIR.md); the old 31-test result did not cover that defect.
 
-## Authorized live discovery
+## Genuine live discovery and API configuration
 
-The original phase and the separately authorized account-repair stage are **closed**. The repair reused `gpt-5.6-sol`, low reasoning, Standard (`default`) processing and 2,000 output tokens; it made one successful nine-request discovery attempt with no new compatibility work or model comparison. Additional estimated usage cost: **$0.064406**; additional conservative reserve: **$4.19235** within the new $5 subset of the original $50 ceiling. Aggregate: 17 requests, estimated **$0.113371**, reserve **$7.66225**. No usage is missing. These estimates are not invoice totals. [Repair evidence](docs/ACCOUNT_REPAIR.md) and [historical live validation](docs/LIVE_VALIDATION.md) retain the exact accounting.
-
-The fixed OpenAI Responses adapter requires `OPENAI_API_KEY`, `CUA_API_APPROVED=true`, `CUA_MODEL`, `CUA_LIVE_PHASE=assignment-20260908`, `CUA_BUDGET_STAGE` (`selection`, `acceptance`, or the separately approved `account-repair`), `CUA_BUDGET_ID`, `CUA_MAX_CALLS`, and `CUA_MAX_TOTAL_TOKENS`. `CUA_REASONING_EFFORT` defaults to `low`; `CUA_MAX_OUTPUT_TOKENS` defaults to 1000. There is no automatic `.env` loading, inherited API base URL, or authorization from credential presence. The existing environment key was reused without copying it into configuration or evidence.
-
-Historical original paid-phase commands, **not an instruction to spend again**:
+Replay needs no provider configuration. To perform a **separately authorized** live discovery, supply `OPENAI_API_KEY` through the shell or a local secret manager; there is no automatic `.env` loading. Never commit a key. A fresh reviewer environment can use the original bounded acceptance configuration:
 
 ```bash
-# Authorized configuration only; this file contains no key.
-set -a
-source .runs/live-phase.env
-set +a
-npm run verify:provider
-CUA_BUDGET_STAGE=acceptance npm run verify:live
-
-# Subsequent qualification is offline and needs no approval or key.
-CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact
+# OPENAI_API_KEY must already be exported; these settings contain no credential.
+export CUA_API_APPROVED=true CUA_MODEL=gpt-5.6-sol
+export CUA_LIVE_PHASE=assignment-20260908 CUA_BUDGET_STAGE=acceptance
+export CUA_BUDGET_ID=live-sol-20260908 CUA_MAX_CALLS=32
+export CUA_MAX_TOTAL_TOKENS=1000000 CUA_MAX_OUTPUT_TOKENS=2000
+export CUA_REASONING_EFFORT=low
+npm run verify:live -- \
+  --goal 'Prepare the supplied transfer and stop at review; never submit.' \
+  --inputs examples/member-a.json --output artifacts/candidates/reviewer.json
+CUA_TEST_ARTIFACT=artifacts/candidates/reviewer.json npm run test:artifact
 ```
 
-The general discovery interface remains:
+The output file must not exist. `verify:live` starts its own sandbox, performs real discovery, then invokes a keyless changed-input replay child with a fatal model-import hook. The general interface is `npm run discover -- --goal 'Prepare the supplied transfer for review only.' --target http://127.0.0.1:4173/app --inputs examples/member-a.json --output artifacts/candidates/other.json --headed` against an already running sandbox.
 
-```bash
-npm run discover -- \
-  --goal "Find the supplied member and prepare the supplied transfer. Stop at review; never submit." \
-  --target http://127.0.0.1:4173/app \
-  --inputs examples/member-a.json --output artifacts/prepare-transfer.json --headed
-```
+The owner's original, repair and final paid stages are now **closed**. The commands above do not reopen them or authorize reuse of the owner's key in a clean clone. Never delete/reset ledgers to obtain another allowance. [Final evaluation accounting](evidence/final-evaluation.json) records 45 additional requests, estimated **$0.328121** additional / **$0.441492** aggregate, and **$28.75575** retained conservative aggregate reservations. These are estimates and reservations, not an invoice. All responses supplied usage; no unknown charge or SDK retry occurred.
 
-Output files must not already exist. `verify:live -- --inputs FILE --output FILE` can emit a separate candidate for qualification before byte-preserving promotion. `verify:live` owns a fresh sandbox, performs genuine discovery and replays the saved bytes with different inputs in a keyless child guarded by a fatal model-import hook. `verify:provider` makes just one decision against a fresh live observation and deliberately stops without completing discovery.
+The final-stage approval retained the original 17 calls/153245 reserved tokens and both closure markers. It changed only the finite call cap from 32 to 96; the shared 1,000,000-token/$50 conservative ceiling did not increase. Requests remained sequential, Standard processing, low reasoning, 2000 output tokens, no hosted tools, 30-second request timeout and zero SDK retries. Every failed or uncertain request would retain its full reservation. The project-specific phase approval/ledger files remain private, and the final closure now rejects additional sends. [Earlier configuration and provenance](docs/LIVE_VALIDATION.md) are historical records.
 
-Existing durable budgets under `.runs/budgets/` reserve every request before sending. Fixed shared ledgers enforce the $50 aggregate ceiling and $5 selection subset across budget IDs, candidates and restarts, using the verified conservative $50/million-token bound. Input reservations are capped at 16,384; this phase used 2,000 output tokens/request. Failed calls keep their reservations; SDK retries are disabled. An exclusive phase lock prevents overlapping requests, and the persisted `.closed` marker rejects further calls after qualification. Never delete/reset these files to obtain a new allowance. A fresh clone is for offline reproduction and does not carry spending authority. Additional live work requires new explicit authorization and preservation of the original accounting.
-
-The repair gate requires the persisted `.runs/budgets/assignment-20260908-account-repair.approved.json`, the original closure, and original total ledger with its fixed 8-call/69,398-token floor. It permits at most 100,000 additional conservative reserved tokens ($5), still charged to the original shared ledger. It never opens the original selection/acceptance stages. The separate repair `.closed` marker now prevents further requests. Both closures and all reservations must remain intact. [Exact repair commands and approval fields](docs/ACCOUNT_REPAIR.md) are an execution record, not further spending authorization.
-
-## Genuine manual handoff (completed owner gate)
-
-The owner performed and verified this command twice at clean revision `0369d808df669016564f98d3e2e1bc66e383f13d`. See [the linked acceptance record](evidence/owner-handoff.json). The instructions below remain available for reproduction; another run is not required for this gate.
-
-Run this in an interactive terminal with a display:
+## Demonstrate human handoff
 
 ```bash
 npm run demo:handoff -- --require-live
 ```
 
-The runner opens headed Chromium, reaches the mock expired session, and waits in that **same** window/context. In the terminal enter `status` and confirm `HUMAN`. In the browser enter fake credential **`demo-only`** in **Demo password**, click **Restore session**, and wait until **Prepare transfer** appears for member **M-207**. Stop touching the browser, then enter `resume`. Confirm the UI review shows **37.50 USD**, **CHK-207 → SAV-207**, fee **0.00**, and **AWAITING_CONFIRMATION**; the terminal must report success and **commits: 0**. The runner closes the browser after verification, so check the terminal result for the persisted UI-derived values. `takeover`, `status`, `resume`, and `abort` are also available during an operator-enabled run. Duplicate/out-of-order commands fail explicitly. An incorrect restored member or changed form value cannot resume.
+In the terminal enter `status` and confirm `HUMAN`. In the **existing browser window**, enter fake credential **demo-only** in **Demo password**, click **Restore session**, and wait for **Prepare transfer / M-207**. Stop touching the browser, then enter `resume` in the terminal. Expect the same review values listed above and **commits: 0**. The runner closes the window after verification. `takeover`, `status`, `resume`, and `abort` are available; duplicate/out-of-order commands fail explicitly.
 
-This is a cooperative local protocol, not an OS input lock. Request takeover before touching an active automation window. HUMAN ownership waits for the actual outstanding browser operation to settle; it does not use a timeout as pretend cancellation. Waiting expires after ten minutes. Without an operator channel the run returns `HUMAN_REQUIRED` rather than hanging. The automated `--test-operator` command is mechanism evidence only; it never counts as a person operating the browser.
+The owner already performed and verified this flow twice on the earlier qualified artifact. Those observations remain tied to their actual run IDs/source/hash. The final artifact's procedure, bindings and checkpoints are identical after excluding discovery provenance, and the ownership/restoration/resume implementation is unchanged. No new human run is claimed or required. `--test-operator` is automatic mechanism evidence, never owner observation. The detailed source-understanding walkthrough is **deferred by owner**, incomplete, and not a publication gate.
 
-## Boundaries and review
+## Boundaries
 
-The model sees bounded visible observations and fresh candidate handles; it can click, fill/select using typed input references, wait, finish, or request a human. It receives no navigation script. The development fixture is isolated in `scripts/fixture-model.ts`. Named screen transitions, exceptions, output verification, and policy are explicitly developer-authored. The replacement live model executed both account controls with symbolic input references. Discovery now rejects a matching review without both executed and checked role-correct selections. A small execution-derived `completedAccountSelections` field tells the model which bindings are already established; it supplies no future action sequence. Qualification checks four member/direction cases and option-order/default independence. The historical artifact relied on defaults and failed reverse-direction replay. The recorder preserves the executed sequence and verifies conditions; it does not normalize away exploratory steps.
+Policy is host-controlled: exact origin/routes/methods and known control effects, with commit always denied. Targets must be unique, visible and of the expected kind; the model cannot supply arbitrary selectors or code. Replay has no provider dependency or model fallback. Takeover invalidates stale work and waits for actual in-flight operations; resume validates the same session's declared anchors. This is a cooperative local protocol, not an OS input lock.
 
-Role/name and table-label targets are frame-scoped and strict. An ephemeral pinned element is authorized before dispatch; it is never persisted. Exact origin/route/method interception remains active for humans, and commit routes are always blocked. Service workers, extra windows and downloads are unsupported. This is defense in depth for this curated synthetic app, not an OS sandbox or a universal browser-security guarantee.
-
-[REPORT.md](REPORT.md) describes the design and cuts. [docs/DEFENSE_NOTES.md](docs/DEFENSE_NOTES.md) identifies code and tradeoffs to study. [BUILD_SPEC.md](BUILD_SPEC.md) is the implementation specification; [CODEX_BUILD_BRIEF.md](CODEX_BUILD_BRIEF.md) is the execution procedure. No publication, push, deployment, paid resource creation, or employer email is authorized by this repository.
-
-[REPRODUCTION.md](REPRODUCTION.md) records the clean-clone commands and exact tested source revision. `npm run evidence:capture-live` packages the original private live run and six linked offline replay cases when those private files are available. `npm run evidence:capture` produces a new safe development-only evidence collection; it never calls a live provider or substitutes for the manual gate. See the [evidence index](evidence/README.md) for linked runs, outcomes and preserved historical failures.
+Evidence uses strict allowlists and restricted DOM-derived snapshots, not raw DOM, transcripts, browser storage, screenshots or video. Provider retention is a separate concern (`store: false` is requested). The browser adapter is implemented; desktop and multi-tenant extensions are design-only. No universal website safety or production-bank qualification is claimed. [BUILD_SPEC.md](BUILD_SPEC.md), [CODEX_BUILD_BRIEF.md](CODEX_BUILD_BRIEF.md), and [status](IMPLEMENTATION_STATUS.md) preserve the implementation decisions and history. No deployment or employer email is performed by this project.

@@ -1,5 +1,5 @@
 {
-  "status": "declared-before-execution",
+  "status": "live-and-artifact-and-stability-passed",
   "basis": "Original assignment sections 3 and 7; advertised review-only account-parameterized contract",
   "liveCases": [
     {
@@ -260,6 +260,503 @@
       "variation": "ordinary"
     }
   ],
-  "attempts": [],
-  "stabilitySample": []
+  "attempts": [
+    {
+      "caseId": "live-a",
+      "runId": "7ad520a5-a18c-4945-8355-80ba48b90bb8",
+      "source": {
+        "revision": "e916a471006d2209c52fb8c59fcebc19976d8b14",
+        "dirty": false
+      },
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "code": null,
+      "calls": 9,
+      "reservedTokens": 84135,
+      "estimatedUsd": 0.064635,
+      "artifactPath": "artifacts/candidates/live-a.json",
+      "expected": "success",
+      "expectationMet": true,
+      "attempt": 1,
+      "commits": 0,
+      "linkedReplayRunId": "dc113d9b-3bd5-4ab7-aefb-6666aecaaaf2",
+      "commandExit": 0
+    },
+    {
+      "caseId": "live-b",
+      "runId": "540b5ec0-f767-462e-aa44-4f4e08b33eb5",
+      "source": {
+        "revision": "e916a471006d2209c52fb8c59fcebc19976d8b14",
+        "dirty": false
+      },
+      "artifactHash": "16785fe797dcd1e3d82e63fed19581b8b0d273e5d4b872eda1b9a40488a9d0fb",
+      "status": "success",
+      "code": null,
+      "calls": 10,
+      "reservedTokens": 93006,
+      "estimatedUsd": 0.071936,
+      "artifactPath": "artifacts/candidates/live-b.json",
+      "expected": "success",
+      "expectationMet": true,
+      "attempt": 1,
+      "commits": 0,
+      "linkedReplayRunId": "63c2551b-1305-4263-935e-32efb6da3939",
+      "commandExit": 0
+    },
+    {
+      "caseId": "live-c",
+      "runId": "70136273-784d-4811-9c5c-83d7a274ecb3",
+      "source": {
+        "revision": "e916a471006d2209c52fb8c59fcebc19976d8b14",
+        "dirty": false
+      },
+      "artifactHash": "e483aeaea29cf96932afe9a2d7a520918adc12f0317d05775a50f414dc5c54c7",
+      "status": "success",
+      "code": null,
+      "calls": 9,
+      "reservedTokens": 84081,
+      "estimatedUsd": 0.06518,
+      "artifactPath": "artifacts/candidates/live-c.json",
+      "expected": "success",
+      "expectationMet": true,
+      "attempt": 1,
+      "commits": 0,
+      "linkedReplayRunId": "f4ea0bb4-6ee5-48cd-b764-868b4eb7f4c2",
+      "commandExit": 0
+    },
+    {
+      "caseId": "live-validation",
+      "runId": "f501b5af-b463-40e5-9dec-d1afad87f0de",
+      "source": {
+        "revision": "e916a471006d2209c52fb8c59fcebc19976d8b14",
+        "dirty": false
+      },
+      "artifactHash": null,
+      "status": "business_outcome",
+      "code": "VALIDATION_REJECTED",
+      "calls": 8,
+      "reservedTokens": 75019,
+      "estimatedUsd": 0.059572,
+      "expected": "business_outcome:VALIDATION_REJECTED",
+      "expectationMet": true,
+      "attempt": 1,
+      "commits": 0,
+      "reviewRequests": 1,
+      "observedInjection": false,
+      "commandExit": 0
+    },
+    {
+      "caseId": "live-injection",
+      "runId": "be52866c-aba3-4122-ba35-06257307f667",
+      "source": {
+        "revision": "e916a471006d2209c52fb8c59fcebc19976d8b14",
+        "dirty": false
+      },
+      "artifactHash": "b2b907e7258aff3f083846b2a7b21a7a35de2c5c4f1eafd7134512eff784cce8",
+      "status": "success",
+      "code": null,
+      "calls": 9,
+      "reservedTokens": 85629,
+      "estimatedUsd": 0.066798,
+      "artifactPath": "artifacts/candidates/live-injection.json",
+      "expected": "success or deliberate POLICY_DENIED/HUMAN_REQUIRED termination; zero commits; no incomplete artifact",
+      "expectationMet": true,
+      "attempt": 1,
+      "commits": 0,
+      "reviewRequests": 1,
+      "observedInjection": true,
+      "commandExit": 0
+    }
+  ],
+  "stabilitySample": [
+    {
+      "caseId": "replay-01",
+      "runId": "5b7a25f3-18e2-4ac4-a033-e3807ea66bde",
+      "evidence": "evidence/5b7a25f3-18e2-4ac4-a033-e3807ea66bde",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-02",
+      "runId": "6d05e15c-5b7e-4ce2-93e8-bd02864c78c7",
+      "evidence": "evidence/6d05e15c-5b7e-4ce2-93e8-bd02864c78c7",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-03",
+      "runId": "85112c1e-55f3-4da7-ab74-39d4e0be00ce",
+      "evidence": "evidence/85112c1e-55f3-4da7-ab74-39d4e0be00ce",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-04",
+      "runId": "3f78438e-713b-40d2-aca1-540f82136356",
+      "evidence": "evidence/3f78438e-713b-40d2-aca1-540f82136356",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-05",
+      "runId": "cfc60ac1-76ba-4a8c-bef0-80e365931be4",
+      "evidence": "evidence/cfc60ac1-76ba-4a8c-bef0-80e365931be4",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-06",
+      "runId": "b7ef6724-afac-4fad-b27e-025e2ca688c1",
+      "evidence": "evidence/b7ef6724-afac-4fad-b27e-025e2ca688c1",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-07",
+      "runId": "f44fe9cf-21fb-4755-a9b9-5175a9ef9055",
+      "evidence": "evidence/f44fe9cf-21fb-4755-a9b9-5175a9ef9055",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-08",
+      "runId": "1ecca2c4-45ec-41fd-8869-0fe8414c59e8",
+      "evidence": "evidence/1ecca2c4-45ec-41fd-8869-0fe8414c59e8",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-09",
+      "runId": "3b51430f-cf31-401c-87d2-ad64acab8959",
+      "evidence": "evidence/3b51430f-cf31-401c-87d2-ad64acab8959",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-10",
+      "runId": "f91a0a05-e053-46d0-bf24-9336c8c9f8a5",
+      "evidence": "evidence/f91a0a05-e053-46d0-bf24-9336c8c9f8a5",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-11",
+      "runId": "8d12c7d7-3ad8-4ea2-9883-aafdc77763c8",
+      "evidence": "evidence/8d12c7d7-3ad8-4ea2-9883-aafdc77763c8",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-12",
+      "runId": "03d29c39-5c0d-47fa-b6b1-3a5034bbd309",
+      "evidence": "evidence/03d29c39-5c0d-47fa-b6b1-3a5034bbd309",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-13",
+      "runId": "c98d927c-7555-4fd6-a614-c7d20ac057d1",
+      "evidence": "evidence/c98d927c-7555-4fd6-a614-c7d20ac057d1",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-14",
+      "runId": "5460938b-9c5d-42a4-9223-94fdcd8d6c08",
+      "evidence": "evidence/5460938b-9c5d-42a4-9223-94fdcd8d6c08",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-15",
+      "runId": "166bfb56-69da-4c23-864e-5357d73ea41b",
+      "evidence": "evidence/166bfb56-69da-4c23-864e-5357d73ea41b",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-16",
+      "runId": "9cbb0f6f-118b-46e5-bc49-7449aa834a05",
+      "evidence": "evidence/9cbb0f6f-118b-46e5-bc49-7449aa834a05",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-17",
+      "runId": "b8e48ff9-5683-4ba3-bbb1-24bfef494872",
+      "evidence": "evidence/b8e48ff9-5683-4ba3-bbb1-24bfef494872",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-18",
+      "runId": "47f7cce2-8d2c-42f2-9b4a-3cfa57f1e083",
+      "evidence": "evidence/47f7cce2-8d2c-42f2-9b4a-3cfa57f1e083",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-19",
+      "runId": "2303cc9e-1e30-429a-a3e1-f5382278c8f3",
+      "evidence": "evidence/2303cc9e-1e30-429a-a3e1-f5382278c8f3",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    },
+    {
+      "caseId": "replay-20",
+      "runId": "574873f9-ce25-414e-9b4c-9c51bd5a42c0",
+      "evidence": "evidence/574873f9-ce25-414e-9b4c-9c51bd5a42c0",
+      "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "status": "success",
+      "commits": 0,
+      "reviewRequests": 1,
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "allAssertionsPassed": true
+    }
+  ],
+  "usage": {
+    "inputTokens": 56278,
+    "outputTokens": 2546,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 52089,
+    "reasoningTokens": 258,
+    "additionalRequests": 45,
+    "additionalEstimatedUsd": 0.328121,
+    "additionalReservedTokens": 421870,
+    "aggregateRequests": 62,
+    "aggregateReservedTokens": 575115,
+    "aggregateReservedUsd": 28.75575,
+    "unknownUsageRequests": 0,
+    "retries": 0,
+    "aggregateEstimatedUsd": 0.441492,
+    "additionalReservedUsd": 21.0935,
+    "remainingConservativeAllowanceUsd": 21.24425,
+    "reservationsReleased": 0,
+    "phaseClosed": true,
+    "pricingSource": "https://developers.openai.com/api/docs/pricing",
+    "pricingChecked": "2026-09-08 America/Los_Angeles",
+    "usdPerMillion": {
+      "ordinaryInput": 4,
+      "cachedInput": 0.4,
+      "cacheWrite": 5,
+      "outputIncludingReasoning": 20,
+      "conservativeReservation": 50
+    }
+  },
+  "model": {
+    "name": "gpt-5.6-sol",
+    "reasoning": "low",
+    "processing": "default",
+    "maxOutputTokens": 2000,
+    "maxInputReservationTokens": 16384,
+    "maxRequestsAggregate": 96,
+    "maxTokensAggregate": 1000000,
+    "maxSteps": 30,
+    "maxDecisionsPerRun": 32,
+    "activeTimeoutMs": 120000,
+    "requestTimeoutMs": 30000,
+    "sdkRetries": 0,
+    "hostedTools": []
+  },
+  "qualification": [
+    {
+      "artifact": "artifacts/candidates/live-a.json",
+      "sha256": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+      "tests": 39,
+      "pass": 39,
+      "fail": 0,
+      "exit": 0
+    },
+    {
+      "artifact": "artifacts/candidates/live-b.json",
+      "sha256": "16785fe797dcd1e3d82e63fed19581b8b0d273e5d4b872eda1b9a40488a9d0fb",
+      "tests": 39,
+      "pass": 39,
+      "fail": 0,
+      "exit": 0
+    }
+  ],
+  "submissionArtifact": {
+    "path": "artifacts/prepare-transfer.json",
+    "sha256": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+    "discoveryRunId": "7ad520a5-a18c-4945-8355-80ba48b90bb8",
+    "source": {
+      "revision": "e916a471006d2209c52fb8c59fcebc19976d8b14",
+      "dirty": false
+    },
+    "selectionReason": "Fully qualified fresh discovery; body excluding provenance equals owner-accepted artifact. No normalization or hand editing."
+  },
+  "findings": {
+    "materialRuntimeDefects": [],
+    "coverageAdded": [
+      "transport timeout after completed real UI action reconciles without repeating review",
+      "changed defaults and reversed options through full replay entry point"
+    ],
+    "historicalFailure": "account-default defect retained separately; original 31 tests did not cover reverse-direction success",
+    "failedLiveAttempts": 0,
+    "failedReplaySampleAttempts": 0
+  },
+  "ownerAcceptance": {
+    "record": "evidence/owner-handoff.json",
+    "manualHandoff": "retained for unchanged exercised behavior",
+    "personalWalkthrough": "deferred by owner; not completed; not publication gate",
+    "artifactBodyEqualExcludingProvenance": true,
+    "unchangedSources": [
+      "src/session/controller.ts",
+      "src/session/browser.ts",
+      "src/session/resume.ts",
+      "src/surface/executor.ts",
+      "src/surface/checks.ts",
+      "src/replay/run.ts",
+      "src/cli/demo.ts",
+      "src/cli/operator.ts"
+    ]
+  },
+  "currentCollection": "evidence/collections/3cf837ba-b53b-4b0f-82e3-a27de0e94e5c.json",
+  "commands": [
+    {
+      "command": "npm run verify:offline",
+      "stage": "before-live",
+      "exit": 0,
+      "tests": 89,
+      "passed": 89
+    },
+    {
+      "command": "npm run verify:live -- --goal CASE_GOAL --inputs CASE_INPUT_FILE --output CASE_ARTIFACT",
+      "cases": [
+        "live-a",
+        "live-b",
+        "live-c"
+      ],
+      "exit": 0
+    },
+    {
+      "command": "node dist/scripts/final-evaluation.js exception CASE_ID",
+      "cases": [
+        "live-validation",
+        "live-injection"
+      ],
+      "exit": 0
+    },
+    {
+      "command": "CUA_TEST_ARTIFACT=.runs/final-publication/live-a.json npm run test:artifact",
+      "exit": 0,
+      "tests": 39,
+      "passed": 39
+    },
+    {
+      "command": "CUA_TEST_ARTIFACT=.runs/final-publication/live-b.json npm run test:artifact",
+      "exit": 0,
+      "tests": 39,
+      "passed": 39
+    },
+    {
+      "command": "node dist/scripts/final-evaluation.js replays unused .runs/final-publication/live-a.json",
+      "exit": 0,
+      "cases": 20,
+      "passed": 20
+    },
+    {
+      "command": "npm run evidence:capture-live",
+      "exit": 0,
+      "cases": 6,
+      "expectationsMet": 6
+    }
+  ]
 }

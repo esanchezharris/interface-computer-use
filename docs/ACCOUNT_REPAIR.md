@@ -1,3 +1,9 @@
+# Historical account repair record
+
+The repair below remains valid historical evidence. The final public evaluation, newly qualified artifact, retained manual acceptance and deferred walkthrough decision are indexed in [current evidence](../evidence/README.md). Its predecessor artifact is preserved at `artifacts/historical/prepare-transfer-4b0ffdc4.json`; nothing below claims the owner exercised the new discovery provenance.
+
+---
+
 # Account-parameterization repair record
 
 The replacement live artifact actively selects both requested accounts and passes **37/37** exact-artifact tests. Full offline verification passes **84/84**. Owner manual handoff has subsequently passed twice; personal code review remains pending. See [owner acceptance](../evidence/owner-handoff.json). This is a correctness repair within the existing capability, synthetic application and safety policy.

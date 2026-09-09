@@ -1,10 +1,14 @@
 # Final publication checkpoint
 
-State: FINAL_ROBUSTNESS_IN_PROGRESS. Started from clean `3d23f6616a83f6296f8c024dbfd9498134e6656a` on `build/computer-use`.
+State: FINAL_LIVE_AND_REPLAY_GATES_PASSED; PACKAGING_REVIEW_AND_CLEAN_REPRODUCTION_IN_PROGRESS.
 
-Working sequence: (1) declare PDF §§3/7 coverage and bounded cases, extend existing final-phase approval preserving ledgers; (2) execute five genuine discovery scenarios, qualify independent artifacts and 20 declared keyless replays; (3) focused review, clean reproduction, safe-history/publication preflight; (4) publish and verify anonymous checkout. Next action: complete focused offline harness/budget checks before paid discovery.
+Branch `build/computer-use`. Final applicable discovery/runtime source: `e916a471006d2209c52fb8c59fcebc19976d8b14` (all five live runs and 20 sample replays recorded clean source). Three normal discoveries and both exceptional cases met their declared expectations; no unexpected failed live attempt. Two independent artifacts each qualified 39/39. Pre-live offline suite passed 89/89. The submission artifact is now SHA256 `0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab`; 20/20 declared fresh-session replays passed with zero model calls/commits. Old artifacts and failures are preserved.
 
-The owner superseded the USD5 repair-stage cap with the remaining original USD50 aggregate ceiling and authorized public GitHub publication after release checks. Original closures and 17-call/153245-token reservations remain intact. No new API calls yet. Detailed personal walkthrough is **deferred by owner**, remains incomplete, and is not a publication gate. Both owner-operated handoffs remain accepted for unchanged ownership/restoration/resume behavior. No such runtime code is changed by this phase's budget and test harness additions.
+All paid stages are closed. Final phase: 45 requests, 56278 input / 2546 output tokens (258 reasoning included), estimated $0.328121 additional. Aggregate: 62 requests, estimated $0.441492, $28.75575 conservative reservations retained. No unknown-usage requests or SDK retries. The original aggregate ceiling remained $50. No more paid requests needed.
+
+Next action: freeze the qualified package, perform one focused independent review and clean-checkout reproduction, then public GitHub preflight/publication and anonymous-checkout smoke. Public creation/push is explicitly authorized after release gates; deployment/email are not. The first history scan found no credential or private-material matches in 12 commits/357 unique blobs. No remote exists yet; authenticated personal account `esanchezharris`, requested name available.
+
+Owner handoff remains passed twice for the original exercised source/hash. Final artifact differs only in discovery provenance; ownership/restoration/resume code is unchanged. Detailed personal walkthrough is **deferred by owner**, remains incomplete, and is not a publication gate. See `evidence/owner-handoff.json`. Current evaluation: `evidence/final-evaluation.json`. Owned test/demo processes close their own browsers and servers; no persistent app is required.
 
 ---
 

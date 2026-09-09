@@ -1,0 +1,32 @@
+{
+  "redacted": true,
+  "frames": [
+    {
+      "scope": "root",
+      "route": "/app",
+      "controls": []
+    },
+    {
+      "scope": "Workspace",
+      "route": "/transfer",
+      "controls": [
+        {
+          "tag": "input",
+          "label": "Demo password",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        },
+        {
+          "tag": "button",
+          "label": "Restore session",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        }
+      ]
+    }
+  ]
+}

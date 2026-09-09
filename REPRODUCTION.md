@@ -1,3 +1,13 @@
+# Final submission reproduction
+
+The final candidate contains the freshly qualified artifact `0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab`. The final applicable implementation/discovery source is `e916a471006d2209c52fb8c59fcebc19976d8b14`. Candidate clean-checkout reproduction and public-checkout smoke are being performed in this phase; the completed command receipts will be recorded here before publication is declared verified.
+
+The walkthrough is deferred by owner and is not a release gate. Both owner-operated handoffs remain valid for unchanged ownership/restoration/resume behavior and identical artifact procedure/bindings/checkpoints (provenance differs). Historical reproductions below are preserved with their original source/hash/counts.
+
+---
+
+## Historical repaired-capability reproduction
+
 # Clean reproduction of the repaired account capability
 
 Performed in one fresh local clone on 2026-09-08 (America/Los_Angeles) from final executable revision **`a0efd14e58a712f20d5e02970ee9f8f19c791e05`**, branch `build/computer-use`. Later packaging changes contain documentation and safe evidence only. The implementation itself was recorded at `563d3951363a19679fd8ae13ab6f5c0f4b0740c7`; the final executable revision includes the new qualified artifact.
