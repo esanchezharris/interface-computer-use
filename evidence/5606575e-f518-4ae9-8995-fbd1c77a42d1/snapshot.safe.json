@@ -1,0 +1,24 @@
+{
+  "redacted": true,
+  "frames": [
+    {
+      "scope": "root",
+      "route": "/app",
+      "controls": []
+    },
+    {
+      "scope": "Workspace",
+      "route": "/review",
+      "controls": [
+        {
+          "tag": "button",
+          "label": "Submit transfer",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        }
+      ]
+    }
+  ]
+}

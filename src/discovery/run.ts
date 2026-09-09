@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { existsSync, writeFileSync } from "node:fs";
+import { recordedAccountInputs } from "../domain/account-bindings.js";
 import { Decision } from "../domain/actions.js";
 import type { Artifact, Step } from "../domain/artifact.js";
 import { Fault, InputSchema, type RunResult } from "../domain/contract.js";
@@ -67,7 +68,9 @@ export async function discover(
       if (remaining <= 0 || recorder.steps.length >= 30) throw new Fault("RUN_TIMEOUT");
       const obs = await waitStable(runtime);
       const epoch = runtime.session.epoch;
+      const completedAccountSelections = recordedAccountInputs(recorder);
       const state = JSON.stringify({
+        completedAccountSelections,
         screen: obs.screen,
         member: obs.member,
         controls: obs.controls.map((c) => ({ name: c.name, value: c.value })),
@@ -89,6 +92,7 @@ export async function discover(
         input,
         observation: obs,
         correction,
+        completedAccountSelections,
         timeoutMs: Math.min(30000, remaining),
       });
       runtime.evidence.event({

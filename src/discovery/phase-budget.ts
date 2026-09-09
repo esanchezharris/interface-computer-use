@@ -1,12 +1,33 @@
-import { closeSync, existsSync, mkdirSync, openSync, unlinkSync } from "node:fs";
+import {
+  closeSync,
+  existsSync,
+  mkdirSync,
+  openSync,
+  readFileSync,
+  statSync,
+  unlinkSync,
+} from "node:fs";
 import { join, resolve } from "node:path";
+import { z } from "zod";
 import { Fault } from "../domain/contract.js";
 import { DurableBudget } from "./budget.js";
 
 export const LIVE_PHASE = "assignment-20260908";
 export const MAX_INPUT_TOKENS = 16_384;
 export const RESERVED_USD_PER_MILLION = 50;
-export type BudgetStage = "selection" | "acceptance";
+export const REPAIR_STAGE = "account-repair";
+export const RepairApproval = z.strictObject({
+  phase: z.literal(LIVE_PHASE),
+  stage: z.literal(REPAIR_STAGE),
+  additionalLimitUsd: z.literal(5),
+  aggregateLimitUsd: z.literal(50),
+  priorCalls: z.literal(8),
+  priorReservedTokens: z.literal(69_398),
+  model: z.literal("gpt-5.6-sol"),
+  reasoning: z.literal("low"),
+  maxOutputTokens: z.literal(2000),
+});
+export type BudgetStage = "selection" | "acceptance" | typeof REPAIR_STAGE;
 export class PhaseBudget {
   readonly #directory: string;
   readonly #total: DurableBudget;
@@ -37,6 +58,29 @@ export class PhaseBudget {
       selectionReservedUsd: (selection.tokens * RESERVED_USD_PER_MILLION) / 1_000_000,
     };
   }
+  private requireRepairApproval(tokens: number): void {
+    const approvalPath = join(this.#directory, `${LIVE_PHASE}-${REPAIR_STAGE}.approved.json`);
+    try {
+      if (
+        !existsSync(join(this.#directory, `${LIVE_PHASE}.closed`)) ||
+        !existsSync(join(this.#directory, `${LIVE_PHASE}-total.json`)) ||
+        statSync(approvalPath).size > 4096
+      )
+        throw new Fault("MODEL_UNAVAILABLE");
+      const approval = RepairApproval.parse(JSON.parse(readFileSync(approvalPath, "utf8")));
+      const total = this.#total.usage();
+      if (total.calls < approval.priorCalls || total.tokens < approval.priorReservedTokens)
+        throw new Fault("MODEL_UNAVAILABLE");
+      if (
+        existsSync(join(this.#directory, `${LIVE_PHASE}-${REPAIR_STAGE}.closed`)) ||
+        total.tokens - approval.priorReservedTokens + tokens > 100_000
+      )
+        throw new Fault("MODEL_BUDGET_EXHAUSTED");
+    } catch (error) {
+      if (error instanceof Fault) throw error;
+      throw new Fault("MODEL_UNAVAILABLE");
+    }
+  }
   async run<T>(tokens: number, stage: BudgetStage, request: () => Promise<T>): Promise<T> {
     mkdirSync(this.#directory, { recursive: true, mode: 0o700 });
     const lock = join(this.#directory, `${LIVE_PHASE}.inflight`);
@@ -47,7 +91,8 @@ export class PhaseBudget {
       throw new Fault("EVIDENCE_WRITE_FAILED");
     }
     try {
-      if (existsSync(join(this.#directory, `${LIVE_PHASE}.closed`)))
+      if (stage === REPAIR_STAGE) this.requireRepairApproval(tokens);
+      else if (existsSync(join(this.#directory, `${LIVE_PHASE}.closed`)))
         throw new Fault("MODEL_BUDGET_EXHAUSTED");
       if (stage === "selection") await this.#selection.reserve(tokens);
       await this.#total.reserve(tokens);

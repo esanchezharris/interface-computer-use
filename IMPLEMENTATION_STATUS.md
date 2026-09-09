@@ -1,3 +1,19 @@
+# Active account-binding repair
+
+State: **ACCOUNT_REPAIR_READY_FOR_LIVE**. Starting source `60a11c4ef51c8f99cffe53119e87aa312f18fac6`, branch `build/computer-use`. Owner-review notes are preserved.
+
+Completed: original artifact archived unchanged; reverse-direction failure retained; red regression baseline recorded; executed/checked symbolic account binding guard and discovery progress feedback implemented. Original selector/executor, policy, checkpoints, ownership and sandbox data/defaults unchanged.
+
+Offline verification: `npm run verify:offline` passed 83/83 before one additional provider-settings regression (7/7 budget tests passed separately). Four-direction and changed-default/order UI tests pass with the explicitly scripted development artifact. Current submission artifact is still the historical six-step artifact and is NOT qualified for the corrected account contract.
+
+Next unmet criterion: genuine non-default discovery with `examples/member-b-reverse.json` to a new candidate path; qualify those exact bytes with the expanded existing suite; only then promote. New owner authorization is USD5 additional within the original USD50 total. Original 8-call/69,398-token accounting and original closure remain intact; the new explicit account-repair stage measures all additional reservations from that retained total. No new paid request yet.
+
+Private baseline logs: `.runs/account-repair/red-baseline.log` (3 pass, 10 fail), `red-discovery.log` (0 pass, 1 fail). Historical reverse-direction runs are public safe evidence `5606575e-f518-4ae9-8995-fbd1c77a42d1`, `5b896d02-5779-4099-b3b4-6aaaefcf064b`, `e6e28544-eaf1-4179-b8d1-e87ff35f1c6e`. Original artifact: `artifacts/historical/prepare-transfer-294a274e.json`, SHA256 `294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d`.
+
+Remaining after live qualification: required-live demos, final offline verification, one clean reproduction, one focused review and final evidence/docs. Manual owner handoff and personal code review remain pending. Historical sections below retain their original results; earlier 31/31 did not cover reverse account direction.
+
+---
+
 # Implementation checkpoint
 
 State: READY_FOR_OWNER_REVIEW. Branch: `build/computer-use`.

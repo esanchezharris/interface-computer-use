@@ -1,3 +1,4 @@
+import type { AccountInput } from "../domain/account-bindings.js";
 import type { Decision } from "../domain/actions.js";
 import type { TransferInput } from "../domain/contract.js";
 import type { Observation } from "../surface/observe.js";
@@ -6,6 +7,7 @@ export type ModelRequest = {
   readonly input: TransferInput;
   readonly observation: Observation;
   readonly correction: boolean;
+  readonly completedAccountSelections?: readonly AccountInput[];
   readonly timeoutMs?: number;
 };
 export interface Model {

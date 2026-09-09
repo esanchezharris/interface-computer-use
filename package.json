@@ -20,7 +20,7 @@
     "demo:replay": "npm run build --silent && node dist/src/cli/demo.js replay",
     "demo:handoff": "npm run build --silent && node dist/src/cli/demo.js handoff",
     "verify:live": "npm run build --silent && node dist/src/cli/live.js",
-    "test:artifact": "npm run build && node --test --test-concurrency=1 dist/tests/integration/outcomes.test.js dist/tests/integration/handoff.test.js dist/tests/integration/safety.test.js dist/tests/integration/policy-effects.test.js",
+    "test:artifact": "npm run build && node --test --test-concurrency=1 dist/tests/integration/outcomes.test.js dist/tests/integration/handoff.test.js dist/tests/integration/safety.test.js dist/tests/integration/policy-effects.test.js dist/tests/integration/parameterization.test.js",
     "evidence:capture": "npm run build --silent && node dist/scripts/capture-evidence.js",
     "verify:provider": "npm run build --silent && node dist/src/cli/smoke.js",
     "evidence:capture-live": "npm run build --silent && node dist/scripts/capture-live-evidence.js"

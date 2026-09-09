@@ -1,0 +1,18 @@
+{
+  "mode": "replay",
+  "actor": "automation",
+  "origin": "live-model",
+  "artifactHash": "294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d",
+  "browserVersion": "153.0.8010.12",
+  "runId": "e6e28544-eaf1-4179-b8d1-e87ff35f1c6e",
+  "startedAt": "2026-09-09T03:37:14.889Z",
+  "source": {
+    "revision": "60a11c4ef51c8f99cffe53119e87aa312f18fac6",
+    "dirty": true
+  },
+  "runtime": "v24.16.0",
+  "profile": "synthetic-bank-v1",
+  "policy": "review-only-v1",
+  "modelCalls": 0,
+  "reservedTokens": 0
+}

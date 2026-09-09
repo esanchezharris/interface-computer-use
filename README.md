@@ -2,7 +2,7 @@
 
 A local TypeScript/Node system that observes a synthetic banking UI, asks one model adapter for primitive actions, records executed symbolic steps, and replays the artifact without a model. Every run stops at review. No real banking service or data is involved.
 
-**Current evidence status:** genuine OpenAI discovery succeeded, and its exact six-step artifact passed all 31 artifact-qualification tests. Changed-input replay runs without credentials or model imports and stops at review with zero commits. The separate development fixture and historical failures remain labeled and preserved. Owner-operated handoff and personal code review remain pending; see [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) and [evidence/README.md](evidence/README.md).
+**Current evidence status:** account-binding repair in progress. The historical six-step live artifact passed its earlier 31 tests but omitted account selections; newly added reverse-direction success cases exposed `CHECKPOINT_MISMATCH`. Offline repairs pass using the development artifact. A replacement live artifact must qualify before promotion. Original evidence and owner-review notes remain preserved. Owner-operated handoff and personal code review remain pending; see [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
 
 ## Setup and keyless demonstration
 

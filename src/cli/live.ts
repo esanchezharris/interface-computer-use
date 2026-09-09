@@ -1,21 +1,24 @@
 import { spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
+import { dirname } from "node:path";
 import { startSandbox } from "../../sandbox/server.js";
 import { createOpenAIModel } from "../discovery/openai.js";
 import { discover } from "../discovery/run.js";
 import { Fault } from "../domain/contract.js";
-import { readJSON, reportError } from "./args.js";
+import { args, readJSON, reportError } from "./args.js";
 
 try {
+  const options = args();
+  const outputPath = options.output ?? "artifacts/prepare-transfer.json";
   const model = createOpenAIModel(process.env);
-  mkdirSync("artifacts", { recursive: true });
+  mkdirSync(dirname(outputPath), { recursive: true });
   const app = await startSandbox({ port: 0 });
   try {
     const learned = await discover({
       goal: "Find the supplied member and prepare the supplied transfer. Stop at review; never submit.",
-      input: readJSON("examples/member-a.json"),
+      input: readJSON(options.inputs ?? "examples/member-a.json"),
       model,
-      outputPath: "artifacts/prepare-transfer.json",
+      outputPath,
       origin: app.origin,
       headed: false,
       operator: false,
@@ -37,7 +40,7 @@ try {
         "./dist/scripts/model-bomb.js",
         "dist/src/cli/replay.js",
         "--artifact",
-        "artifacts/prepare-transfer.json",
+        outputPath,
         "--inputs",
         "examples/member-b.json",
         "--origin",

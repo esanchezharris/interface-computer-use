@@ -1,0 +1,31 @@
+{
+  "sourceBeforeRepair": "60a11c4ef51c8f99cffe53119e87aa312f18fac6",
+  "sourceDirty": true,
+  "historicalArtifactSha256": "294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d",
+  "baseline": {
+    "command": "CUA_TEST_ARTIFACT=artifacts/historical/prepare-transfer-294a274e.json node --test --test-concurrency=1 dist/tests/unit/account-bindings.test.js dist/tests/integration/parameterization.test.js",
+    "exit": 1,
+    "tests": 13,
+    "passed": 3,
+    "failed": 10
+  },
+  "omittedDiscovery": {
+    "command": "node --test dist/tests/integration/discovery-bindings.test.js",
+    "exit": 1,
+    "tests": 1,
+    "passed": 0,
+    "failed": 1,
+    "runId": "70a15bff-b027-408d-9094-b41f403dffd3",
+    "origin": "development-fixture",
+    "note": "Matching default review was accepted by old recorder; regression correctly failed. This is not live discovery."
+  },
+  "reverseFailures": [
+    "5b896d02-5779-4099-b3b4-6aaaefcf064b",
+    "e6e28544-eaf1-4179-b8d1-e87ff35f1c6e"
+  ],
+  "priorOwnerReviewFailure": "5606575e-f518-4ae9-8995-fbd1c77a42d1",
+  "code": "CHECKPOINT_MISMATCH",
+  "modelCalls": 0,
+  "commits": 0,
+  "notes": "Success was required. No expected failure was relabeled as a successful transfer review. Earlier 31/31 did not cover this direction."
+}

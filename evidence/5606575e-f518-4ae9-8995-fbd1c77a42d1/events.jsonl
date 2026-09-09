@@ -1,0 +1,15 @@
+{"at":"2026-09-09T01:43:58.374Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-start","actor":"automation","stepId":"step-001","action":"fill","strategy":"role","reason":"supply-input"}
+{"at":"2026-09-09T01:43:58.407Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-complete","actor":"automation","stepId":"step-001","screen":"search","action":"fill","strategy":"role"}
+{"at":"2026-09-09T01:43:58.429Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-start","actor":"automation","stepId":"step-002","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:43:58.552Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-complete","actor":"automation","stepId":"step-002","screen":"member","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:43:58.571Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-start","actor":"automation","stepId":"step-003","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:43:58.639Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-complete","actor":"automation","stepId":"step-003","screen":"accounts","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:43:58.659Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-start","actor":"automation","stepId":"step-004","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:43:58.742Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-complete","actor":"automation","stepId":"step-004","screen":"transfer","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:43:58.765Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-start","actor":"automation","stepId":"step-005","action":"fill","strategy":"table-label","reason":"supply-input"}
+{"at":"2026-09-09T01:43:58.782Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-complete","actor":"automation","stepId":"step-005","screen":"transfer","action":"fill","strategy":"table-label"}
+{"at":"2026-09-09T01:43:58.805Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-start","actor":"automation","stepId":"step-006","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:43:58.888Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"recovery","actor":"system","screen":"review","reason":"observe-change"}
+{"at":"2026-09-09T01:43:58.891Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"action-complete","actor":"automation","stepId":"step-006","screen":"review","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:43:58.897Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"exception","actor":"system","code":"CHECKPOINT_MISMATCH"}
+{"at":"2026-09-09T01:43:58.903Z","runId":"5606575e-f518-4ae9-8995-fbd1c77a42d1","kind":"terminal","actor":"system","code":"CHECKPOINT_MISMATCH"}

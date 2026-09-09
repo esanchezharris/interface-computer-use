@@ -53,6 +53,23 @@ test("approval rejects missing approval, key-only access, and unbounded configur
   assert.equal(approvedConfig(authorized).maxCalls, 2);
 });
 
+test("repair approval reuses only the previously validated model, settings, and ledger", () => {
+  const repair = {
+    ...authorized,
+    CUA_BUDGET_STAGE: "account-repair",
+    CUA_BUDGET_ID: "live-sol-20260908",
+    CUA_MAX_OUTPUT_TOKENS: "2000",
+  };
+  assert.equal(approvedConfig(repair).stage, "account-repair");
+  for (const change of [
+    { CUA_MODEL: "gpt-6-astra" },
+    { CUA_REASONING_EFFORT: "medium" },
+    { CUA_BUDGET_ID: "new-allowance" },
+    { CUA_MAX_OUTPUT_TOKENS: "1000" },
+  ])
+    assert.throws(() => approvedConfig({ ...repair, ...change }), code("MODEL_UNAVAILABLE"));
+});
+
 test("failed attempts remain reserved across budget reconstruction and exhaustion", async () => {
   // Given a reserved failed request; When reopened and used again; Then the original debit persists.
   const directory = await mkdtemp(join(tmpdir(), "cua-budget-"));

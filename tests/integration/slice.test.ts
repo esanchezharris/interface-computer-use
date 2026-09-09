@@ -28,15 +28,29 @@ test("A02 A05 A17 A18 development fixture records real UI actions and replays ch
     evidenceRoot: ".runs/tests",
   } as const;
   try {
+    const fixture = new FixtureModel();
+    const completedSelections: (readonly string[])[] = [];
     // When completing fixture discovery then fresh-context replay of the exact serialized artifact.
     const learned = await discover({
       ...options,
       input: a,
-      model: new FixtureModel(),
+      model: {
+        origin: fixture.origin,
+        provider: fixture.provider,
+        model: fixture.model,
+        usage: () => fixture.usage(),
+        decide: (request) => {
+          completedSelections.push(request.completedAccountSelections ?? []);
+          return fixture.decide(request);
+        },
+      },
       goal: "Prepare supplied transfer to review",
     });
     assert.equal(learned.result.status, "success", JSON.stringify(learned.result));
     assert.ok(learned.artifact);
+    assert.deepEqual(completedSelections.slice(0, 5), [[], [], [], [], []]);
+    assert.deepEqual(completedSelections[5], ["sourceAccountRef"]);
+    assert.deepEqual(completedSelections[6], ["sourceAccountRef", "destinationAccountRef"]);
     const bytes = `${JSON.stringify(learned.artifact, null, 2)}\n`;
     const replayed = await replay({ ...options, input: b, artifactBytes: bytes });
     // Then extracted business values reflect member B and the commit oracle remains zero.

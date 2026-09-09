@@ -1,3 +1,4 @@
+import { requireAccountBindings } from "../domain/account-bindings.js";
 import type { Action, Binding, Decision } from "../domain/actions.js";
 import {
   Artifact,
@@ -79,7 +80,7 @@ export class Recorder {
       this.fields = post.filter((c) => c.kind === "value-equals");
   }
   artifact(provenance: Artifact["provenance"]): Artifact {
-    return Artifact.parse({
+    const artifact = Artifact.parse({
       schemaVersion: 1,
       capabilityId: "prepare-transfer-review",
       capabilityVersion: 1,
@@ -93,5 +94,7 @@ export class Recorder {
       steps: this.steps,
       provenance,
     });
+    requireAccountBindings(artifact);
+    return artifact;
   }
 }
