@@ -1,8 +1,35 @@
 # Final submission reproduction
 
-The final candidate contains the freshly qualified artifact `0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab`. The final applicable implementation/discovery source is `e916a471006d2209c52fb8c59fcebc19976d8b14`. Candidate clean-checkout reproduction and public-checkout smoke are being performed in this phase; the completed command receipts will be recorded here before publication is declared verified.
+Performed from clean candidate **`daa8d75baa63ac1129b49e07d145b50f0dfa85aa`** on 2026-09-09 UTC (the evening of September 8 in America/Los_Angeles). Final applicable executable/discovery source is `e916a471006d2209c52fb8c59fcebc19976d8b14`; later commits package documentation and safe evidence only. Artifact SHA256: **`0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab`**.
 
-The walkthrough is deferred by owner and is not a release gate. Both owner-operated handoffs remain valid for unchanged ownership/restoration/resume behavior and identical artifact procedure/bindings/checkpoints (provenance differs). Historical reproductions below are preserved with their original source/hash/counts.
+```bash
+git clone --no-local . .reproduction/final-daa8d75
+cd .reproduction/final-daa8d75
+npm ci
+npm run browser:install
+npm run verify:offline
+CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact
+npm run demo:replay -- --require-live
+npm run demo:handoff -- --require-live --test-operator
+```
+
+Every command exited **0**, and the clone stayed clean. The driver removed environment names containing OPENAI, ANTHROPIC, API_KEY or CUA_ before all commands, adding back only the explicit artifact selection. No credentials, paid approval, budget ledger, ignored assignment PDF or private run was cloned.
+
+| Check | Observed result |
+|---|---|
+| Installation / browser | Both exit 0; pinned Chromium reused the machine download cache |
+| Offline | **89/89**, zero failures/skips/retries; Biome/types/build passed |
+| Exact submission artifact | **39/39**, zero failures/skips/retries; unchanged hash above |
+| Keyless replay | [956ef772](evidence/956ef772-bbf3-44a2-af71-b9229966a6e8/manifest.json), matching current UI outputs, zero model calls/commits |
+| Automated handoff | [5b3ed933](evidence/5b3ed933-93a3-44c7-bbd0-8ebe2660bdce/manifest.json), same-session restoration, matching UI outputs, zero model calls/commits |
+| Missing explicit artifact | `CUA_TEST_ARTIFACT=.runs/missing.json node --test dist/tests/integration/parameterization.test.js` returned expected exit 1 before UI work; no fallback |
+| No API configuration | `npm run verify:live` returned expected exit 1 / MODEL_UNAVAILABLE before browser or API work |
+
+Expected caller values were independently checked: M-207, CHK-207 → SAV-207, 3750 cents, fee 0, USD, AWAITING_CONFIRMATION. Public safe results redact values; [command receipts](evidence/final-evaluation.json) preserve actual exits/timing/source. Private raw command logs remain only under `.reproduction/final-daa8d75/.runs/reproduction/`.
+
+Environment: macOS arm64, Node24.16.0, npm11.13.0, Chromium153.0.8010.12. This is a clean source checkout on the same machine, not a pristine-machine or cross-platform claim. Public anonymous-checkout smoke is recorded separately after publication.
+
+Detailed personal source review is deferred by owner, remains incomplete, and is not a publication gate. The two owner-operated handoffs retain their original run/source/hash identity; no relevant ownership/restoration/resume code changed, and artifact procedure/bindings/checkpoints match after excluding provenance.
 
 ---
 

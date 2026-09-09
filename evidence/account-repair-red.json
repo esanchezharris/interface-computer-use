@@ -17,7 +17,10 @@
     "failed": 1,
     "runId": "70a15bff-b027-408d-9094-b41f403dffd3",
     "origin": "development-fixture",
-    "note": "Matching default review was accepted by old recorder; regression correctly failed. This is not live discovery."
+    "note": "Matching default review was accepted by old recorder; regression correctly failed. This is not live discovery.",
+    "artifact": "evidence/70a15bff-b027-408d-9094-b41f403dffd3/capability.json",
+    "artifactSha256": "78f3dd9351fbfdd3febd32edce69713ac228eff73d8f67cb2df0fb19f463b865",
+    "packagingNote": "Original emitted bytes recovered during final preflight and copied unchanged. Historical fixture regression still failed; this is not a qualified/live artifact."
   },
   "reverseFailures": [
     "5b896d02-5779-4099-b3b4-6aaaefcf064b",

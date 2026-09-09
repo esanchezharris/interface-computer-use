@@ -690,7 +690,12 @@
     ],
     "historicalFailure": "account-default defect retained separately; original 31 tests did not cover reverse-direction success",
     "failedLiveAttempts": 0,
-    "failedReplaySampleAttempts": 0
+    "failedReplaySampleAttempts": 0,
+    "packagingCorrection": {
+      "runId": "70a15bff-b027-408d-9094-b41f403dffd3",
+      "originalSha256": "78f3dd9351fbfdd3febd32edce69713ac228eff73d8f67cb2df0fb19f463b865",
+      "change": "Original emitted bytes recovered during final preflight and copied unchanged. Historical fixture regression still failed; this is not a qualified/live artifact."
+    }
   },
   "ownerAcceptance": {
     "record": "evidence/owner-handoff.json",
@@ -758,5 +763,187 @@
       "cases": 6,
       "expectationsMet": 6
     }
-  ]
+  ],
+  "cleanReproduction": {
+    "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+    "commands": [
+      {
+        "name": "install",
+        "command": [
+          "npm",
+          "ci"
+        ],
+        "environmentOverride": {},
+        "exit": 0,
+        "expectedExit": 0,
+        "elapsedSeconds": 1.388,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true
+      },
+      {
+        "name": "browser",
+        "command": [
+          "npm",
+          "run",
+          "browser:install"
+        ],
+        "environmentOverride": {},
+        "exit": 0,
+        "expectedExit": 0,
+        "elapsedSeconds": 0.772,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true
+      },
+      {
+        "name": "offline",
+        "command": [
+          "npm",
+          "run",
+          "verify:offline"
+        ],
+        "environmentOverride": {},
+        "exit": 0,
+        "expectedExit": 0,
+        "elapsedSeconds": 45.505,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true
+      },
+      {
+        "name": "artifact",
+        "command": [
+          "npm",
+          "run",
+          "test:artifact"
+        ],
+        "environmentOverride": {
+          "CUA_TEST_ARTIFACT": "artifacts/prepare-transfer.json"
+        },
+        "exit": 0,
+        "expectedExit": 0,
+        "elapsedSeconds": 30.542,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true
+      },
+      {
+        "name": "replay",
+        "command": [
+          "npm",
+          "run",
+          "demo:replay",
+          "--",
+          "--require-live"
+        ],
+        "environmentOverride": {},
+        "exit": 0,
+        "expectedExit": 0,
+        "elapsedSeconds": 1.832,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true,
+        "runId": "956ef772-bbf3-44a2-af71-b9229966a6e8"
+      },
+      {
+        "name": "handoff",
+        "command": [
+          "npm",
+          "run",
+          "demo:handoff",
+          "--",
+          "--require-live",
+          "--test-operator"
+        ],
+        "environmentOverride": {},
+        "exit": 0,
+        "expectedExit": 0,
+        "elapsedSeconds": 1.881,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true,
+        "runId": "5b3ed933-93a3-44c7-bbd0-8ebe2660bdce"
+      },
+      {
+        "name": "missing-artifact",
+        "command": [
+          "node",
+          "--test",
+          "dist/tests/integration/parameterization.test.js"
+        ],
+        "environmentOverride": {
+          "CUA_TEST_ARTIFACT": ".runs/missing.json"
+        },
+        "exit": 1,
+        "expectedExit": 1,
+        "elapsedSeconds": 0.449,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true
+      },
+      {
+        "name": "live-denied-without-key",
+        "command": [
+          "npm",
+          "run",
+          "verify:live"
+        ],
+        "environmentOverride": {},
+        "exit": 1,
+        "expectedExit": 1,
+        "elapsedSeconds": 0.94,
+        "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+        "providerCredentialsAbsent": true,
+        "cleanAfter": true
+      }
+    ],
+    "passed": true,
+    "offline": {
+      "tests": 89,
+      "passed": 89,
+      "failed": 0
+    },
+    "artifact": {
+      "tests": 39,
+      "passed": 39,
+      "failed": 0
+    },
+    "environment": {
+      "platform": "macOS arm64",
+      "node": "24.16.0",
+      "npm": "11.13.0",
+      "chromium": "153.0.8010.12",
+      "browserInstall": "reused machine download cache; no claim of pristine machine validation"
+    }
+  },
+  "focusedReview": {
+    "source": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+    "reviewer": "independent read-only Codex reviewer final_publication_review",
+    "verdict": "PASS",
+    "materialFindings": [],
+    "scope": "Assignment sections3/7, actual delta, assertions, current live/sample evidence linkage and preserved manual acceptance. Reviewer did not rerun browser tests; root clean reproduction is separate."
+  },
+  "preflight": {
+    "historyAndStagedScan": {
+      "revision": "daa8d75baa63ac1129b49e07d145b50f0dfa85aa",
+      "commits": 13,
+      "uniqueBlobsIncludingIndex": 484,
+      "findings": [],
+      "scope": "All reachable history and staged blobs; exact current key, provider/GitHub/private-key signatures and private-material paths. No matched values emitted."
+    },
+    "evidenceSchemaAndLinkage": {
+      "runs": 89,
+      "events": 1785,
+      "artifacts": 18,
+      "unlinkedArtifactRunIds": [],
+      "strictSchemasPassed": true,
+      "replayUsageZero": true
+    },
+    "originalEmployerPdfTracked": false,
+    "rawPrivateRunsTracked": false,
+    "executableChangesSinceCleanCandidate": [],
+    "releaseBlockers": [],
+    "publication": "authorized; not yet performed at this packaging commit"
+  }
 }

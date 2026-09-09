@@ -6,6 +6,8 @@ Start with [genuine discovery](7ad520a5-a18c-4945-8355-80ba48b90bb8/manifest.jso
 
 [Owner handoff acceptance](owner-handoff.json) preserves the two actual owner observations separately from automatic metadata. The new artifact has identical procedural content, and ownership/restoration/resume code remains unchanged. No new human observation is claimed. Detailed personal source review is deferred by owner, not completed or required for publication.
 
+Clean candidate `daa8d75baa63ac1129b49e07d145b50f0dfa85aa` passed installation/browser setup,89/89offline,39/39exactartifact, required-live keyless replay and automatic handoff. [Reproduction receipts](../REPRODUCTION.md) and [structured evaluation](final-evaluation.json) identify source, commands and timings. The single independent read-only final review passed with no material core findings. Final preflight recovered the original exact bytes of an omitted historical fixture regression artifact at [70a15bff](70a15bff-b027-408d-9094-b41f403dffd3/capability.json); this remains the old expected-to-fail test's evidence, not a qualified capability.
+
 # Final requirement-to-evidence map
 
 Acceptance basis: original assignment §§3 and 7, read completely. Final scenario definitions were committed before execution in `e916a471006d2209c52fb8c59fcebc19976d8b14`; [all five attempts and twenty replays](final-evaluation.json) now include actual outcomes. All met expectations. Two independent artifacts passed 39/39 each. Historical evidence below retains its original context.
