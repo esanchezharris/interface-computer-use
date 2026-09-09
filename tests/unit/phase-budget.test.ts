@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -74,6 +74,21 @@ test("phase lock prohibits concurrent requests before another reservation or sen
     assert.equal(new PhaseBudget(root).usage().calls, 1);
   } finally {
     release();
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("completed phase remains closed across restarts without resetting reservations", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cua-phase-"));
+  try {
+    await new PhaseBudget(root).run(100, "acceptance", async () => {});
+    await writeFile(join(root, "assignment-20260908.closed"), "qualified");
+    await assert.rejects(
+      new PhaseBudget(root).run(100, "acceptance", async () => assert.fail("closed phase sent")),
+      exhausted,
+    );
+    assert.equal(new PhaseBudget(root).usage().tokens, 100);
+  } finally {
     await rm(root, { recursive: true, force: true });
   }
 });

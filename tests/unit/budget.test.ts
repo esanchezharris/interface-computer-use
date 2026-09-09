@@ -41,6 +41,9 @@ test("approval rejects missing approval, key-only access, and unbounded configur
     { OPENAI_API_KEY: "synthetic-only-key" },
     { ...authorized, CUA_API_APPROVED: "false" },
     { ...authorized, CUA_MODEL: "" },
+    { ...authorized, CUA_LIVE_PHASE: undefined },
+    { ...authorized, CUA_BUDGET_STAGE: "invalid" },
+    { ...authorized, CUA_MODEL: "unpriced-model" },
     { ...authorized, CUA_MAX_CALLS: "33" },
     { ...authorized, CUA_MAX_TOTAL_TOKENS: "Infinity" },
     { ...authorized, CUA_MAX_OUTPUT_TOKENS: "4001" },
@@ -161,7 +164,7 @@ test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and s
       JSON.stringify({
         id: "resp_wire_fixture",
         object: "response",
-        status: "completed",
+        status: calls === 4 ? "incomplete" : "completed",
         output: [
           {
             type: "message",
@@ -190,6 +193,13 @@ test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and s
     "fetch",
     async (input: string | URL | Request, init?: RequestInit) => {
       assert.equal(String(input), "https://api.openai.com/v1/responses");
+      const body = JSON.parse(typeof init?.body === "string" ? init.body : "{}");
+      assert.equal(body.service_tier, "default");
+      assert.equal(body.store, false);
+      assert.equal(body.max_output_tokens, 100);
+      assert.equal(body.tools, undefined);
+      assert.deepEqual(body.reasoning, { effort: "low" });
+      assert.deepEqual(body.text, { format: { type: "json_object" } });
       return nativeFetch(`http://127.0.0.1:${address.port}/responses`, init);
     },
   );
@@ -198,7 +208,7 @@ test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and s
       {
         ...authorized,
         CUA_BUDGET_ID: budgetId,
-        CUA_MAX_CALLS: "3",
+        CUA_MAX_CALLS: "4",
         CUA_MAX_TOTAL_TOKENS: "100000",
       },
       directory,
@@ -222,6 +232,9 @@ test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and s
       responseStatus: "completed",
     });
     assert.equal(calls, 3);
+    await assert.rejects(model.decide(request), code("MODEL_INCOMPLETE"));
+    assert.equal(model.lastRequestMetadata().responseStatus, "incomplete");
+    assert.equal(calls, 4);
     await assert.rejects(model.decide(request), code("MODEL_BUDGET_EXHAUSTED"));
     const persisted = await readFile(join(directory, `${budgetId}.json`), "utf8");
     assert.equal(persisted.includes("SENSITIVE_TEST_PROVIDER_ERROR"), false);

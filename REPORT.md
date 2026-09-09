@@ -4,7 +4,7 @@ One Node process owns a Chromium context, session controller, trusted executor a
 
 The browser seam owns observation, strict target resolution, primitive actions and UI extraction. Domain schemas own contracts. Host policy owns permission; neither the model nor the artifact grants it. Sandbox fixtures and the server-state oracle belong to tests and launchers. The runner never reads them. Node's HTTP server, Zod, Playwright and JSON/JSONL are sufficient; an agent framework would add indirection without solving another requirement.
 
-The checked-in demonstration uses a clearly labeled scripted model fixture against a real UI. The real provider loop and budget gate are implemented and wire-tested locally, but genuine paid discovery remains unavailable without explicit authorization/configuration. Fixture evidence does not satisfy that requirement.
+The genuine live artifact was discovered with seven OpenAI gpt-5.6-sol decisions from current UI observations, after one compatibility request. Its unchanged bytes passed 31 qualification tests, including changed-input replay with no key or model imports. The distinct scripted development fixture and historical failures remain available.
 
 # Artifact schema
 
@@ -18,7 +18,7 @@ Replay fixes both the procedure and branch rules. It resolves each current targe
 
 Not-found, insufficient funds and supported validation rejection return business outcomes. Permission denial, explicit app errors, exhausted load deadlines, ambiguity, wrong review values and policy denial are distinct failures. Native or DOM confirmations are never accepted automatically. Multiple incompatible screen conditions fail closed. Completion extracts unique visible table values, validates cents/fee/currency/status, and independently compares member, both account references and amount with the invocation. A heading alone cannot pass.
 
-Defaults bound discovery to 30 actions, 32 model decisions, 120 seconds of active time, 5 seconds/action and 10 seconds/condition wait. Provider requests have at most 30 seconds and durable call/token reservations; failed calls count and automatic SDK retries are disabled. Reserved tokens are a conservative allowance, distinct from actual returned usage and from billing.
+Defaults bound discovery to 30 actions, 32 model decisions, 120 seconds of active time, 5 seconds/action and 10 seconds/condition wait. Provider requests have at most 30 seconds and durable call/token reservations; failed calls count and automatic SDK retries are disabled. Shared durable phase ledgers reserve a conservative dollar bound before each sequential request; a closure marker prevents further spending. Eight paid requests returned 8,870 input and 378 output tokens: estimated cost $0.048965, with $3.4699 held in reservations. No failed or unknown-usage request occurred; neither figure is a billing receipt.
 
 # Heterogeneity & multi-tenant
 
@@ -42,4 +42,4 @@ Runtime-validated allowlists cover artifacts, events, manifests, result summarie
 
 There is one capability, application, browser adapter and provider. No desktop implementation, tenant infrastructure, remote co-browsing, authentication service, model-assisted replay repair, generic graph language or polished dashboard was built. Successful paths are not automatically shortened. The optional stability sweep is deferred until genuine discovery and manual gates pass.
 
-The remaining submission work is external: authorize a compatible model and finite API budget, capture genuine discovery, qualify that exact artifact through keyless replay and negative cases, then perform the real manual handoff and candidate review. Source, fixtures, tests and safe evidence are useful independently, but they are not a substitute for those gates. Publication and employer email remain separately authorized actions.
+The live model left correct account defaults unchanged, so its six executed steps are qualified for the documented member/account pairs; arbitrary account permutations remain unqualified. No artifact was hand-edited. The remaining owner gates are the real headed manual handoff and personal code review. Publication and employer email remain separately authorized actions.

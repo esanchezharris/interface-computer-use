@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { setTimeout as pause } from "node:timers/promises";
@@ -104,8 +105,8 @@ test("A15 altered amount fails resume at the declared review anchor", async () =
     ...common,
     origin: app.origin,
     mode: "replay",
-    provenance: "development-fixture",
-    artifactHash: null,
+    provenance: artifact.provenance.origin,
+    artifactHash: createHash("sha256").update(readFileSync(artifactPath)).digest("hex"),
   });
   try {
     const reviewIndex = artifact.steps.findIndex((step) => {

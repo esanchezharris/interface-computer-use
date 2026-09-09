@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 import type { Fault as SandboxFault } from "../sandbox/data.js";
@@ -7,9 +7,8 @@ import { startSandbox } from "../sandbox/server.js";
 import { discover } from "../src/discovery/run.js";
 import { Artifact } from "../src/domain/artifact.js";
 import { BusinessCode, FailureCode, Fault } from "../src/domain/contract.js";
-import { SafeResult } from "../src/evidence/schema.js";
-import { Event, Manifest, Snapshot } from "../src/evidence/store.js";
 import { replay } from "../src/replay/run.js";
+import { promote } from "./evidence-files.js";
 import { FixtureModel } from "./fixture-model.js";
 import { testOperator } from "./test-operator.js";
 
@@ -37,24 +36,7 @@ const Collection = z.strictObject({
   artifact: z.string().regex(/^[a-f0-9-]{36}\/capability\.json$/),
   entries: z.array(Entry),
 });
-function promote(directory: string): string {
-  const manifest = Manifest.parse(
-    JSON.parse(readFileSync(join(directory, "manifest.json"), "utf8")),
-  );
-  const lines = readFileSync(join(directory, "events.jsonl"), "utf8").trim().split("\n");
-  for (const line of lines)
-    Event.extend({ at: z.iso.datetime(), runId: z.uuid() }).parse(JSON.parse(line));
-  SafeResult.parse(JSON.parse(readFileSync(join(directory, "result.safe.json"), "utf8")));
-  const names = ["manifest.json", "events.jsonl", "result.safe.json"];
-  if (existsSync(join(directory, "snapshot.safe.json"))) {
-    Snapshot.parse(JSON.parse(readFileSync(join(directory, "snapshot.safe.json"), "utf8")));
-    names.push("snapshot.safe.json");
-  }
-  const destination = join("evidence", manifest.runId);
-  mkdirSync(destination, { recursive: false });
-  for (const name of names) copyFileSync(join(directory, name), join(destination, name));
-  return manifest.runId;
-}
+
 const a = {
   memberId: "M-104",
   sourceAccountRef: "CHK-104",

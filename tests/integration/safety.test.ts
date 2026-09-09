@@ -12,6 +12,8 @@ import { execute } from "../../src/surface/executor.js";
 import { workspace } from "../../src/surface/observe.js";
 import { artifactPath } from "../artifact-path.js";
 
+const bytes = readFileSync(artifactPath, "utf8");
+const artifact = Artifact.parse(JSON.parse(bytes));
 const input = {
   memberId: "M-207",
   sourceAccountRef: "CHK-207",
@@ -25,12 +27,10 @@ const options = {
   operator: true,
   headed: false,
   mode: "replay",
-  provenance: "development-fixture",
-  artifactHash: null,
+  provenance: artifact.provenance.origin,
+  artifactHash: createHash("sha256").update(bytes).digest("hex"),
   waitMs: 500,
 } as const;
-const bytes = readFileSync(artifactPath, "utf8");
-const artifact = Artifact.parse(JSON.parse(bytes));
 test("A03 keyless CLI replay runs with a fatal model import hook and immutable artifact", async () => {
   // Given an actual subprocess with provider keys removed and a model import bomb.
   const app = await startSandbox({ port: 0 });

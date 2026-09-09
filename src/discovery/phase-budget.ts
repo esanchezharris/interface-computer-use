@@ -1,4 +1,4 @@
-import { closeSync, mkdirSync, openSync, unlinkSync } from "node:fs";
+import { closeSync, existsSync, mkdirSync, openSync, unlinkSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { Fault } from "../domain/contract.js";
 import { DurableBudget } from "./budget.js";
@@ -47,6 +47,8 @@ export class PhaseBudget {
       throw new Fault("EVIDENCE_WRITE_FAILED");
     }
     try {
+      if (existsSync(join(this.#directory, `${LIVE_PHASE}.closed`)))
+        throw new Fault("MODEL_BUDGET_EXHAUSTED");
       if (stage === "selection") await this.#selection.reserve(tokens);
       await this.#total.reserve(tokens);
       return await request();

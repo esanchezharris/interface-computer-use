@@ -1,50 +1,28 @@
 # Implementation checkpoint
 
-State: LIVE_VALIDATION_IN_PROGRESS. User authorized existing environment key and up to USD50 aggregate additional usage (USD5 selection subset). Baseline and historical evidence preserved.
-Branch: `build/computer-use`. Tested executable source: `b53842a0ebaf13d546119bece16cc193f293c758`.
-Later packaging commits contain only documentation and reviewed safe evidence. Use
-`git rev-parse HEAD` / `git status --short` for the current packaging revision and dirty state.
-Read completely: BUILD_SPEC.md, CODEX_BUILD_BRIEF.md and original assignment PDF.
+State: LIVE_EVIDENCE_PACKAGING. Branch: `build/computer-use`.
+Live discovery executable revision: `728c1b13f94510524287f5d0ffba46748b47f296`, clean at dispatch.
+Current packaging/code delta: use `git rev-parse HEAD` and `git status --short`.
+BUILD_SPEC.md, CODEX_BUILD_BRIEF.md and original assignment PDF were read completely.
 
-## Completed local work
+## Observed completed gates
 
-- M0-M3: synthetic iframe app, strict contracts/artifact, real provider adapter and durable approval/budget gates, UI discovery/recording, model-free replay, policy, outcomes, bounded waits, ownership/resume and safe persistence.
-- M4: seven-run evidence collection, original failures retained, concise report/defense notes, agent-operated visible UI inspection and clean-clone rehearsal. See `REPRODUCTION.md` and `evidence/README.md` for commands and A01-A20 mapping.
-- `npm run verify:offline`: lint, strict types and **59/59** tests passed, 0 failed/skipped, no retries. Fresh repaired-source clone also passes 59/59 (34.043 s test duration).
-- `npm run demo:replay` and `npm run demo:handoff -- --test-operator`: success in that clean clone, zero model calls and zero commits.
-- Current artifact qualification: **31/31** tests, no skips/retries. Collection: `evidence/collections/ec1cf49c-f5cc-4d00-95fe-d86df4c095c6.json`.
-- Malformed-input CLI exits 1 with CONTRACT_INVALID before UI work. Unauthorized `verify:live` exits 1 with MODEL_UNAVAILABLE before browser/API work. These are expected gate results, not unresolved implementation failures.
+- Genuine discovery succeeded once with gpt-5.6-sol after one compatibility request: 8 paid requests total, no paid failures or retries.
+- Exact live artifact `artifacts/prepare-transfer.json`: SHA-256 `294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d`.
+- `npm run verify:live`: live discovery and fresh-session changed-input keyless replay passed; zero model calls in replay, zero commits.
+- `CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact`: 31/31, no skips/retries. Artifact bytes unchanged.
+- Expanded offline verification passed 63/63; two additional required-live CLI guard tests then passed 2/2. Final combined suite and clean reproduction still need refreshing.
+- Existing fixture evidence and failures remain preserved; owner manual and personal code review remain pending.
 
-## Acceptance flags
+## Paid phase closed
 
-- offline_core_passed: true (A02-A19 with development artifact; live-derived qualifications still gated)
-- live_discovery_passed: false (A01; no authorized project model/key/finite budget)
-- live_artifact_replay_passed: false (requires genuine discovery artifact)
-- handoff_mechanism_passed: true (A13-A15; automated test_operator only)
-- manual_handoff_checked: false (owner must operate the headed browser)
-- clean_reproduction_passed: true (A20; fresh clone, lockfile install, 59/59 tests and both demos)
+8,870 input tokens; 378 output tokens; estimated USD0.048965 using verified rates.
+Durable total reservation USD3.4699, selection subset USD0.42525. All responses returned usage; no unknown-usage request.
+Original ledgers/config and closure marker remain ignored under `.runs/`. Do not delete/reset or make more paid calls.
 
-## Review and evidence
+## Next unmet engineering action
 
-Earlier review failures and repaired regressions are summarized in `docs/QA_NOTES.md`.
-The packaged-source review at `544ebb202cc3cc0ee8c5cc162a5bb64eb5cf903e` found an
-unknown-click-effect policy gap. Four regressions first showed 3 failures/1 pass;
-all 4 pass after the fix. The complete 59-test suite and clean reproduction were refreshed.
-Exact-SHA final review reports and verdict records are retained in ignored `.runs/reviews/`.
-Review coverage never upgrades unperformed live/manual gates.
+Commit the final focused repairs, capture safe linked live evidence, and run the final executable revision in a fresh local clone with provider configuration removed. Then update reproduction/evidence records and perform one focused review of the live-phase delta. No architectural planning or new model selection is needed.
 
-## Next unmet criterion and owner actions
-
-A01 is next: supply explicitly authorized OpenAI model/key/approval and finite call/token
-budget as documented in README, then run `npm run verify:live`. Live paid requests so far: **0**.
-Qualify the resulting exact artifact with
-`CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact`.
-The independent manual gate is `npm run demo:handoff` in a real terminal/display:
-wait for HUMAN, restore with fake demo-only credential in the same window, then resume.
-Review code/evidence personally before any submission-readiness claim.
-
-No new architecture planning is needed. No intentional sandbox/browser process remains;
-launchers and tests close their owned resources. Private runs and clean clones remain ignored.
-No publication, push, deployment, paid resource creation or employer email occurred.
-
-Live phase working plan: shared durable cost bounds and provider compatibility (in progress), genuine discovery and exact-artifact qualification, focused repair/verification/reproduction, safe evidence and final review. No paid calls yet. Current source has focused phase-budget/provider metadata changes; no architecture restart.
+The owner gate remains `npm run demo:handoff -- --require-live` in an interactive terminal/display: restore the same browser with fake demo-only credential, then resume. See README for exact checks. Personal code review is separately pending.
+No publication, push, deployment, paid resource creation or email occurred. Launchers/tests close their owned resources; private runs and clones remain ignored.

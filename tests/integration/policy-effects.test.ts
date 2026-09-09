@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { startSandbox } from "../../sandbox/server.js";
@@ -23,8 +24,8 @@ for (const scenario of ["no-form", "button-type", "search-method", "review-metho
         amountCents: 3750,
       },
       mode: "replay",
-      provenance: "development-fixture",
-      artifactHash: null,
+      provenance: artifact.provenance.origin,
+      artifactHash: createHash("sha256").update(readFileSync(artifactPath)).digest("hex"),
       actor: "test_operator",
       operator: false,
       headed: false,

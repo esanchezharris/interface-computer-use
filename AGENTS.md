@@ -13,7 +13,10 @@ push, deployment, paid resources, or employer email without separate authorizati
 
 Verification commands (implemented during this build): `npm ci`, `npm run browser:install`,
 `npm run verify:offline`, `npm run demo:replay`, `npm run demo:handoff`.
-`npm run verify:live` is opt-in and budget-gated. See README for live/manual gates.
+`CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact` qualifies the live bytes.
+`npm run demo:handoff -- --require-live` is the owner manual gate.
+The authorized paid phase is closed; preserve its durable ledgers and closure marker.
+`npm run verify:live` is opt-in and budget-gated. See README and docs/LIVE_VALIDATION.md.
 
 Preserve applicable user-provided Codex Follow-up instructions in assistant responses:
 append one Follow-up JSON payload, normally with exactly four concrete prompts.
