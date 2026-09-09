@@ -1,6 +1,6 @@
 # Candidate defense notes
 
-Read the code and run the commands yourself before presenting it. These notes do not claim you wrote, understood, or manually validated anything yet.
+Read the code and run the commands yourself before presenting it. These notes do not establish authorship or personal code understanding. The owner has now separately reported performing and verifying two manual handoff runs; see [acceptance evidence](../evidence/owner-handoff.json).
 
 1. **Discovery versus a macro:** `src/discovery/run.ts` asks a `Model` for each action from the current observation. `src/discovery/openai.ts` implements the real provider. `scripts/fixture-model.ts` is intentionally scripted, labeled development-only and isolated from replay. Compare the newly discovered eight steps with the separate scripted fixture; matching sequence length is not provenance. The live request/action evidence identifies which was actually model-chosen.
 2. **Artifact versus a transcript:** `src/domain/artifact.ts`, `actions.ts` and `recording/recorder.ts` show symbolic inputs, strict finite declarations and completed-step recording. `src/policy/profile.ts` contains authored screen/effect knowledge. Explain what was learned versus supplied, and why the artifact hash is not a signature or proof of a model request.
@@ -17,7 +17,7 @@ A small practice change: lower `MAX_AMOUNT_CENTS` in `src/domain/contract.ts`, u
 ## Limitations to state openly
 
 - The replacement live artifact actively selects both account inputs and passes both directions for two members plus a changed-default/order case. The previous six-step artifact relied on defaults and is historical; its 31/31 did not cover reverse-direction behavior. This remains one synthetic account/UI domain. The development fixture remains separate.
-- Automated `test_operator` evidence proves mechanism, not personal operation. The candidate must complete the headed manual check.
+- Automated `test_operator` evidence proves mechanism, not personal operation. The owner has completed the headed manual check twice, separately documented in the owner acceptance record. Personal code review remains pending.
 - Only macOS arm64/Node 24 was tested. One synthetic UI does not establish vendor/tenant portability.
 - Host route policy and cooperative ownership are not an OS sandbox or an input lock. Passive application activity can continue during a handoff; resume revalidation contains that risk for this reversible demo.
 - Unknown formats, effects, modals and unsupported profiles fail closed. Failed discovery gets evidence but no successful artifact.

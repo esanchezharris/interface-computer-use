@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "recordType": "owner-handoff-acceptance",
+  "recordedAt": "2026-09-09T05:10:47.798Z",
+  "gate": "manual_handoff_checked",
+  "status": "passed",
+  "basis": "Owner attestation and pasted terminal output linked to validated original automatic evidence",
+  "ownerAttestation": {
+    "source": "Owner message in this project conversation",
+    "statement": "ran it twice and verified it myself",
+    "performedByOwner": true
+  },
+  "artifactPath": "artifacts/prepare-transfer.json",
+  "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+  "runs": [
+    {
+      "runId": "e59f4654-727a-4f35-83fc-59fced282a63",
+      "automaticEvidence": {
+        "path": "evidence/e59f4654-727a-4f35-83fc-59fced282a63",
+        "manifestSha256": "eaf3459cc5d5471c37b27b42627f01b604c4b189195412c68d85edd4b95e9302",
+        "source": {
+          "revision": "0369d808df669016564f98d3e2e1bc66e383f13d",
+          "dirty": false
+        },
+        "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+        "actor": "human",
+        "origin": "live-model",
+        "mode": "replay",
+        "startedAt": "2026-09-09T04:59:52.767Z",
+        "finishedAt": "2026-09-09T05:04:02.839Z",
+        "status": "success",
+        "modelCalls": 0,
+        "reservedTokens": 0,
+        "ownershipSequence": [
+          "PAUSING",
+          "HUMAN",
+          "RESUMING",
+          "AUTOMATION"
+        ],
+        "credentialFieldChangeAndNavigationRecorded": true,
+        "noAutomationActionStartDuringHumanOwnership": true,
+        "bothAccountSelectsCompletedAfterResume": true,
+        "outputValues": "redacted; not independently re-observed in this acceptance update"
+      },
+      "ownerReportedTerminal": {
+        "command": "npm run demo:handoff -- --require-live",
+        "status": "success",
+        "commits": 0,
+        "outputMatchesExample": "examples/member-b.json",
+        "feeCents": 0,
+        "currency": "USD",
+        "reviewStatus": "AWAITING_CONFIRMATION",
+        "explicitHumanStatusBeforeResumeShown": false
+      }
+    },
+    {
+      "runId": "78753464-d145-41f3-88b3-bc4cf3201efa",
+      "automaticEvidence": {
+        "path": "evidence/78753464-d145-41f3-88b3-bc4cf3201efa",
+        "manifestSha256": "59e1bf7829cc917c9ee15d4ca37d85d54a71321a255507aab3834d4a0a0eb0f7",
+        "source": {
+          "revision": "0369d808df669016564f98d3e2e1bc66e383f13d",
+          "dirty": false
+        },
+        "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+        "actor": "human",
+        "origin": "live-model",
+        "mode": "replay",
+        "startedAt": "2026-09-09T05:05:44.375Z",
+        "finishedAt": "2026-09-09T05:06:45.705Z",
+        "status": "success",
+        "modelCalls": 0,
+        "reservedTokens": 0,
+        "ownershipSequence": [
+          "PAUSING",
+          "HUMAN",
+          "RESUMING",
+          "AUTOMATION"
+        ],
+        "credentialFieldChangeAndNavigationRecorded": true,
+        "noAutomationActionStartDuringHumanOwnership": true,
+        "bothAccountSelectsCompletedAfterResume": true,
+        "outputValues": "redacted; not independently re-observed in this acceptance update"
+      },
+      "ownerReportedTerminal": {
+        "command": "npm run demo:handoff -- --require-live",
+        "status": "success",
+        "commits": 0,
+        "outputMatchesExample": "examples/member-b.json",
+        "feeCents": 0,
+        "currency": "USD",
+        "reviewStatus": "AWAITING_CONFIRMATION",
+        "explicitHumanStatusBeforeResumeShown": true
+      }
+    }
+  ],
+  "personalCodeReview": "pending-owner",
+  "limits": [
+    "actor:human alone is configuration, not identity attestation; owner confirmation supplies that attestation",
+    "Commit counts and visible output values come from owner-provided terminal output; automatic safe results redact outputs and do not contain a commit counter",
+    "No new browser replay or model API request was made to record this acceptance",
+    "No fixture or test_operator run was relabeled; their historical evidence is unchanged"
+  ]
+}

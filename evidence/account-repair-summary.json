@@ -34,7 +34,7 @@
     "passed": 37,
     "failed": 0
   },
-  "manualHandoff": "pending-owner",
+  "manualHandoff": "passed-owner-verified",
   "personalCodeReview": "pending-owner",
   "finalExecutableRevision": "a0efd14e58a712f20d5e02970ee9f8f19c791e05",
   "cleanReproduction": {
@@ -48,5 +48,10 @@
     "clean": true,
     "replayRunId": "a11620ca-2fb5-472c-ab36-eda5012feb23",
     "testOperatorRunId": "c3cb6c43-2141-4e40-bd2c-93d46dc4c0bd"
-  }
+  },
+  "manualHandoffEvidence": "evidence/owner-handoff.json",
+  "manualHandoffRunIds": [
+    "e59f4654-727a-4f35-83fc-59fced282a63",
+    "78753464-d145-41f3-88b3-bc4cf3201efa"
+  ]
 }

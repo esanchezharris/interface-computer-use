@@ -2,7 +2,7 @@
 
 A local TypeScript/Node system that observes a synthetic banking UI, asks one model adapter for primitive actions, records executed symbolic steps, and replays the artifact without a model. Every run stops at review. No real banking service or data is involved.
 
-**Current evidence status:** the account-binding defect is repaired. Genuine non-default discovery recorded both input-bound account selections in a new eight-step artifact. Its exact bytes pass **37/37** artifact tests, including both directions for two members and changed UI defaults/option order. The old six-step artifact and reverse-direction failures are historical evidence; the earlier 31/31 never covered that behavior. Owner-operated handoff and personal code review remain pending. See [account repair](docs/ACCOUNT_REPAIR.md), [status](IMPLEMENTATION_STATUS.md) and [evidence](evidence/README.md).
+**Current evidence status:** the account-binding defect is repaired. Genuine non-default discovery recorded both input-bound account selections in a new eight-step artifact. Its exact bytes pass **37/37** artifact tests, including both directions for two members and changed UI defaults/option order. The old six-step artifact and reverse-direction failures are historical evidence; the earlier 31/31 never covered that behavior. Owner-operated handoff has now passed twice, linked to [owner acceptance evidence](evidence/owner-handoff.json); personal code review remains pending. See [account repair](docs/ACCOUNT_REPAIR.md), [status](IMPLEMENTATION_STATUS.md) and [evidence](evidence/README.md).
 
 ## Setup and keyless demonstration
 
@@ -68,7 +68,9 @@ Existing durable budgets under `.runs/budgets/` reserve every request before sen
 
 The repair gate requires the persisted `.runs/budgets/assignment-20260908-account-repair.approved.json`, the original closure, and original total ledger with its fixed 8-call/69,398-token floor. It permits at most 100,000 additional conservative reserved tokens ($5), still charged to the original shared ledger. It never opens the original selection/acceptance stages. The separate repair `.closed` marker now prevents further requests. Both closures and all reservations must remain intact. [Exact repair commands and approval fields](docs/ACCOUNT_REPAIR.md) are an execution record, not further spending authorization.
 
-## Genuine manual handoff (owner gate)
+## Genuine manual handoff (completed owner gate)
+
+The owner performed and verified this command twice at clean revision `0369d808df669016564f98d3e2e1bc66e383f13d`. See [the linked acceptance record](evidence/owner-handoff.json). The instructions below remain available for reproduction; another run is not required for this gate.
 
 Run this in an interactive terminal with a display:
 

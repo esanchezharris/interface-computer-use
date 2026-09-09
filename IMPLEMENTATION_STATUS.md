@@ -1,6 +1,6 @@
 # Account-binding repair checkpoint
 
-State: **ACCOUNT_REPAIR_AUTOMATED_GATES_AND_CLEAN_REPRODUCTION_PASSED; OWNER_ACCEPTANCE_PENDING**.
+State: **ACCOUNT_REPAIR_AUTOMATED_GATES_AND_CLEAN_REPRODUCTION_PASSED; OWNER_MANUAL_HANDOFF_PASSED; PERSONAL_CODE_REVIEW_PENDING**.
 
 Branch `build/computer-use`; final executable revision `a0efd14e58a712f20d5e02970ee9f8f19c791e05`; implementation/discovery source `563d3951363a19679fd8ae13ab6f5c0f4b0740c7`. Old artifact and all failures/owner-review notes preserved. The root cause, executed symbolic selections and regression evidence are in `docs/ACCOUNT_REPAIR.md`.
 
@@ -12,9 +12,14 @@ Both paid stages are closed. Repair: 9 requests, estimated USD0.064406, conserva
 
 Clean reproduction completed once on final executable revision `a0efd14e58a712f20d5e02970ee9f8f19c791e05`: setup, 84/84 offline, 37/37 artifact, required-live replay and test_operator all exited 0 with clean source. Exact commands/evidence are in REPRODUCTION.md. The single final focused review is recorded by final package SHA in ignored `.runs/reviews/ledger.jsonl`; require that record rather than reusing old reviews. Do not restart architecture or model selection. Private logs: `.runs/account-repair/`. Public evidence: `evidence/account-parameterization.json`, `evidence/account-repair-summary.json`, collection `6142ca94-a5de-493a-8130-973a5a09c020`.
 
-Owner manual handoff and personal code review remain pending. Manual command `npm run demo:handoff -- --require-live`; expected M-207 / CHK-207 → SAV-207 / 37.50 USD / fee 0.00 / AWAITING_CONFIRMATION, terminal success and zero commits. Preserve owner observation separately and link it to the emitted run ID when supplied. Nothing pushed, published, deployed, submitted or emailed.
+Owner manual handoff **passed twice**, confirmed by the owner and linked to original runs `e59f4654-727a-4f35-83fc-59fced282a63` and `78753464-d145-41f3-88b3-bc4cf3201efa`. Both ran `npm run demo:handoff -- --require-live` at clean package revision `0369d808df669016564f98d3e2e1bc66e383f13d` with the qualified hash. Automatic evidence records human ownership/restoration/resume, success and zero model calls/reserved tokens. Owner-supplied terminal output reports matching M-207 / CHK-207 → SAV-207 / 37.50 USD / fee 0.00 / AWAITING_CONFIRMATION and commits: 0. These evidence sources remain separate in `evidence/owner-handoff.json`.
+
+Current owner flags: `manual_handoff_checked: true`; `personal_code_review_completed: false`. **Next unmet owner criterion: personal code review.** The owner has not reported that completed. No additional execution or paid request was made for this acceptance update. Nothing pushed, published, deployed, submitted or emailed.
 
 ---
+
+## Historical checkpoint before the account repair and owner acceptance
+
 
 # Implementation checkpoint
 

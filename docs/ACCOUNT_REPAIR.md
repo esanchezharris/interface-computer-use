@@ -1,6 +1,6 @@
 # Account-parameterization repair record
 
-The replacement live artifact actively selects both requested accounts and passes **37/37** exact-artifact tests. Full offline verification passes **84/84**. Owner manual handoff and personal code review remain pending. This is a correctness repair within the existing capability, synthetic application and safety policy.
+The replacement live artifact actively selects both requested accounts and passes **37/37** exact-artifact tests. Full offline verification passes **84/84**. Owner manual handoff has subsequently passed twice; personal code review remains pending. See [owner acceptance](../evidence/owner-handoff.json). This is a correctness repair within the existing capability, synthetic application and safety policy.
 
 ## Root cause and preserved failure
 
@@ -85,14 +85,16 @@ Observed repair usage: **11,168 input** = 1,034 ordinary + 10,134 cache-write + 
 
 Additional reserve: **83,847 tokens / USD4.19235**, retained in full. Aggregate: **17 requests**, 153,245 reserved tokens / **USD7.66225**, estimated spend **USD0.113371**. No missing usage or uncertain failed charge exists; retained excess above estimated use is USD4.127944 for repair and USD7.548879 aggregate. No reservation was refunded/reset. This is not a billing receipt. Paid requests have stopped.
 
-## Remaining owner actions and limits
+## Owner handoff completed; personal review pending
 
-From the project in an interactive terminal, run exactly:
+The owner reported personally performing and verifying the command below twice. Runs `e59f4654-727a-4f35-83fc-59fced282a63` and `78753464-d145-41f3-88b3-bc4cf3201efa` both match the qualified artifact and clean package revision `0369d808df669016564f98d3e2e1bc66e383f13d`. Their original automatic records show HUMAN ownership, restoration activity, resumption, success and zero model calls/reserved tokens. Owner-supplied terminal output confirms the expected values and commits: 0. [The acceptance record](../evidence/owner-handoff.json) separates owner report from automatically recorded evidence. No repeat manual run is required.
+
+Command actually performed by the owner, retained for reproduction:
 
 ```bash
 npm run demo:handoff -- --require-live
 ```
 
-In the terminal enter `status` and confirm HUMAN. In the same browser enter the synthetic credential **demo-only** in **Demo password**, click **Restore session**, and wait for **Prepare transfer / M-207**. Stop touching the browser and enter `resume` in the terminal. The new qualified artifact must produce **M-207, CHK-207 → SAV-207, 37.50 USD, fee 0.00, AWAITING_CONFIRMATION**; the terminal must report success and **commits: 0**. The runner closes its browser after verification; the terminal result preserves the UI-derived values. Report the emitted evidence path/run ID with what you actually observed. That report will be linked to the real run as owner observation; automatically recorded metadata remains a separate source. Personal code review is also still pending.
+In the terminal enter `status` and confirm HUMAN. In the same browser enter the synthetic credential **demo-only** in **Demo password**, click **Restore session**, and wait for **Prepare transfer / M-207**. Stop touching the browser and enter `resume` in the terminal. The new qualified artifact must produce **M-207, CHK-207 → SAV-207, 37.50 USD, fee 0.00, AWAITING_CONFIRMATION**; the terminal must report success and **commits: 0**. The runner closes its browser after verification; the terminal result preserves the UI-derived values. The owner report and these exact run IDs are now linked; automatically recorded metadata remains a separate source. Personal code review is still pending.
 
 This proves the account contract for the existing synthetic application, not a universal account system, vendor portability or an OS input lock. Public snapshots intentionally redact business values; assertion logs remain private while expected synthetic test inputs are documented above. Source and artifact hashes establish linkage, not cryptographic proof of provider origin. Nothing was pushed, published, deployed, submitted, or emailed.

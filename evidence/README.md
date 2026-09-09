@@ -1,6 +1,6 @@
 # Current account-repair evidence
 
-**New genuine discovery and repaired-artifact automated qualification passed. Owner manual handoff and personal code review remain pending.**
+**New genuine discovery and repaired-artifact automated qualification passed. Owner manual handoff passed twice; personal code review remains pending.**
 
 Submission: `artifacts/prepare-transfer.json`; SHA256 `4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5`. The eight steps include executed and checked `sourceAccountRef` and `destinationAccountRef` selections. Candidate bytes were qualified before atomic promotion and remain identical at `artifacts/candidates/account-repair.json`.
 
@@ -12,10 +12,11 @@ Submission: `artifacts/prepare-transfer.json`; SHA256 `4b0ffdc4c4510716f724d12e2
 | [Current outcome/recovery/policy/operator collection](collections/6142ca94-a5de-493a-8130-973a5a09c020.json) | Six linked cases; all expected outcomes; zero commits |
 | [Required-live replay](09a31f1e-4167-4eb1-9d31-e7fbf00dbb67/manifest.json) | Success, zero model calls/commits |
 | [Required-live test_operator](abf19e6c-fd89-406b-8112-adadb4bed578/manifest.json) | Same-session success; automated operator, not owner observation |
+| [Owner-operated handoff e59f4654](e59f4654-727a-4f35-83fc-59fced282a63/manifest.json) and [78753464](78753464-d145-41f3-88b3-bc4cf3201efa/manifest.json) | Owner personally verified both; clean `0369d80…`, qualified artifact, successful human restoration/resumption, zero model calls. [Separate owner attestation/terminal values and automatic evidence](owner-handoff.json); reported commits: 0 |
 | [Repair usage and qualification](account-repair-summary.json) | 37/37 exact-artifact tests; 9 additional requests; 11,168 input / 480 output tokens; estimated USD0.064406, retained reserve USD4.19235 |
 | [Red baseline](account-repair-red.json), [original observed failure](5606575e-f518-4ae9-8995-fbd1c77a42d1/result.safe.json) | Original artifact's real reverse-direction CHECKPOINT_MISMATCH retained; no false successful result |
 
-`npm run verify:offline` passed **84/84**; candidate and promoted-path `test:artifact` each passed **37/37**, with no skips/retries. Commands, source and honest limits are in [ACCOUNT_REPAIR.md](../docs/ACCOUNT_REPAIR.md). Clean reproduction also passed **84/84 and 37/37**, from clean executable revision `a0efd14e58a712f20d5e02970ee9f8f19c791e05`: [replay a11620ca](a11620ca-2fb5-472c-ab36-eda5012feb23/manifest.json), [test_operator c3cb6c43](c3cb6c43-2141-4e40-bd2c-93d46dc4c0bd/manifest.json). Exact commands are in [REPRODUCTION.md](../REPRODUCTION.md). Public run files are allowlist-validated copies; caller outputs remain private. The original and repair spending gates are closed with all reservations retained. No actual-human gate is claimed.
+`npm run verify:offline` passed **84/84**; candidate and promoted-path `test:artifact` each passed **37/37**, with no skips/retries. Commands, source and honest limits are in [ACCOUNT_REPAIR.md](../docs/ACCOUNT_REPAIR.md). Clean reproduction also passed **84/84 and 37/37**, from clean executable revision `a0efd14e58a712f20d5e02970ee9f8f19c791e05`: [replay a11620ca](a11620ca-2fb5-472c-ab36-eda5012feb23/manifest.json), [test_operator c3cb6c43](c3cb6c43-2141-4e40-bd2c-93d46dc4c0bd/manifest.json). Exact commands are in [REPRODUCTION.md](../REPRODUCTION.md). Public run files are allowlist-validated copies; caller outputs remain private. The original and repair spending gates are closed with all reservations retained. The manual gate is established by the owner’s explicit report linked to the original runs, not by `actor: human` alone. Output values and commit counts are owner-reported terminal evidence; automatic safe files retain redaction. Personal code review remains pending.
 
 ## Historical evidence below
 
