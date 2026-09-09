@@ -1,0 +1,17 @@
+{
+  "runId": "f1df02bf-2c8c-4812-84f8-695ba6c66366",
+  "startedAt": "2026-09-08T23:34:56.243Z",
+  "mode": "replay",
+  "actor": "automation",
+  "origin": "development-fixture",
+  "artifactHash": "18da0f297332abd055819c212f17dd2ef13056839ed27cdbefcfd92003119aab",
+  "browserVersion": "153.0.8010.12",
+  "source": {
+    "revision": "uncommitted",
+    "dirty": true
+  },
+  "runtime": "v24.16.0",
+  "profile": "synthetic-bank-v1",
+  "policy": "review-only-v1",
+  "modelCalls": 0
+}

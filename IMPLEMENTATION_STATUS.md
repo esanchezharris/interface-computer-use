@@ -1,6 +1,7 @@
 # Implementation checkpoint
 
-State: BUILDING (M4 evidence and clean reproduction). Branch `build/computer-use`; no commit yet, new implementation files untracked.
+State: BUILDING (M4 final packaged-source review). Branch `build/computer-use`.
+Tested executable source: `f49371f9da98e23e57d3ca9c5c0575219ca0468d`; packaging changes contain documentation and safe evidence only.
 Read completely: BUILD_SPEC.md, CODEX_BUILD_BRIEF.md, assignment PDF (all text).
 Environment: macOS arm64, Node 24.16.0, npm 11.13.0; dependency versions locked.
 
@@ -8,7 +9,7 @@ Environment: macOS arm64, Node 24.16.0, npm 11.13.0; dependency versions locked.
 1. M0 complete: runnable synthetic iframe sandbox; schemas; dependency/browser installation.
 2. M1 complete offline: actual UI fixture discovery and changed-input replay. Live M1 externally gated.
 3. M2 and M3 complete offline: outcomes, host policy, evidence, same-session test operator and adversarial regression repairs.
-4. M4 in progress: capture public safe evidence, rehearse a clean clone, finish documentation and final review.
+4. M4 evidence, documentation and clean reproduction complete. Final packaged-source review is the next local action.
 
 ## Observed results
 - `npm run build` passes.
@@ -25,9 +26,11 @@ Environment: macOS arm64, Node 24.16.0, npm 11.13.0; dependency versions locked.
 - live_artifact_replay_passed: false (depends on genuine discovery)
 - handoff_mechanism_passed: true (automated test_operator only, tests/integration/handoff.test.ts)
 - manual_handoff_checked: false (owner must operate headed browser)
-- clean_reproduction_passed: false (M4)
+- clean_reproduction_passed: true (A20; clean-clone 55/55 and both demos; REPRODUCTION.md)
 
 API authorization: no explicit project approval/model/key/budget supplied. Live requests: 0.
 `artifacts/development-fixture.json` is openly scripted development evidence, not a live-model artifact.
 Processes: tests/launchers own ephemeral servers/browsers and close them. No intentionally persistent process.
-Next implementation action: commit the tested source, capture safe evidence and execute the documented commands from a clean local clone (A20).
+Evidence collection: `evidence/collections/bc906ea7-1002-418e-8e6c-704d333ad78e.json`; seven actual development UI runs, all zero commits. The new artifact passes 27/27 browser qualification tests.
+Final review: pending after packaging; preserve findings and exact-SHA report under `.runs/reviews/`.
+Next implementation action: perform the final review, repair any material findings, then issue the final checkpoint with external gates pending.

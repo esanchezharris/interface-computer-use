@@ -1,0 +1,18 @@
+{
+  "mode": "discovery",
+  "actor": "automation",
+  "origin": "development-fixture",
+  "artifactHash": "122e42d09ac4d56fb45dac01e7a4f0f9db02ffe985a49f8753c756826ac1bf8e",
+  "browserVersion": "153.0.8010.12",
+  "runId": "06e36561-042e-451e-a76d-4ed600c211c8",
+  "startedAt": "2026-09-09T00:17:48.018Z",
+  "source": {
+    "revision": "f49371f9da98e23e57d3ca9c5c0575219ca0468d",
+    "dirty": false
+  },
+  "runtime": "v24.16.0",
+  "profile": "synthetic-bank-v1",
+  "policy": "review-only-v1",
+  "modelCalls": 9,
+  "reservedTokens": 0
+}

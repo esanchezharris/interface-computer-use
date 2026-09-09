@@ -1,0 +1,16 @@
+{"at":"2026-09-09T00:17:49.845Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-001","action":"fill","strategy":"role","reason":"supply-input"}
+{"at":"2026-09-09T00:17:49.868Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-001","screen":"search","action":"fill","strategy":"role"}
+{"at":"2026-09-09T00:17:49.888Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-002","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T00:17:49.973Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-002","screen":"member","action":"click","strategy":"role"}
+{"at":"2026-09-09T00:17:49.990Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-003","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T00:17:50.062Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-003","screen":"accounts","action":"click","strategy":"role"}
+{"at":"2026-09-09T00:17:50.079Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-004","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T00:17:50.165Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-004","screen":"transfer","action":"click","strategy":"role"}
+{"at":"2026-09-09T00:17:50.183Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-005","action":"select","strategy":"role","reason":"supply-input"}
+{"at":"2026-09-09T00:17:50.196Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-005","screen":"transfer","action":"select","strategy":"role"}
+{"at":"2026-09-09T00:17:50.216Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-006","action":"select","strategy":"role","reason":"supply-input"}
+{"at":"2026-09-09T00:17:50.232Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-006","screen":"transfer","action":"select","strategy":"role"}
+{"at":"2026-09-09T00:17:50.260Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-007","action":"fill","strategy":"table-label","reason":"supply-input"}
+{"at":"2026-09-09T00:17:50.282Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-complete","actor":"automation","stepId":"step-007","screen":"transfer","action":"fill","strategy":"table-label"}
+{"at":"2026-09-09T00:17:50.311Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"action-start","actor":"automation","stepId":"step-008","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T00:17:50.361Z","runId":"bcfdd451-a3ae-49b3-88c9-2591239f8e86","kind":"terminal","actor":"system","code":"INSUFFICIENT_FUNDS"}

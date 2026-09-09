@@ -1,0 +1,18 @@
+{
+  "runId": "d0765da1-6f26-45b9-b6ee-74e30c14a064",
+  "startedAt": "2026-09-08T23:53:21.360Z",
+  "mode": "discovery",
+  "actor": "automation",
+  "origin": "development-fixture",
+  "artifactHash": "27f1ed95476dd13c9feb522300d759ddbfda1fd9503bd93e34bd8be2f058cd54",
+  "browserVersion": "153.0.8010.12",
+  "source": {
+    "revision": "uncommitted",
+    "dirty": true
+  },
+  "runtime": "v24.16.0",
+  "profile": "synthetic-bank-v1",
+  "policy": "review-only-v1",
+  "modelCalls": 9,
+  "reservedTokens": 0
+}

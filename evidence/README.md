@@ -27,8 +27,33 @@ Working runs are ignored under `.runs/`. Public run copies are validated as allo
 | A17 | Pass: executed symbolic steps, unchanged replay bytes | `tests/integration/{slice,safety}.test.ts` |
 | A18 | Pass for implemented labeling/linkage; genuine live evidence pending | manifests distinguish development-fixture, automation and test_operator; never inferred human/live |
 | A19 | Pass: actual failures emit structured diagnostics/snapshots; failed persistence stops and closes | failure run directories; `tests/integration/review-regressions.test.ts` |
-| A20 | Pending final clean-copy rehearsal | see `REPRODUCTION.md` when completed |
+| A20 | Pass: clean tracked-source clone; install, 55/55 tests, keyless demos | [REPRODUCTION.md](../REPRODUCTION.md) |
 
-The original failing attempts are retained privately. Selected safe historical failures will be copied alongside the collection and labeled separately. Their old metadata reflects the implementation at the time and is not current qualification evidence. See `docs/QA_NOTES.md` for diagnoses. No test retries, fixture-to-live relabeling, or unperformed manual checks are used to establish these statuses.
+The original failing attempts are retained privately. Selected safe historical failures are copied below. Their old metadata reflects the implementation at the time and is not current qualification evidence. See `docs/QA_NOTES.md` for diagnoses. No test retries, fixture-to-live relabeling, or unperformed manual checks are used to establish these statuses.
 
 The full offline suite most recently passed **55/55** tests before packaging. Final commands, exact source revisions, clean-copy results and current status are recorded in `IMPLEMENTATION_STATUS.md` and `REPRODUCTION.md`.
+
+## Captured collection
+
+[Collection bc906ea7](collections/bc906ea7-1002-418e-8e6c-704d333ad78e.json) records seven actual UI runs. Its artifact SHA-256 is `122e42d09ac4d56fb45dac01e7a4f0f9db02ffe985a49f8753c756826ac1bf8e`. All linked replays used those exact bytes, recorded zero model calls, and the independent oracle recorded zero commits in every case.
+
+| Case | Safe run directory | Actual result |
+|---|---|---|
+| Scripted development discovery | [06e36561](06e36561-042e-451e-a76d-4ed600c211c8/manifest.json) | Success; 9 fixture decisions, 0 live requests; [artifact](06e36561-042e-451e-a76d-4ed600c211c8/capability.json) |
+| Changed-input replay | [bfdb659f](bfdb659f-c51b-4878-ac3d-453f569bbc51/manifest.json) | Success |
+| Business outcome | [bcfdd451](bcfdd451-a3ae-49b3-88c9-2591239f8e86/result.safe.json) | INSUFFICIENT_FUNDS |
+| Bounded loading recovery | [4fae5555](4fae5555-1fdc-4a2e-be54-a53ddedde8b1/manifest.json) | Success; one review POST |
+| Hard failure | [b353d168](b353d168-65c7-478f-9feb-96b82d7da48e/result.safe.json) | APP_ERROR; restricted snapshot |
+| Policy failure | [5a20bbdf](5a20bbdf-6d6c-460a-8a6c-856d122345dd/result.safe.json) | POLICY_DENIED; no review POST |
+| Automated handoff | [d282987c](d282987c-f508-4399-b1ba-3199fe18e75a/manifest.json) | Success; test_operator |
+
+Source revision is `f49371f9da98e23e57d3ca9c5c0575219ca0468d`. Discovery started clean. Later runs truthfully show `dirty: true` because the capture added public evidence; executable source was unchanged. The new artifact also passed `test:artifact` (27/27). The clean-reproduction demos separately record clean source: [replay](a7fe0963-3c54-42c1-bdf5-8cd33454c65b/manifest.json), [test_operator](b1af876d-0a9d-405c-bc84-ed4b27f75cf6/manifest.json).
+
+## Fixture and historical provenance
+
+The checked-in `artifacts/development-fixture.json` is linked to its [original executed discovery](d0765da1-6f26-45b9-b6ee-74e30c14a064/manifest.json), hash `27f1ed95476dd13c9feb522300d759ddbfda1fd9503bd93e34bd8be2f058cd54`. That run predates the first commit and honestly records `uncommitted`, dirty source.
+
+- [Startup failure 6eeb7a1b](historical/6eeb7a1b-98d6-416e-ac6f-200353c05133/result.safe.json): TARGET_NOT_FOUND before the iframe was ready.
+- [Recorder/replay failure f1df02bf](historical/f1df02bf-2c8c-4812-84f8-695ba6c66366/result.safe.json): CHECKPOINT_MISMATCH from a prematurely recorded screen.
+
+Historical bytes are preserved, not migrated: those manifests predate the `reservedTokens` field. They were checked against the explicit older allowlisted shape before copying. They are evidence of failures and repairs, not current acceptance passes. Every public run omits full business outputs and raw model/human content.

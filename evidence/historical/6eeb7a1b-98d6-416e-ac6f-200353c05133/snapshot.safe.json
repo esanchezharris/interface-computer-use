@@ -1,0 +1,32 @@
+{
+  "redacted": true,
+  "frames": [
+    {
+      "scope": "root",
+      "route": "/app",
+      "controls": []
+    },
+    {
+      "scope": "Workspace",
+      "route": "/search",
+      "controls": [
+        {
+          "tag": "input",
+          "label": "Member ID",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        },
+        {
+          "tag": "button",
+          "label": "Search",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        }
+      ]
+    }
+  ]
+}
