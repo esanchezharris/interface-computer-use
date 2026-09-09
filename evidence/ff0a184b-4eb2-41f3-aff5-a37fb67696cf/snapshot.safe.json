@@ -1,0 +1,24 @@
+{
+  "redacted": true,
+  "frames": [
+    {
+      "scope": "root",
+      "route": "/app",
+      "controls": []
+    },
+    {
+      "scope": "Workspace",
+      "route": "/accounts",
+      "controls": [
+        {
+          "tag": "a",
+          "label": "[REDACTED]",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        }
+      ]
+    }
+  ]
+}

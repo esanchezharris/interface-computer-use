@@ -1,0 +1,48 @@
+{
+  "redacted": true,
+  "frames": [
+    {
+      "scope": "root",
+      "route": "/app",
+      "controls": []
+    },
+    {
+      "scope": "Workspace",
+      "route": "/transfer",
+      "controls": [
+        {
+          "tag": "select",
+          "label": "Source account",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        },
+        {
+          "tag": "select",
+          "label": "Destination account",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        },
+        {
+          "tag": "input",
+          "label": "Amount USD",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        },
+        {
+          "tag": "button",
+          "label": "Review transfer",
+          "visible": true,
+          "enabled": true,
+          "values": "[REDACTED]",
+          "matches": 1
+        }
+      ]
+    }
+  ]
+}

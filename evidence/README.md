@@ -18,7 +18,7 @@ Working runs are ignored under `.runs/`. Public run copies are validated as allo
 | A08 | Pass: distinct permission/app failures | `tests/integration/outcomes.test.ts`, collection hard failure |
 | A09 | Pass: duplicate controls and duplicate frames prevent effect | `tests/integration/outcomes.test.ts` |
 | A10 | Pass: wrong member/accounts/amount, malformed fee, hidden values | `tests/integration/{outcomes,safety}.test.ts` |
-| A11 | Pass: forbidden control, submitter override, miswired route, human request; commits 0 | `tests/integration/safety.test.ts`, collection policy failure |
+| A11 | Pass: forbidden control, submitter override, unknown effect/type/method, miswired route, human request; commits 0 | `tests/integration/{safety,policy-effects}.test.ts`, collection policy failure |
 | A12 | Pass: native confirmation dismissed, DOM dialog rejected | `tests/integration/{outcomes,safety}.test.ts` |
 | A13 | Pass mechanism; **manual candidate gate pending** | `tests/integration/{handoff,review-regressions}.test.ts`, collection test_operator |
 | A14 | Pass: actual pending Playwright click, late model response, finalization race | `tests/unit/ownership.test.ts`, `tests/integration/{discovery-errors,review-regressions}.test.ts` |
@@ -27,13 +27,31 @@ Working runs are ignored under `.runs/`. Public run copies are validated as allo
 | A17 | Pass: executed symbolic steps, unchanged replay bytes | `tests/integration/{slice,safety}.test.ts` |
 | A18 | Pass for implemented labeling/linkage; genuine live evidence pending | manifests distinguish development-fixture, automation and test_operator; never inferred human/live |
 | A19 | Pass: actual failures emit structured diagnostics/snapshots; failed persistence stops and closes | failure run directories; `tests/integration/review-regressions.test.ts` |
-| A20 | Pass: clean tracked-source clone; install, 55/55 tests, keyless demos | [REPRODUCTION.md](../REPRODUCTION.md) |
+| A20 | Pass: clean tracked-source clone; install, 59/59 tests, keyless demos | [REPRODUCTION.md](../REPRODUCTION.md) |
 
 The original failing attempts are retained privately. Selected safe historical failures are copied below. Their old metadata reflects the implementation at the time and is not current qualification evidence. See `docs/QA_NOTES.md` for diagnoses. No test retries, fixture-to-live relabeling, or unperformed manual checks are used to establish these statuses.
 
-The full offline suite most recently passed **55/55** tests before packaging. Final commands, exact source revisions, clean-copy results and current status are recorded in `IMPLEMENTATION_STATUS.md` and `REPRODUCTION.md`.
+The repaired source passed **59/59** offline tests, including a second fresh clone. Final commands, exact source revisions, clean-copy results and current status are recorded in `IMPLEMENTATION_STATUS.md` and `REPRODUCTION.md`.
 
-## Captured collection
+## Current repaired-source collection
+
+[Collection ec1cf49c](collections/ec1cf49c-f5cc-4d00-95fe-d86df4c095c6.json) captures seven actual runs at source `b53842a0ebaf13d546119bece16cc193f293c758`. [Artifact bytes](aa3a106d-418a-412d-a280-31c16da26ff4/capability.json) hash to `ff64e8b180afac7ea8f76e41abd6c151e3fd327609c9a59c544c557184ae0e75`. Every linked replay used that hash and recorded zero model calls; all seven independent commit counters were zero.
+
+| Case | Safe run | Actual result |
+|---|---|---|
+| Scripted development discovery | [aa3a106d](aa3a106d-418a-412d-a280-31c16da26ff4/manifest.json) | Success; 9 fixture decisions, 0 live requests |
+| Changed-input replay | [22d5176a](22d5176a-f471-4e04-919e-b5ec9973ac1a/manifest.json) | Success |
+| Business outcome | [f4f262ef](f4f262ef-9d5e-4660-bbac-5f9e07565d06/result.safe.json) | INSUFFICIENT_FUNDS |
+| Bounded recovery | [1c842506](1c842506-8cbd-42c2-89e0-f2c2e420b3cf/manifest.json) | Success; one review POST |
+| Hard failure | [ff0a184b](ff0a184b-4eb2-41f3-aff5-a37fb67696cf/result.safe.json) | APP_ERROR |
+| Policy failure | [bcab0e95](bcab0e95-74b4-4952-8a7e-df0f462311a1/result.safe.json) | POLICY_DENIED; zero review POSTs |
+| Automated handoff | [e0ad908b](e0ad908b-03e9-469b-8944-2a4833c95a63/manifest.json) | Success; test_operator |
+
+The exact current artifact passed `CUA_TEST_ARTIFACT=evidence/aa3a106d-418a-412d-a280-31c16da26ff4/capability.json npm run test:artifact`: **31/31**, no skips/retries (24.508 s).
+
+Discovery started clean. Later capture runs truthfully show dirty source because earlier safe evidence copies were added; executable source did not change. The second fresh-clone [replay](ed3d7a71-8e05-4dcf-8e49-14174d88ab7e/manifest.json) and [test_operator](11077b81-d9da-4d27-a1fb-e3843ecba2c8/manifest.json) runs separately record repaired source with `dirty: false`.
+
+## Prior collection before the final policy repair
 
 [Collection bc906ea7](collections/bc906ea7-1002-418e-8e6c-704d333ad78e.json) records seven actual UI runs. Its artifact SHA-256 is `122e42d09ac4d56fb45dac01e7a4f0f9db02ffe985a49f8753c756826ac1bf8e`. All linked replays used those exact bytes, recorded zero model calls, and the independent oracle recorded zero commits in every case.
 
