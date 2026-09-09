@@ -1,6 +1,6 @@
 # Implementation checkpoint
 
-State: **IMPLEMENTATION_COMPLETE_WITH_EXTERNAL_GATES_PENDING**. Not submission-ready.
+State: LIVE_VALIDATION_IN_PROGRESS. User authorized existing environment key and up to USD50 aggregate additional usage (USD5 selection subset). Baseline and historical evidence preserved.
 Branch: `build/computer-use`. Tested executable source: `b53842a0ebaf13d546119bece16cc193f293c758`.
 Later packaging commits contain only documentation and reviewed safe evidence. Use
 `git rev-parse HEAD` / `git status --short` for the current packaging revision and dirty state.
@@ -46,3 +46,5 @@ Review code/evidence personally before any submission-readiness claim.
 No new architecture planning is needed. No intentional sandbox/browser process remains;
 launchers and tests close their owned resources. Private runs and clean clones remain ignored.
 No publication, push, deployment, paid resource creation or employer email occurred.
+
+Live phase working plan: shared durable cost bounds and provider compatibility (in progress), genuine discovery and exact-artifact qualification, focused repair/verification/reproduction, safe evidence and final review. No paid calls yet. Current source has focused phase-budget/provider metadata changes; no architecture restart.

@@ -21,7 +21,9 @@ const config = {
 };
 const authorized = {
   OPENAI_API_KEY: "synthetic-only-key",
-  CUA_MODEL: "test-model",
+  CUA_MODEL: "gpt-5.6-sol",
+  CUA_LIVE_PHASE: "assignment-20260908",
+  CUA_BUDGET_STAGE: "selection",
   CUA_API_APPROVED: "true",
   CUA_MAX_CALLS: "2",
   CUA_MAX_TOTAL_TOKENS: "10000",
@@ -124,6 +126,7 @@ test("concurrent processes cannot over-reserve the shared budget", async () => {
 test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and safe errors", async (context) => {
   // Given a local HTTP provider fixture; When requests fail or return JSON; Then count every attempt without live API access.
   const budgetId = `wire-${randomUUID()}`;
+  const directory = await mkdtemp(join(tmpdir(), "cua-wire-"));
   const request: ModelRequest = {
     goal: "Use the visible interface",
     correction: false,
@@ -191,28 +194,36 @@ test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and s
     },
   );
   try {
-    const model = createOpenAIModel({
-      ...authorized,
-      CUA_BUDGET_ID: budgetId,
-      CUA_MAX_CALLS: "3",
-      CUA_MAX_TOTAL_TOKENS: "100000",
-    });
+    const model = createOpenAIModel(
+      {
+        ...authorized,
+        CUA_BUDGET_ID: budgetId,
+        CUA_MAX_CALLS: "3",
+        CUA_MAX_TOTAL_TOKENS: "100000",
+      },
+      directory,
+    );
     assert.ok("lastRequestMetadata" in model && typeof model.lastRequestMetadata === "function");
     await assert.rejects(model.decide(request), code("MODEL_UNAVAILABLE"));
-    assert.deepEqual(model.lastRequestMetadata(), {});
+    assert.deepEqual(model.lastRequestMetadata(), { httpStatus: 503 });
     assert.equal(calls, 1);
     assert.equal(model.usage().calls, 1);
     assert.deepEqual(await model.decide(request), decision);
     assert.deepEqual(model.lastRequestMetadata(), {
       requestId: "req_wire_fixture",
+      responseStatus: "completed",
       inputTokens: 1,
       outputTokens: 1,
     });
     assert.equal(await model.decide(request), null);
-    assert.deepEqual(model.lastRequestMetadata(), { inputTokens: 1, outputTokens: 1 });
+    assert.deepEqual(model.lastRequestMetadata(), {
+      inputTokens: 1,
+      outputTokens: 1,
+      responseStatus: "completed",
+    });
     assert.equal(calls, 3);
     await assert.rejects(model.decide(request), code("MODEL_BUDGET_EXHAUSTED"));
-    const persisted = await readFile(join(".runs/budgets", `${budgetId}.json`), "utf8");
+    const persisted = await readFile(join(directory, `${budgetId}.json`), "utf8");
     assert.equal(persisted.includes("SENSITIVE_TEST_PROVIDER_ERROR"), false);
     assert.equal(persisted.includes(authorized.OPENAI_API_KEY), false);
   } finally {
@@ -221,6 +232,6 @@ test("SDK wire fixture proves no retries, failed-call debit, JSON parsing, and s
       server.close((error) => (error === undefined ? resolve() : reject(error)));
       server.closeAllConnections();
     });
-    await rm(join(".runs/budgets", `${budgetId}.json`), { force: true });
+    await rm(directory, { recursive: true, force: true });
   }
 });

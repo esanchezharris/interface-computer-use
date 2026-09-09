@@ -34,6 +34,11 @@ export const Event = z.strictObject({
     .optional(),
   inputTokens: z.number().int().min(0).max(1000000).optional(),
   outputTokens: z.number().int().min(0).max(1000000).optional(),
+  cachedInputTokens: z.number().int().min(0).max(1000000).optional(),
+  cacheWriteTokens: z.number().int().min(0).max(1000000).optional(),
+  reasoningTokens: z.number().int().min(0).max(1000000).optional(),
+  responseStatus: z.enum(["completed", "incomplete", "failed", "other"]).optional(),
+  httpStatus: z.number().int().min(100).max(599).optional(),
   reason: z
     .enum(["advance", "supply-input", "observe-change", "verify-review", "need-operator"])
     .optional(),

@@ -22,8 +22,11 @@ try {
       actor: "automation",
       evidenceRoot: ".runs/live",
     });
-    if (learned.result.status !== "success") throw new Fault("MODEL_UNAVAILABLE");
     process.stderr.write(`Genuine discovery evidence: ${learned.evidenceDirectory}\n`);
+    if (learned.result.status !== "success")
+      throw new Fault(
+        learned.result.status === "failed" ? learned.result.code : "MODEL_UNAVAILABLE",
+      );
     const env = Object.fromEntries(
       Object.entries(process.env).filter(([key]) => !/OPENAI|ANTHROPIC|API_KEY|CUA_/.test(key)),
     );
@@ -46,7 +49,7 @@ try {
       child.once("error", reject);
       child.once("exit", resolve);
     });
-    if (exit !== 0) throw new Fault("CHECKPOINT_MISMATCH");
+    if (exit !== 0 || app.stats.commits !== 0) throw new Fault("CHECKPOINT_MISMATCH");
     process.stdout.write(
       `${JSON.stringify({ liveDiscovery: true, keylessReplay: true, commits: app.stats.commits, manualHandoff: false })}\n`,
     );

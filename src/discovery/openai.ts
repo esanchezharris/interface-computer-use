@@ -1,12 +1,18 @@
+import { resolve } from "node:path";
 import { OpenAI } from "openai";
 import { z } from "zod";
 import { Decision } from "../domain/actions.js";
 import { Fault } from "../domain/contract.js";
 import { BudgetConfigSchema, DurableBudget } from "./budget.js";
 import type { Model, ModelRequest } from "./model.js";
+import { LIVE_PHASE, MAX_INPUT_TOKENS, PhaseBudget } from "./phase-budget.js";
 
 const ApprovedConfigSchema = BudgetConfigSchema.extend({
   apiKey: z.string().min(1).max(512).regex(/^\S+$/),
+  model: z.enum(["gpt-5.6-sol", "gpt-6-astra"]),
+  phase: z.literal(LIVE_PHASE),
+  stage: z.enum(["selection", "acceptance"]),
+  reasoning: z.enum(["low", "medium"]),
 });
 export type ApprovedConfig = Readonly<z.infer<typeof ApprovedConfigSchema>>;
 export function approvedConfig(env: NodeJS.ProcessEnv): ApprovedConfig {
@@ -18,11 +24,17 @@ export function approvedConfig(env: NodeJS.ProcessEnv): ApprovedConfig {
     CUA_MAX_CALLS,
     CUA_MAX_TOTAL_TOKENS,
     CUA_MAX_OUTPUT_TOKENS,
+    CUA_LIVE_PHASE,
+    CUA_BUDGET_STAGE,
+    CUA_REASONING_EFFORT,
   } = env;
   if (CUA_API_APPROVED !== "true") throw new Fault("MODEL_UNAVAILABLE");
   const parsed = ApprovedConfigSchema.safeParse({
     apiKey: OPENAI_API_KEY,
     model: CUA_MODEL,
+    phase: CUA_LIVE_PHASE,
+    stage: CUA_BUDGET_STAGE,
+    reasoning: CUA_REASONING_EFFORT ?? "low",
     budgetId: CUA_BUDGET_ID,
     maxCalls: Number(CUA_MAX_CALLS),
     maxTotalTokens: Number(CUA_MAX_TOTAL_TOKENS),
@@ -42,6 +54,11 @@ const RequestMetadata = z.strictObject({
     .optional(),
   inputTokens: z.number().int().min(0).max(1_000_000).optional(),
   outputTokens: z.number().int().min(0).max(1_000_000).optional(),
+  cachedInputTokens: z.number().int().min(0).max(1_000_000).optional(),
+  cacheWriteTokens: z.number().int().min(0).max(1_000_000).optional(),
+  reasoningTokens: z.number().int().min(0).max(1_000_000).optional(),
+  responseStatus: z.enum(["completed", "incomplete", "failed", "other"]).optional(),
+  httpStatus: z.number().int().min(100).max(599).optional(),
 });
 type RequestMetadata = Readonly<z.infer<typeof RequestMetadata>>;
 
@@ -52,17 +69,26 @@ class OpenAIModel implements Model {
   readonly #client: OpenAI;
   readonly #budget: DurableBudget;
   readonly #outputTokens: number;
+  readonly #phase: PhaseBudget;
+  readonly #stage: ApprovedConfig["stage"];
+  readonly #reasoning: ApprovedConfig["reasoning"];
   #lastMetadata: RequestMetadata = {};
-  constructor(config: ApprovedConfig) {
+  constructor(config: ApprovedConfig, directory: string) {
+    this.#phase = new PhaseBudget(directory);
+    this.#stage = config.stage;
+    this.#reasoning = config.reasoning;
     this.model = config.model;
     this.#outputTokens = config.maxOutputTokens;
-    this.#budget = new DurableBudget({
-      budgetId: config.budgetId,
-      model: config.model,
-      maxCalls: config.maxCalls,
-      maxTotalTokens: config.maxTotalTokens,
-      maxOutputTokens: config.maxOutputTokens,
-    });
+    this.#budget = new DurableBudget(
+      {
+        budgetId: config.budgetId,
+        model: config.model,
+        maxCalls: config.maxCalls,
+        maxTotalTokens: config.maxTotalTokens,
+        maxOutputTokens: config.maxOutputTokens,
+      },
+      directory,
+    );
     this.#budget.usage();
     this.#client = new OpenAI({
       apiKey: config.apiKey,
@@ -86,52 +112,89 @@ class OpenAIModel implements Model {
     this.#lastMetadata = {};
     const input = JSON.stringify({ ...request, decisionSchema });
     // UTF-8 bytes plus message overhead conservatively reserve input tokens; output is capped by the API.
-    const reservation = Buffer.byteLength(instructions + input, "utf8") + 2048 + this.#outputTokens;
-    await this.#budget.reserve(reservation);
-    try {
-      const response = await this.#client.responses.create(
-        {
-          model: this.model,
-          instructions,
-          input,
-          max_output_tokens: this.#outputTokens,
-          text: { format: { type: "json_object" } },
-          store: false,
-        },
-        { timeout: Math.max(1, Math.min(30000, request.timeoutMs ?? 30000)) },
-      );
-      const metadata = RequestMetadata.safeParse({
-        ...(response._request_id === undefined || response._request_id === null
-          ? {}
-          : { requestId: response._request_id }),
-        ...(response.usage?.input_tokens === undefined
-          ? {}
-          : { inputTokens: response.usage.input_tokens }),
-        ...(response.usage?.output_tokens === undefined
-          ? {}
-          : { outputTokens: response.usage.output_tokens }),
-      });
-      if (metadata.success) this.#lastMetadata = metadata.data;
-      const actual = response.usage?.total_tokens;
-      if (
-        actual !== undefined &&
-        (!Number.isSafeInteger(actual) || actual < 0 || actual > reservation)
-      )
-        throw new Fault("MODEL_BUDGET_EXHAUSTED");
-      if (!response.output_text) return null;
+    const inputReservation = Buffer.byteLength(instructions + input, "utf8") + 2048;
+    if (inputReservation > MAX_INPUT_TOKENS) throw new Fault("MODEL_BUDGET_EXHAUSTED");
+    const reservation = inputReservation + this.#outputTokens;
+    return this.#phase.run(reservation, this.#stage, async () => {
+      await this.#budget.reserve(reservation);
       try {
-        return JSON.parse(response.output_text);
+        const response = await this.#client.responses.create(
+          {
+            model: this.model,
+            instructions,
+            input,
+            max_output_tokens: this.#outputTokens,
+            reasoning: { effort: this.#reasoning },
+            service_tier: "default",
+            text: { format: { type: "json_object" } },
+            store: false,
+          },
+          { timeout: Math.max(1, Math.min(30000, request.timeoutMs ?? 30000)) },
+        );
+        const metadata = RequestMetadata.safeParse({
+          responseStatus: ["completed", "incomplete", "failed"].includes(response.status ?? "")
+            ? response.status
+            : "other",
+          ...(response.usage?.input_tokens_details?.cached_tokens === undefined
+            ? {}
+            : { cachedInputTokens: response.usage.input_tokens_details.cached_tokens }),
+          ...(response.usage?.input_tokens_details?.cache_write_tokens === undefined
+            ? {}
+            : { cacheWriteTokens: response.usage.input_tokens_details.cache_write_tokens }),
+          ...(response.usage?.output_tokens_details?.reasoning_tokens === undefined
+            ? {}
+            : { reasoningTokens: response.usage.output_tokens_details.reasoning_tokens }),
+          ...(response._request_id === undefined || response._request_id === null
+            ? {}
+            : { requestId: response._request_id }),
+          ...(response.usage?.input_tokens === undefined
+            ? {}
+            : { inputTokens: response.usage.input_tokens }),
+          ...(response.usage?.output_tokens === undefined
+            ? {}
+            : { outputTokens: response.usage.output_tokens }),
+        });
+        if (metadata.success) this.#lastMetadata = metadata.data;
+        const actual = response.usage?.total_tokens;
+        if (
+          actual !== undefined &&
+          (!Number.isSafeInteger(actual) || actual < 0 || actual > reservation)
+        )
+          throw new Fault("MODEL_BUDGET_EXHAUSTED");
+        if (response.service_tier && response.service_tier !== "default")
+          throw new Fault("MODEL_PRICING_UNSUPPORTED");
+        if (response.status === "incomplete") throw new Fault("MODEL_INCOMPLETE");
+        if (response.status !== "completed") throw new Fault("MODEL_UNAVAILABLE");
+        if (!response.output_text) return null;
+        try {
+          return JSON.parse(response.output_text);
+        } catch (error) {
+          if (error instanceof SyntaxError) return null;
+          throw error;
+        }
       } catch (error) {
-        if (error instanceof SyntaxError) return null;
-        throw error;
+        if (error instanceof Fault) throw error;
+        if (error instanceof OpenAI.APIError) {
+          const metadata = RequestMetadata.safeParse({
+            ...(error.status === undefined ? {} : { httpStatus: error.status }),
+            ...(error.requestID ? { requestId: error.requestID } : {}),
+          });
+          if (metadata.success) this.#lastMetadata = metadata.data;
+          if (error.status === 401 || error.status === 403 || error.status === 404)
+            throw new Fault("MODEL_ACCESS_DENIED");
+          if (error.status === 400 || error.status === 422)
+            throw new Fault("MODEL_SCHEMA_INCOMPATIBLE");
+          if (error.status === 429) throw new Fault("MODEL_RATE_LIMITED");
+        }
+        throw new Fault("MODEL_UNAVAILABLE");
       }
-    } catch (error) {
-      if (error instanceof Fault) throw error;
-      throw new Fault("MODEL_UNAVAILABLE");
-    }
+    });
   }
 }
 
-export function createOpenAIModel(env: NodeJS.ProcessEnv): Model {
-  return new OpenAIModel(approvedConfig(env));
+export function createOpenAIModel(
+  env: NodeJS.ProcessEnv,
+  directory = resolve(".runs/budgets"),
+): Model {
+  return new OpenAIModel(approvedConfig(env), directory);
 }

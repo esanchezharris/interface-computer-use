@@ -17,6 +17,11 @@ export interface Model {
     readonly requestId?: string | undefined;
     readonly inputTokens?: number | undefined;
     readonly outputTokens?: number | undefined;
+    readonly cachedInputTokens?: number | undefined;
+    readonly cacheWriteTokens?: number | undefined;
+    readonly reasoningTokens?: number | undefined;
+    readonly responseStatus?: "completed" | "incomplete" | "failed" | "other" | undefined;
+    readonly httpStatus?: number | undefined;
   };
   usage(): { calls: number; tokens: number };
 }

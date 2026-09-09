@@ -21,7 +21,8 @@
     "demo:handoff": "npm run build --silent && node dist/src/cli/demo.js handoff",
     "verify:live": "npm run build --silent && node dist/src/cli/live.js",
     "test:artifact": "npm run build && node --test --test-concurrency=1 dist/tests/integration/outcomes.test.js dist/tests/integration/handoff.test.js dist/tests/integration/safety.test.js dist/tests/integration/policy-effects.test.js",
-    "evidence:capture": "npm run build --silent && node dist/scripts/capture-evidence.js"
+    "evidence:capture": "npm run build --silent && node dist/scripts/capture-evidence.js",
+    "verify:provider": "npm run build --silent && node dist/src/cli/smoke.js"
   },
   "dependencies": {
     "openai": "7.10.0",
