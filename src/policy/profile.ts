@@ -73,6 +73,12 @@ const safeControls: Readonly<Record<string, readonly string[]>> = {
   "Amount USD": ["fill"],
   "Review transfer": ["click"],
 };
+const clickEffects: Readonly<Record<string, readonly [string, string, string, string]>> = {
+  Search: ["button", "submit", "/member", "GET"],
+  Accounts: ["a", "", "/accounts", "GET"],
+  "Prepare transfer": ["a", "", "/transfer", "GET"],
+  "Review transfer": ["button", "submit", "/review", "POST"],
+};
 export function authorize(binding: Binding, operation: string, effect: Effect): void {
   const name =
     binding.strategy === "table-label"
@@ -83,16 +89,22 @@ export function authorize(binding: Binding, operation: string, effect: Effect): 
   if (!safeControls[name]?.includes(operation) || effect.type === "password")
     throw new Fault("POLICY_DENIED");
   // Actual route checks occur before dispatch too, not merely from the safe label.
-  const route = effect.href || effect.formAction;
-  if (operation === "click" && route) {
-    const url = new URL(route);
-    const expected: Readonly<Record<string, string>> = {
-      Search: "/member",
-      Accounts: "/accounts",
-      "Prepare transfer": "/transfer",
-      "Review transfer": "/review",
-    };
-    if (url.pathname !== expected[name]) throw new Fault("POLICY_DENIED");
+  if (operation === "click") {
+    const expected = clickEffects[name];
+    const route = effect.tag === "a" ? effect.href : effect.formAction;
+    if (
+      !expected ||
+      effect.tag !== expected[0] ||
+      effect.type !== expected[1] ||
+      effect.method !== expected[3] ||
+      !route
+    )
+      throw new Fault("POLICY_DENIED");
+    try {
+      if (new URL(route).pathname !== expected[2]) throw new Fault("POLICY_DENIED");
+    } catch {
+      throw new Fault("POLICY_DENIED");
+    }
   }
 }
 
