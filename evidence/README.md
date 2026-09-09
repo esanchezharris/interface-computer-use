@@ -1,10 +1,35 @@
+# Current account-repair evidence
+
+**New genuine discovery and repaired-artifact automated qualification passed. Owner manual handoff and personal code review remain pending.**
+
+Submission: `artifacts/prepare-transfer.json`; SHA256 `4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5`. The eight steps include executed and checked `sourceAccountRef` and `destinationAccountRef` selections. Candidate bytes were qualified before atomic promotion and remain identical at `artifacts/candidates/account-repair.json`.
+
+| Current evidence | Actual result |
+|---|---|
+| [Genuine discovery cf84d841](cf84d841-1d59-48cf-984a-0f8347b0c7c4/manifest.json), [artifact](cf84d841-1d59-48cf-984a-0f8347b0c7c4/capability.json), [actions](cf84d841-1d59-48cf-984a-0f8347b0c7c4/events.jsonl) | One attempt; nine paid requests; eight steps; SAV-207 → CHK-207, 6100 cents; clean source `563d3951363a19679fd8ae13ab6f5c0f4b0740c7` |
+| [First keyless child ad157653](ad157653-7133-4ef5-8af9-83012da1211a/manifest.json) | Changed direction/amount, success, zero model calls |
+| [Four directions and defaults/order](account-parameterization.json) | Four ordinary fresh replay runs plus one visible-DOM Runtime harness perturbation; matching UI outputs, same bytes/hash, zero model calls/reservations/commits |
+| [Current outcome/recovery/policy/operator collection](collections/6142ca94-a5de-493a-8130-973a5a09c020.json) | Six linked cases; all expected outcomes; zero commits |
+| [Required-live replay](09a31f1e-4167-4eb1-9d31-e7fbf00dbb67/manifest.json) | Success, zero model calls/commits |
+| [Required-live test_operator](abf19e6c-fd89-406b-8112-adadb4bed578/manifest.json) | Same-session success; automated operator, not owner observation |
+| [Repair usage and qualification](account-repair-summary.json) | 37/37 exact-artifact tests; 9 additional requests; 11,168 input / 480 output tokens; estimated USD0.064406, retained reserve USD4.19235 |
+| [Red baseline](account-repair-red.json), [original observed failure](5606575e-f518-4ae9-8995-fbd1c77a42d1/result.safe.json) | Original artifact's real reverse-direction CHECKPOINT_MISMATCH retained; no false successful result |
+
+`npm run verify:offline` passed **84/84**; candidate and promoted-path `test:artifact` each passed **37/37**, with no skips/retries. Commands, source and honest limits are in [ACCOUNT_REPAIR.md](../docs/ACCOUNT_REPAIR.md). Clean reproduction is recorded in [REPRODUCTION.md](../REPRODUCTION.md). Public run files are allowlist-validated copies; caller outputs remain private. The original and repair spending gates are closed with all reservations retained. No actual-human gate is claimed.
+
+## Historical evidence below
+
+The following original record is retained. Its six-step artifact relied on defaults and is now at `artifacts/historical/prepare-transfer-294a274e.json`. The earlier 31/31 did not test reverse-direction success and is not current qualification. Fixture, live-model, test_operator and actual-human provenance remain distinct.
+
+---
+
 # Evidence index
 
 Status: **genuine discovery and live-artifact automated qualification passed; owner manual handoff and personal code review remain pending**.
 
 ## Live evidence first
 
-The [genuine artifact](../artifacts/prepare-transfer.json), preserved byte-for-byte,
+The [historical genuine artifact](../artifacts/historical/prepare-transfer-294a274e.json), preserved byte-for-byte,
 hashes to `294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d`.
 [Collection 96325056](collections/96325056-8e68-4296-97ec-fb11183ac97b.json) links
 its original discovery and six fresh replay cases. All linked replays have that

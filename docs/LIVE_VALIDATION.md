@@ -1,3 +1,13 @@
+# Account repair supersedes the six-step qualification
+
+On 2026-09-08 the owner authorized at most USD5 additional OpenAI usage within the original USD50 ceiling. The separately approved account-repair stage has now closed after one successful nine-request genuine discovery and **37/37** tests against its exact eight-step artifact. Both account selections are executed, symbolically bound and checked. The old artifact remains at `artifacts/historical/prepare-transfer-294a274e.json`; its bytes and prior failures were not changed.
+
+Current artifact SHA256: `4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5`. Current live run: [cf84d841](../evidence/cf84d841-1d59-48cf-984a-0f8347b0c7c4/manifest.json). See [ACCOUNT_REPAIR.md](ACCOUNT_REPAIR.md) for source, commands, coverage and accounting; [summary](../evidence/account-repair-summary.json) for observed usage and separate estimates/reservations. No new compatibility or model-selection calls were made. Owner manual handoff and personal review remain pending.
+
+The original report below is historical. Its 31/31 result covered default-matching examples and fault cases; it was not an enforced account-pair restriction or proof of arbitrary account parameterization. The owner-review reverse-direction failure established a real missing binding, repaired above.
+
+---
+
 # Live validation record
 
 On 2026-09-08 the owner authorized reuse of the existing environment OpenAI key,
@@ -19,7 +29,7 @@ observation, primitive decision schema, prompt and provider adapter as discovery
 The model received no fixture trajectory, application source or hidden state.
 
 Discovery ran from clean source `728c1b13f94510524287f5d0ffba46748b47f296`.
-The [unaltered artifact](../artifacts/prepare-transfer.json) hashes to
+The [historical unaltered artifact](../artifacts/historical/prepare-transfer-294a274e.json) hashes to
 `294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d`.
 The six steps leave the already-correct account defaults untouched. Qualification
 covers the documented member/account pairs and existing fault cases, not arbitrary

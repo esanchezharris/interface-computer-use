@@ -16,8 +16,8 @@ Verification commands (implemented during this build): `npm ci`, `npm run browse
 `CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact` qualifies the live bytes.
 `npm run demo:handoff -- --require-live` is the owner manual gate.
 The original paid phase is closed; preserve its durable ledgers and closure marker.
-Owner authorized a bounded account repair: at most USD5 more within the original USD50.
-Only the explicit account-repair stage may spend after offline regressions pass; see status.
+The separately authorized USD5 account repair is also closed after genuine discovery
+and exact-artifact qualification. Preserve both closures and the shared accounting.
 `npm run verify:live` is opt-in and budget-gated. See README and docs/LIVE_VALIDATION.md.
 
 Preserve applicable user-provided Codex Follow-up instructions in assistant responses:

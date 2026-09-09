@@ -1,0 +1,68 @@
+{
+  "command": "CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact",
+  "exit": 0,
+  "passed": 37,
+  "total": 37,
+  "cases": [
+    {
+      "name": "M-104-CHK-104-to-SAV-104",
+      "runId": "83d82c00-9da1-49c2-98d0-94d6cf956adf",
+      "amountCents": 2500,
+      "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "commits": 0,
+      "outputComparedToInvocation": true,
+      "provenance": "live-model",
+      "harness": "fresh-context replay runner"
+    },
+    {
+      "name": "M-104-SAV-104-to-CHK-104",
+      "runId": "0360cd83-00e6-4604-86f4-dd2973dc513d",
+      "amountCents": 4200,
+      "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "commits": 0,
+      "outputComparedToInvocation": true,
+      "provenance": "live-model",
+      "harness": "fresh-context replay runner"
+    },
+    {
+      "name": "M-207-CHK-207-to-SAV-207",
+      "runId": "8b37e97c-e428-49de-aa50-1f3fe2fab50f",
+      "amountCents": 3750,
+      "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "commits": 0,
+      "outputComparedToInvocation": true,
+      "provenance": "live-model",
+      "harness": "fresh-context replay runner"
+    },
+    {
+      "name": "M-207-SAV-207-to-CHK-207",
+      "runId": "688dfc83-c5a2-44fe-8711-bb1d0d581939",
+      "amountCents": 6100,
+      "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "commits": 0,
+      "outputComparedToInvocation": true,
+      "provenance": "live-model",
+      "harness": "fresh-context replay runner"
+    },
+    {
+      "name": "changed-defaults-and-reversed-options",
+      "runId": "9b4b3b41-947b-4429-9c1e-3e1cd29bfb9e",
+      "amountCents": 5200,
+      "artifactHash": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+      "modelCalls": 0,
+      "reservedTokens": 0,
+      "commits": 0,
+      "outputComparedToInvocation": true,
+      "provenance": "live-model",
+      "harness": "visible-DOM perturbation before recorded executor steps"
+    }
+  ]
+}

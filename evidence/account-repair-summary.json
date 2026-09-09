@@ -1,0 +1,39 @@
+{
+  "artifactSha256": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+  "artifactPath": "artifacts/prepare-transfer.json",
+  "candidatePath": "artifacts/candidates/account-repair.json",
+  "discoveryRunId": "cf84d841-1d59-48cf-984a-0f8347b0c7c4",
+  "discoverySource": "563d3951363a19679fd8ae13ab6f5c0f4b0740c7",
+  "repairDiscoveryAttempts": 1,
+  "failedRepairDiscoveryAttempts": 0,
+  "additionalPaidRequests": 9,
+  "sdkRetries": 0,
+  "usage": {
+    "inputTokens": 11168,
+    "outputTokens": 480,
+    "cachedInputTokens": 0,
+    "cacheWriteTokens": 10134,
+    "reasoningTokens": 29
+  },
+  "ordinaryInputTokens": 1034,
+  "estimatedAdditionalSpendUsd": 0.064406,
+  "additionalReservedTokens": 83847,
+  "additionalReservedUsd": 4.19235,
+  "aggregatePaidRequests": 17,
+  "aggregateReservedTokens": 153245,
+  "aggregateReservedUsd": 7.66225,
+  "aggregateEstimatedSpendUsd": 0.113371,
+  "requestsWithMissingUsage": 0,
+  "paidStageClosed": true,
+  "qualification": {
+    "command": "CUA_TEST_ARTIFACT=artifacts/candidates/account-repair.json npm run test:artifact",
+    "exit": 0,
+    "artifactSha256": "4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5",
+    "keyless": true,
+    "tests": 37,
+    "passed": 37,
+    "failed": 0
+  },
+  "manualHandoff": "pending-owner",
+  "personalCodeReview": "pending-owner"
+}

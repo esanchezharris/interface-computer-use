@@ -1,16 +1,18 @@
-# Active account-binding repair
+# Account-binding repair checkpoint
 
-State: **ACCOUNT_REPAIR_READY_FOR_LIVE**. Starting source `60a11c4ef51c8f99cffe53119e87aa312f18fac6`, branch `build/computer-use`. Owner-review notes are preserved.
+State: **ACCOUNT_REPAIR_AUTOMATED_GATES_PASSED; FINAL_REPRODUCTION_AND_FOCUSED_REVIEW_NEXT**.
 
-Completed: original artifact archived unchanged; reverse-direction failure retained; red regression baseline recorded; executed/checked symbolic account binding guard and discovery progress feedback implemented. Original selector/executor, policy, checkpoints, ownership and sandbox data/defaults unchanged.
+Branch `build/computer-use`; implementation/discovery source `563d3951363a19679fd8ae13ab6f5c0f4b0740c7`. Old artifact and all failures/owner-review notes preserved. The root cause, executed symbolic selections and regression evidence are in `docs/ACCOUNT_REPAIR.md`.
 
-Offline verification: `npm run verify:offline` passed 83/83 before one additional provider-settings regression (7/7 budget tests passed separately). Four-direction and changed-default/order UI tests pass with the explicitly scripted development artifact. Current submission artifact is still the historical six-step artifact and is NOT qualified for the corrected account contract.
+New current/candidate artifact SHA256: `4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5`. Genuine non-default discovery `cf84d841-1d59-48cf-984a-0f8347b0c7c4` succeeded first attempt, nine paid requests/eight executed steps. Both account inputs drive checked UI selects. Candidate was qualified before byte-for-byte promotion to `artifacts/prepare-transfer.json`.
 
-Next unmet criterion: genuine non-default discovery with `examples/member-b-reverse.json` to a new candidate path; qualify those exact bytes with the expanded existing suite; only then promote. New owner authorization is USD5 additional within the original USD50 total. Original 8-call/69,398-token accounting and original closure remain intact; the new explicit account-repair stage measures all additional reservations from that retained total. No new paid request yet.
+Performed: candidate qualification 37/37; promoted-path qualification 37/37; full offline lint/types/build/tests 84/84; required-live replay and test_operator demos; six-case linked live evidence capture. All exit 0; zero model calls/commits in replays. Four member/direction cases and changed-default/order test pass with identical artifact bytes. Original 31/31 remains historical and did not cover the defect.
 
-Private baseline logs: `.runs/account-repair/red-baseline.log` (3 pass, 10 fail), `red-discovery.log` (0 pass, 1 fail). Historical reverse-direction runs are public safe evidence `5606575e-f518-4ae9-8995-fbd1c77a42d1`, `5b896d02-5779-4099-b3b4-6aaaefcf064b`, `e6e28544-eaf1-4179-b8d1-e87ff35f1c6e`. Original artifact: `artifacts/historical/prepare-transfer-294a274e.json`, SHA256 `294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d`.
+Both paid stages are closed. Repair: 9 requests, estimated USD0.064406, conservative reserve USD4.19235 within USD5 additional. Aggregate: 17 requests, estimated USD0.113371, reserve USD7.66225 within original USD50. All usage returned; all reservations retained. No more paid requests needed.
 
-Remaining after live qualification: required-live demos, final offline verification, one clean reproduction, one focused review and final evidence/docs. Manual owner handoff and personal code review remain pending. Historical sections below retain their original results; earlier 31/31 did not cover reverse account direction.
+Next unmet automated procedure: one clean clone on final executable revision, then one focused review of affected changes. Record exact revisions and verdicts. Do not restart architecture or model selection. Private logs: `.runs/account-repair/`. Public evidence: `evidence/account-parameterization.json`, `evidence/account-repair-summary.json`, collection `6142ca94-a5de-493a-8130-973a5a09c020`.
+
+Owner manual handoff and personal code review remain pending. Manual command `npm run demo:handoff -- --require-live`; expected M-207 / CHK-207 → SAV-207 / 37.50 USD / fee 0.00 / AWAITING_CONFIRMATION, terminal success and zero commits. Preserve owner observation separately and link it to the emitted run ID when supplied. Nothing pushed, published, deployed, submitted or emailed.
 
 ---
 

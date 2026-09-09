@@ -2,7 +2,7 @@
 
 Read the code and run the commands yourself before presenting it. These notes do not claim you wrote, understood, or manually validated anything yet.
 
-1. **Discovery versus a macro:** `src/discovery/run.ts` asks a `Model` for each action from the current observation. `src/discovery/openai.ts` implements the real provider. `scripts/fixture-model.ts` is intentionally scripted, labeled development-only and isolated from replay. Compare the six genuinely chosen live steps with the eight-step development fixture; explain why only the former satisfies genuine discovery.
+1. **Discovery versus a macro:** `src/discovery/run.ts` asks a `Model` for each action from the current observation. `src/discovery/openai.ts` implements the real provider. `scripts/fixture-model.ts` is intentionally scripted, labeled development-only and isolated from replay. Compare the newly discovered eight steps with the separate scripted fixture; matching sequence length is not provenance. The live request/action evidence identifies which was actually model-chosen.
 2. **Artifact versus a transcript:** `src/domain/artifact.ts`, `actions.ts` and `recording/recorder.ts` show symbolic inputs, strict finite declarations and completed-step recording. `src/policy/profile.ts` contains authored screen/effect knowledge. Explain what was learned versus supplied, and why the artifact hash is not a signature or proof of a model request.
 3. **Targeting and correctness:** `src/surface/target.ts`, `executor.ts`, `checks.ts` own strict frame-scoped role/table targeting, pinned elements, bounded checks and independent displayed-output verification. Walk through the nonsemantic amount field. A visible review heading is insufficient.
 4. **Handoff races:** `src/session/controller.ts` owns epochs and in-flight promises. `resume.ts` owns continuation checks. Explain why Promise.race alone cannot cancel Playwright, why paused model responses are discarded, and why finalization must check ownership after awaiting verification. Show the timed-out click regression and wrong-member/amount tests.
@@ -16,7 +16,7 @@ A small practice change: lower `MAX_AMOUNT_CENTS` in `src/domain/contract.ts`, u
 
 ## Limitations to state openly
 
-- The live artifact is qualified for the documented member/account pairs. Its model did not change already-correct account defaults; arbitrary account permutations are not qualified. The development fixture remains separate.
+- The replacement live artifact actively selects both account inputs and passes both directions for two members plus a changed-default/order case. The previous six-step artifact relied on defaults and is historical; its 31/31 did not cover reverse-direction behavior. This remains one synthetic account/UI domain. The development fixture remains separate.
 - Automated `test_operator` evidence proves mechanism, not personal operation. The candidate must complete the headed manual check.
 - Only macOS arm64/Node 24 was tested. One synthetic UI does not establish vendor/tenant portability.
 - Host route policy and cooperative ownership are not an OS sandbox or an input lock. Passive application activity can continue during a handoff; resume revalidation contains that risk for this reversible demo.

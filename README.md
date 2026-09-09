@@ -2,7 +2,7 @@
 
 A local TypeScript/Node system that observes a synthetic banking UI, asks one model adapter for primitive actions, records executed symbolic steps, and replays the artifact without a model. Every run stops at review. No real banking service or data is involved.
 
-**Current evidence status:** account-binding repair in progress. The historical six-step live artifact passed its earlier 31 tests but omitted account selections; newly added reverse-direction success cases exposed `CHECKPOINT_MISMATCH`. Offline repairs pass using the development artifact. A replacement live artifact must qualify before promotion. Original evidence and owner-review notes remain preserved. Owner-operated handoff and personal code review remain pending; see [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md).
+**Current evidence status:** the account-binding defect is repaired. Genuine non-default discovery recorded both input-bound account selections in a new eight-step artifact. Its exact bytes pass **37/37** artifact tests, including both directions for two members and changed UI defaults/option order. The old six-step artifact and reverse-direction failures are historical evidence; the earlier 31/31 never covered that behavior. Owner-operated handoff and personal code review remain pending. See [account repair](docs/ACCOUNT_REPAIR.md), [status](IMPLEMENTATION_STATUS.md) and [evidence](evidence/README.md).
 
 ## Setup and keyless demonstration
 
@@ -35,11 +35,11 @@ Successful stdout contains the full UI-extracted result for the caller. **Do not
 
 ## Authorized live discovery
 
-The authorized phase is **complete and closed**. One compatibility request and one seven-request discovery succeeded using `gpt-5.6-sol`, low reasoning, Standard (`default`) processing, and the actual JSON decision contract. No second candidate was needed. Estimated usage cost was **$0.048965**; the durable ledger retains **$3.4699** in conservative reservations, including $0.42525 for selection. These are different measures, neither an invoice. [Live validation](docs/LIVE_VALIDATION.md) records the authorization, prices, settings and counts.
+The original phase and the separately authorized account-repair stage are **closed**. The repair reused `gpt-5.6-sol`, low reasoning, Standard (`default`) processing and 2,000 output tokens; it made one successful nine-request discovery attempt with no new compatibility work or model comparison. Additional estimated usage cost: **$0.064406**; additional conservative reserve: **$4.19235** within the new $5 subset of the original $50 ceiling. Aggregate: 17 requests, estimated **$0.113371**, reserve **$7.66225**. No usage is missing. These estimates are not invoice totals. [Repair evidence](docs/ACCOUNT_REPAIR.md) and [historical live validation](docs/LIVE_VALIDATION.md) retain the exact accounting.
 
-The fixed OpenAI Responses adapter requires `OPENAI_API_KEY`, `CUA_API_APPROVED=true`, `CUA_MODEL`, `CUA_LIVE_PHASE=assignment-20260908`, `CUA_BUDGET_STAGE` (`selection` or `acceptance`), `CUA_BUDGET_ID`, `CUA_MAX_CALLS`, and `CUA_MAX_TOTAL_TOKENS`. `CUA_REASONING_EFFORT` defaults to `low`; `CUA_MAX_OUTPUT_TOKENS` defaults to 1000. There is no automatic `.env` loading, inherited API base URL, or authorization from credential presence. The existing environment key was reused without copying it into configuration or evidence.
+The fixed OpenAI Responses adapter requires `OPENAI_API_KEY`, `CUA_API_APPROVED=true`, `CUA_MODEL`, `CUA_LIVE_PHASE=assignment-20260908`, `CUA_BUDGET_STAGE` (`selection`, `acceptance`, or the separately approved `account-repair`), `CUA_BUDGET_ID`, `CUA_MAX_CALLS`, and `CUA_MAX_TOTAL_TOKENS`. `CUA_REASONING_EFFORT` defaults to `low`; `CUA_MAX_OUTPUT_TOKENS` defaults to 1000. There is no automatic `.env` loading, inherited API base URL, or authorization from credential presence. The existing environment key was reused without copying it into configuration or evidence.
 
-Actual paid-phase commands, recorded for reproducibility, **not an instruction to spend again**:
+Historical original paid-phase commands, **not an instruction to spend again**:
 
 ```bash
 # Authorized configuration only; this file contains no key.
@@ -62,9 +62,11 @@ npm run discover -- \
   --inputs examples/member-a.json --output artifacts/prepare-transfer.json --headed
 ```
 
-Output files must not already exist. `verify:live` owns a fresh sandbox, performs genuine discovery and replays the saved bytes with different inputs in a keyless child guarded by a fatal model-import hook. `verify:provider` makes just one decision against a fresh live observation and deliberately stops without completing discovery.
+Output files must not already exist. `verify:live -- --inputs FILE --output FILE` can emit a separate candidate for qualification before byte-preserving promotion. `verify:live` owns a fresh sandbox, performs genuine discovery and replays the saved bytes with different inputs in a keyless child guarded by a fatal model-import hook. `verify:provider` makes just one decision against a fresh live observation and deliberately stops without completing discovery.
 
 Existing durable budgets under `.runs/budgets/` reserve every request before sending. Fixed shared ledgers enforce the $50 aggregate ceiling and $5 selection subset across budget IDs, candidates and restarts, using the verified conservative $50/million-token bound. Input reservations are capped at 16,384; this phase used 2,000 output tokens/request. Failed calls keep their reservations; SDK retries are disabled. An exclusive phase lock prevents overlapping requests, and the persisted `.closed` marker rejects further calls after qualification. Never delete/reset these files to obtain a new allowance. A fresh clone is for offline reproduction and does not carry spending authority. Additional live work requires new explicit authorization and preservation of the original accounting.
+
+The repair gate requires the persisted `.runs/budgets/assignment-20260908-account-repair.approved.json`, the original closure, and original total ledger with its fixed 8-call/69,398-token floor. It permits at most 100,000 additional conservative reserved tokens ($5), still charged to the original shared ledger. It never opens the original selection/acceptance stages. The separate repair `.closed` marker now prevents further requests. Both closures and all reservations must remain intact. [Exact repair commands and approval fields](docs/ACCOUNT_REPAIR.md) are an execution record, not further spending authorization.
 
 ## Genuine manual handoff (owner gate)
 
@@ -80,7 +82,7 @@ This is a cooperative local protocol, not an OS input lock. Request takeover bef
 
 ## Boundaries and review
 
-The model sees bounded visible observations and fresh candidate handles; it can click, fill/select using typed input references, wait, finish, or request a human. It receives no navigation script. The development fixture is isolated in `scripts/fixture-model.ts`. Named screen transitions, exceptions, output verification, and policy are explicitly developer-authored. The live model left the already-correct account defaults unchanged; its six-step artifact is qualified for the documented member/account pairs, not arbitrary account permutations. The recorder preserves the executed sequence and verifies conditions; it does not normalize away exploratory steps.
+The model sees bounded visible observations and fresh candidate handles; it can click, fill/select using typed input references, wait, finish, or request a human. It receives no navigation script. The development fixture is isolated in `scripts/fixture-model.ts`. Named screen transitions, exceptions, output verification, and policy are explicitly developer-authored. The replacement live model executed both account controls with symbolic input references. Discovery now rejects a matching review without both executed and checked role-correct selections. A small execution-derived `completedAccountSelections` field tells the model which bindings are already established; it supplies no future action sequence. Qualification checks four member/direction cases and option-order/default independence. The historical artifact relied on defaults and failed reverse-direction replay. The recorder preserves the executed sequence and verifies conditions; it does not normalize away exploratory steps.
 
 Role/name and table-label targets are frame-scoped and strict. An ephemeral pinned element is authorized before dispatch; it is never persisted. Exact origin/route/method interception remains active for humans, and commit routes are always blocked. Service workers, extra windows and downloads are unsupported. This is defense in depth for this curated synthetic app, not an OS sandbox or a universal browser-security guarantee.
 
