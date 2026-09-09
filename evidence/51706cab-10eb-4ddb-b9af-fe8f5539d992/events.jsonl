@@ -1,0 +1,13 @@
+{"at":"2026-09-09T01:18:24.208Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-start","actor":"automation","stepId":"step-001","action":"fill","strategy":"role","reason":"supply-input"}
+{"at":"2026-09-09T01:18:24.229Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-complete","actor":"automation","stepId":"step-001","screen":"search","action":"fill","strategy":"role"}
+{"at":"2026-09-09T01:18:24.245Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-start","actor":"automation","stepId":"step-002","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:24.322Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-complete","actor":"automation","stepId":"step-002","screen":"member","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:18:24.337Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-start","actor":"automation","stepId":"step-003","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:24.412Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-complete","actor":"automation","stepId":"step-003","screen":"accounts","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:18:24.428Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-start","actor":"automation","stepId":"step-004","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:24.440Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"recovery","actor":"system","reason":"observe-change"}
+{"at":"2026-09-09T01:18:24.486Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-complete","actor":"automation","stepId":"step-004","screen":"transfer","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:18:24.505Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-start","actor":"automation","stepId":"step-005","action":"fill","strategy":"table-label","reason":"supply-input"}
+{"at":"2026-09-09T01:18:24.519Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-complete","actor":"automation","stepId":"step-005","screen":"transfer","action":"fill","strategy":"table-label"}
+{"at":"2026-09-09T01:18:24.539Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"action-start","actor":"automation","stepId":"step-006","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:24.596Z","runId":"51706cab-10eb-4ddb-b9af-fe8f5539d992","kind":"terminal","actor":"system","code":"INSUFFICIENT_FUNDS"}

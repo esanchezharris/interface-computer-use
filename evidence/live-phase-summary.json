@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "phase": "assignment-20260908",
+  "closed": true,
+  "model": "gpt-5.6-sol",
+  "candidateCount": 1,
+  "compatibilityRequests": 1,
+  "discoveryAttempts": 1,
+  "discoveryRequests": 7,
+  "paidRequests": 8,
+  "failedPaidRequests": 0,
+  "unknownUsageRequests": 0,
+  "inputTokens": 8870,
+  "outputTokens": 378,
+  "ordinaryInputTokens": 2945,
+  "cachedInputTokens": 0,
+  "cacheWriteTokens": 5925,
+  "reasoningTokens": 0,
+  "estimatedUsageUsd": 0.048965,
+  "conservativeReserveUsd": 3.4699,
+  "selectionReserveUsd": 0.42525,
+  "heldExcessReserveUsd": 3.420935,
+  "pricingVerifiedDate": "2026-09-08",
+  "pricingReference": "docs/LIVE_VALIDATION.md",
+  "artifactSha256": "294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d",
+  "manualHandoff": false,
+  "sources": [
+    "evidence/c6c0c7b6-77c5-429f-8c98-3aa1fc3fc1fe/events.jsonl",
+    "evidence/fbcd21b6-5f82-4778-a73c-09afe5559dc7/events.jsonl"
+  ]
+}

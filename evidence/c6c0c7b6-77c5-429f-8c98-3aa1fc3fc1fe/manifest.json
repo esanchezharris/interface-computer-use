@@ -1,0 +1,18 @@
+{
+  "mode": "discovery",
+  "actor": "automation",
+  "origin": "live-model",
+  "artifactHash": null,
+  "browserVersion": "153.0.8010.12",
+  "runId": "c6c0c7b6-77c5-429f-8c98-3aa1fc3fc1fe",
+  "startedAt": "2026-09-09T01:02:10.548Z",
+  "source": {
+    "revision": "728c1b13f94510524287f5d0ffba46748b47f296",
+    "dirty": false
+  },
+  "runtime": "v24.16.0",
+  "profile": "synthetic-bank-v1",
+  "policy": "review-only-v1",
+  "modelCalls": 1,
+  "reservedTokens": 8505
+}

@@ -1,0 +1,59 @@
+{
+  "id": "96325056-8e68-4296-97ec-fb11183ac97b",
+  "origin": "live-model",
+  "liveDiscovery": true,
+  "manualHandoff": false,
+  "artifact": "artifacts/prepare-transfer.json",
+  "artifactHash": "294a274e3a9cfc5a48bfecd0dc655c43de46c45934c95fffddb71b0a294d269d",
+  "discoveryRunId": "fbcd21b6-5f82-4778-a73c-09afe5559dc7",
+  "entries": [
+    {
+      "case": "changed-input",
+      "runId": "dacb0b44-c4cc-4bf5-af3d-d7db9c0a1005",
+      "status": "success",
+      "code": null,
+      "commits": 0,
+      "reviewRequests": 1
+    },
+    {
+      "case": "business-outcome",
+      "runId": "51706cab-10eb-4ddb-b9af-fe8f5539d992",
+      "status": "business_outcome",
+      "code": "INSUFFICIENT_FUNDS",
+      "commits": 0,
+      "reviewRequests": 1
+    },
+    {
+      "case": "recovery",
+      "runId": "e92209a3-c2d7-4f48-8b55-c1111bbb0f77",
+      "status": "success",
+      "code": null,
+      "commits": 0,
+      "reviewRequests": 1
+    },
+    {
+      "case": "hard-failure",
+      "runId": "26e95cb7-1866-485c-a0d1-d8368f1c4997",
+      "status": "failed",
+      "code": "APP_ERROR",
+      "commits": 0,
+      "reviewRequests": 0
+    },
+    {
+      "case": "policy-failure",
+      "runId": "c84ce153-9edb-475c-8c45-1a8b077ed61c",
+      "status": "failed",
+      "code": "POLICY_DENIED",
+      "commits": 0,
+      "reviewRequests": 0
+    },
+    {
+      "case": "test-operator",
+      "runId": "6bf87a8e-638b-458f-952d-7b03aed1ba7a",
+      "status": "success",
+      "code": null,
+      "commits": 0,
+      "reviewRequests": 1
+    }
+  ]
+}

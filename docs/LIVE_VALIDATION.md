@@ -47,7 +47,7 @@ API origin. No shared billing settings or processing tier were changed.
 | Automatic retries | 0 |
 
 Existing durable budget machinery reserves UTF-8 request bytes plus 2,048 message
--overhead tokens and the output cap before sending. Fixed phase ledgers add the
+overhead tokens and the output cap before sending. Fixed phase ledgers add the
 shared USD50 ceiling and USD5 subset at a conservative **USD50 per million reserved
 tokens**, sufficient for either allowed candidate at the verified Standard short
 context rates. The input cap stays below the 272k long-context pricing threshold.
@@ -59,7 +59,7 @@ allowance. Do not reset or remove the original `.runs/budgets/` accounting.
 ## Observed usage and estimated cost
 
 All eight responses returned usage metadata. Safe request IDs and token counts
-are in the linked events; no raw prompts, responses or key values are persisted.
+are in the linked events and [computed summary](../evidence/live-phase-summary.json); no raw prompts, responses or key values are persisted.
 
 | Quantity | Observed total |
 |---|---:|

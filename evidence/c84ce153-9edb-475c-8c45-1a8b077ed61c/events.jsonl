@@ -1,0 +1,12 @@
+{"at":"2026-09-09T01:18:26.080Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-start","actor":"automation","stepId":"step-001","action":"fill","strategy":"role","reason":"supply-input"}
+{"at":"2026-09-09T01:18:26.099Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-complete","actor":"automation","stepId":"step-001","screen":"search","action":"fill","strategy":"role"}
+{"at":"2026-09-09T01:18:26.114Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-start","actor":"automation","stepId":"step-002","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:26.198Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-complete","actor":"automation","stepId":"step-002","screen":"member","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:18:26.219Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-start","actor":"automation","stepId":"step-003","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:26.286Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-complete","actor":"automation","stepId":"step-003","screen":"accounts","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:18:26.302Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-start","actor":"automation","stepId":"step-004","action":"click","strategy":"role","reason":"advance"}
+{"at":"2026-09-09T01:18:26.352Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-complete","actor":"automation","stepId":"step-004","screen":"transfer","action":"click","strategy":"role"}
+{"at":"2026-09-09T01:18:26.371Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-start","actor":"automation","stepId":"step-005","action":"fill","strategy":"table-label","reason":"supply-input"}
+{"at":"2026-09-09T01:18:26.384Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"action-complete","actor":"automation","stepId":"step-005","screen":"transfer","action":"fill","strategy":"table-label"}
+{"at":"2026-09-09T01:18:26.403Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"exception","actor":"system","stepId":"step-006","code":"POLICY_DENIED"}
+{"at":"2026-09-09T01:18:26.408Z","runId":"c84ce153-9edb-475c-8c45-1a8b077ed61c","kind":"terminal","actor":"system","code":"POLICY_DENIED"}
