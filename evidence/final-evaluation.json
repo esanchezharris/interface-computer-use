@@ -1,5 +1,5 @@
 {
-  "status": "live-and-artifact-and-stability-passed",
+  "status": "published-and-anonymous-checkout-verified",
   "basis": "Original assignment sections 3 and 7; advertised review-only account-parameterized contract",
   "liveCases": [
     {
@@ -945,5 +945,70 @@
     "executableChangesSinceCleanCandidate": [],
     "releaseBlockers": [],
     "publication": "authorized; not yet performed at this packaging commit"
+  },
+  "publication": {
+    "repository": "https://github.com/esanchezharris/interface-computer-use",
+    "source": "e7e94c0b992424dfc0e38953c76e48ded5ae0c3e",
+    "branch": "main",
+    "providerCredentialsAbsent": true,
+    "modelImportBomb": true,
+    "commands": [
+      {
+        "name": "install",
+        "command": [
+          "npm",
+          "ci"
+        ],
+        "exit": 0,
+        "elapsedSeconds": 1.551
+      },
+      {
+        "name": "browser",
+        "command": [
+          "npm",
+          "run",
+          "browser:install"
+        ],
+        "exit": 0,
+        "elapsedSeconds": 0.854
+      },
+      {
+        "name": "build",
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "exit": 0,
+        "elapsedSeconds": 0.996
+      },
+      {
+        "name": "replay",
+        "command": [
+          "node",
+          "--import",
+          "./dist/scripts/model-bomb.js",
+          "dist/src/cli/demo.js",
+          "replay",
+          "--require-live"
+        ],
+        "exit": 0,
+        "elapsedSeconds": 1.555
+      }
+    ],
+    "runId": "87039f72-8d3d-417a-b21d-80ad2a4a9f89",
+    "artifactHash": "0563d71f96163a53524688a08f6b647e4c9f678251b447f83fd26ff6bb5537ab",
+    "uiOutputsVerified": true,
+    "commits": 0,
+    "modelCalls": 0,
+    "cleanAfter": true,
+    "visibility": "public",
+    "defaultBranch": "main",
+    "preservedBranch": "build/computer-use",
+    "anonymousHttpStatus": 200,
+    "anonymousClone": true,
+    "emailSent": false,
+    "applicationDeployed": false,
+    "packagingNote": "This receipt describes the first public checkout. A subsequent documentation-only commit records it; executable source and qualified artifact remain unchanged."
   }
 }

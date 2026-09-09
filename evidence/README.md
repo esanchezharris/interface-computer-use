@@ -1,4 +1,6 @@
-# Current submission evidence
+# Current public submission evidence
+
+Published at [GitHub](https://github.com/esanchezharris/interface-computer-use), default `main`, with the build branch and history retained. [Anonymous public-checkout replay](87039f72-8d3d-417a-b21d-80ad2a4a9f89/manifest.json) passed with the model-import bomb and zero model calls/commits. The publication receipt and exact tested public source are in [final evaluation](final-evaluation.json).
 
 Start with [genuine discovery](7ad520a5-a18c-4945-8355-80ba48b90bb8/manifest.json), its [executed actions and safe request metadata](7ad520a5-a18c-4945-8355-80ba48b90bb8/events.jsonl), the [exact artifact bytes](7ad520a5-a18c-4945-8355-80ba48b90bb8/capability.json), and [linked keyless replay](dc113d9b-3bd5-4ab7-aefb-6666aecaaaf2/manifest.json).
 
