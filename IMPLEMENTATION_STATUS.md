@@ -1,8 +1,8 @@
 # Account-binding repair checkpoint
 
-State: **ACCOUNT_REPAIR_AUTOMATED_GATES_PASSED; FINAL_REPRODUCTION_AND_FOCUSED_REVIEW_NEXT**.
+State: **ACCOUNT_REPAIR_AUTOMATED_GATES_AND_CLEAN_REPRODUCTION_PASSED; OWNER_ACCEPTANCE_PENDING**.
 
-Branch `build/computer-use`; implementation/discovery source `563d3951363a19679fd8ae13ab6f5c0f4b0740c7`. Old artifact and all failures/owner-review notes preserved. The root cause, executed symbolic selections and regression evidence are in `docs/ACCOUNT_REPAIR.md`.
+Branch `build/computer-use`; final executable revision `a0efd14e58a712f20d5e02970ee9f8f19c791e05`; implementation/discovery source `563d3951363a19679fd8ae13ab6f5c0f4b0740c7`. Old artifact and all failures/owner-review notes preserved. The root cause, executed symbolic selections and regression evidence are in `docs/ACCOUNT_REPAIR.md`.
 
 New current/candidate artifact SHA256: `4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5`. Genuine non-default discovery `cf84d841-1d59-48cf-984a-0f8347b0c7c4` succeeded first attempt, nine paid requests/eight executed steps. Both account inputs drive checked UI selects. Candidate was qualified before byte-for-byte promotion to `artifacts/prepare-transfer.json`.
 
@@ -10,7 +10,7 @@ Performed: candidate qualification 37/37; promoted-path qualification 37/37; ful
 
 Both paid stages are closed. Repair: 9 requests, estimated USD0.064406, conservative reserve USD4.19235 within USD5 additional. Aggregate: 17 requests, estimated USD0.113371, reserve USD7.66225 within original USD50. All usage returned; all reservations retained. No more paid requests needed.
 
-Next unmet automated procedure: one clean clone on final executable revision, then one focused review of affected changes. Record exact revisions and verdicts. Do not restart architecture or model selection. Private logs: `.runs/account-repair/`. Public evidence: `evidence/account-parameterization.json`, `evidence/account-repair-summary.json`, collection `6142ca94-a5de-493a-8130-973a5a09c020`.
+Clean reproduction completed once on final executable revision `a0efd14e58a712f20d5e02970ee9f8f19c791e05`: setup, 84/84 offline, 37/37 artifact, required-live replay and test_operator all exited 0 with clean source. Exact commands/evidence are in REPRODUCTION.md. The single final focused review is recorded by final package SHA in ignored `.runs/reviews/ledger.jsonl`; require that record rather than reusing old reviews. Do not restart architecture or model selection. Private logs: `.runs/account-repair/`. Public evidence: `evidence/account-parameterization.json`, `evidence/account-repair-summary.json`, collection `6142ca94-a5de-493a-8130-973a5a09c020`.
 
 Owner manual handoff and personal code review remain pending. Manual command `npm run demo:handoff -- --require-live`; expected M-207 / CHK-207 → SAV-207 / 37.50 USD / fee 0.00 / AWAITING_CONFIRMATION, terminal success and zero commits. Preserve owner observation separately and link it to the emitted run ID when supplied. Nothing pushed, published, deployed, submitted or emailed.
 

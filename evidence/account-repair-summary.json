@@ -35,5 +35,18 @@
     "failed": 0
   },
   "manualHandoff": "pending-owner",
-  "personalCodeReview": "pending-owner"
+  "personalCodeReview": "pending-owner",
+  "finalExecutableRevision": "a0efd14e58a712f20d5e02970ee9f8f19c791e05",
+  "cleanReproduction": {
+    "path": ".reproduction/account-repair-a0efd14",
+    "revision": "a0efd14e58a712f20d5e02970ee9f8f19c791e05",
+    "offlinePassed": 84,
+    "offlineTotal": 84,
+    "artifactPassed": 37,
+    "artifactTotal": 37,
+    "keyless": true,
+    "clean": true,
+    "replayRunId": "a11620ca-2fb5-472c-ab36-eda5012feb23",
+    "testOperatorRunId": "c3cb6c43-2141-4e40-bd2c-93d46dc4c0bd"
+  }
 }

@@ -1,3 +1,40 @@
+# Clean reproduction of the repaired account capability
+
+Performed in one fresh local clone on 2026-09-08 (America/Los_Angeles) from final executable revision **`a0efd14e58a712f20d5e02970ee9f8f19c791e05`**, branch `build/computer-use`. Later packaging changes contain documentation and safe evidence only. The implementation itself was recorded at `563d3951363a19679fd8ae13ab6f5c0f4b0740c7`; the final executable revision includes the new qualified artifact.
+
+```bash
+git clone --no-local . .reproduction/account-repair-a0efd14
+cd .reproduction/account-repair-a0efd14
+npm ci
+npm run browser:install
+npm run verify:offline
+CUA_TEST_ARTIFACT=artifacts/prepare-transfer.json npm run test:artifact
+npm run demo:replay -- --require-live
+npm run demo:handoff -- --require-live --test-operator
+```
+
+All commands exited **0**. The clone was clean before and after every command. Provider/approval environment names containing OPENAI, ANTHROPIC, API_KEY or CUA_ were removed in the reproduction driver; only the explicit artifact path was added back for qualification. No secret, original budget ledger, paid approval file or private run was cloned. Replay made zero model calls and zero commits.
+
+| Gate | Actual result |
+|---|---|
+| Lockfile install | 10 packages, 0 audit vulnerabilities |
+| Browser install | Existing pinned Chromium available from machine cache |
+| `verify:offline` | Biome, strict types, build; **84/84**, zero failures/skips/retries; 41.211 s test duration |
+| Exact current-artifact `test:artifact` | **37/37**, zero failures/skips/retries; 28.701 s |
+| Required-live replay | UI-derived matching output; [a11620ca](evidence/a11620ca-2fb5-472c-ab36-eda5012feb23/manifest.json) |
+| Required-live `test_operator` | Same-session restoration and matching output; [c3cb6c43](evidence/c3cb6c43-2141-4e40-bd2c-93d46dc4c0bd/manifest.json) |
+| Missing explicit artifact | `CUA_TEST_ARTIFACT=.runs/missing-artifact.json node --test dist/tests/integration/parameterization.test.js` returned expected **1 / ENOENT**, before UI work; no fixture fallback |
+
+Both linked manifests record this exact clean revision, `origin: live-model`, zero model calls and zero reserved tokens. They link to **`4b0ffdc4c4510716f724d12e2ecc359c2b05d5bdfe98f699cf49ef3593c801e5`**, the unchanged new submission/candidate bytes. Caller outputs were checked against M-207, CHK-207 → SAV-207, 3750 cents, zero fee, USD, AWAITING_CONFIRMATION. Safe public results redact those values by design. The same artifact's four-direction and defaults/order cases ran within the 37-test qualification; no paid discovery was repeated.
+
+Environment: macOS arm64, Node 24.16.0, npm 11.13.0, Playwright 1.63.0, Chromium 153.0.8010.12. Other platforms are untested. Actual exit/timing records and private stdout are at `.reproduction/account-repair-a0efd14/.runs/reproduction/commands.json` and sibling logs. Setup did not create a paid resource. [Current repair record](docs/ACCOUNT_REPAIR.md) and [evidence index](evidence/README.md) preserve original failed account runs and distinguish fixture/live/test_operator provenance. Owner-operated handoff and personal code review remain pending.
+
+## Historical reproductions below
+
+The earlier six-step artifact and 31/31 qualification below are historical and do not cover reverse-direction account parameterization. The new 84/84 and 37/37 above supersede them for current acceptance.
+
+---
+
 # Clean reproduction of the live-qualified implementation
 
 Rehearsed on 2026-09-08 (America/Los_Angeles) from executable source
