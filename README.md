@@ -48,7 +48,7 @@ Both account selections are actual recorded `select` actions bound to invocation
 
 ## Genuine live discovery and API configuration
 
-Replay needs no provider configuration. To perform a **separately authorized** live discovery, supply `OPENAI_API_KEY` through the shell or a local secret manager; there is no automatic `.env` loading. Never commit a key. A fresh reviewer environment can use the original bounded acceptance configuration:
+Replay needs no provider configuration. Live discovery requires OpenAI API access and explicit budget approval. Supply `OPENAI_API_KEY` through the shell or a local secret manager; there is no automatic `.env` loading. Never commit a key. A fresh reviewer environment can use this bounded configuration:
 
 ```bash
 # OPENAI_API_KEY must already be exported; these settings contain no credential.
@@ -65,9 +65,7 @@ CUA_TEST_ARTIFACT=artifacts/candidates/reviewer.json npm run test:artifact
 
 The output file must not exist. `verify:live` starts its own sandbox, performs real discovery, then invokes a keyless changed-input replay child with a fatal model-import hook. The general interface is `npm run discover -- --goal 'Prepare the supplied transfer for review only.' --target http://127.0.0.1:4173/app --inputs examples/member-a.json --output artifacts/candidates/other.json --headed` against an already running sandbox.
 
-The owner's original, repair and final paid stages are now **closed**. The commands above do not reopen them or authorize reuse of the owner's key in a clean clone. Never delete/reset ledgers to obtain another allowance. [Final evaluation accounting](evidence/final-evaluation.json) records 45 additional requests, estimated **$0.328121** additional / **$0.441492** aggregate, and **$28.75575** retained conservative aggregate reservations. These are estimates and reservations, not an invoice. All responses supplied usage; no unknown charge or SDK retry occurred.
-
-The final-stage approval retained the original 17 calls/153245 reserved tokens and both closure markers. It changed only the finite call cap from 32 to 96; the shared 1,000,000-token/$50 conservative ceiling did not increase. Requests remained sequential, Standard processing, low reasoning, 2000 output tokens, no hosted tools, 30-second request timeout and zero SDK retries. Every failed or uncertain request would retain its full reservation. The project-specific phase approval/ledger files remain private, and the final closure now rejects additional sends. [Earlier configuration and provenance](docs/LIVE_VALIDATION.md) are historical records.
+Discovery bounds actions, decisions, active time, requests and tokens. Requests are sequential, use Standard processing with no hosted tools, and have a 30-second timeout with SDK retries disabled. Durable ledgers reserve conservative costs before sending and retain failed or uncertain request reservations within the $50 aggregate ceiling. Existing closed stages reject further sends; never reset ledgers to obtain another allowance. See [configuration details and historical provenance](docs/LIVE_VALIDATION.md) and [recorded usage, cost estimates and retained reservations](evidence/final-evaluation.json).
 
 ## Demonstrate human handoff
 
@@ -77,10 +75,10 @@ npm run demo:handoff -- --require-live
 
 In the terminal enter `status` and confirm `HUMAN`. In the **existing browser window**, enter fake credential **demo-only** in **Demo password**, click **Restore session**, and wait for **Prepare transfer / M-207**. Stop touching the browser, then enter `resume` in the terminal. Expect the same review values listed above and **commits: 0**. The runner closes the window after verification. `takeover`, `status`, `resume`, and `abort` are available; duplicate/out-of-order commands fail explicitly.
 
-The owner already performed and verified this flow twice on the earlier qualified artifact. Those observations remain tied to their actual run IDs/source/hash. The final artifact's procedure, bindings and checkpoints are identical after excluding discovery provenance, and the ownership/restoration/resume implementation is unchanged. No new human run is claimed or required. `--test-operator` is automatic mechanism evidence, never owner observation. The detailed source-understanding walkthrough is **deferred by owner**, incomplete, and not a publication gate.
+The owner performed and verified this flow twice on the earlier qualified artifact. Those observations remain tied to their actual run IDs/source/hash. The final artifact's procedure, bindings and checkpoints are identical after excluding discovery provenance, and the ownership/restoration/resume implementation is unchanged. No new human run is claimed. `--test-operator` is automatic mechanism evidence, never owner observation.
 
 ## Boundaries
 
 Policy is host-controlled: exact origin/routes/methods and known control effects, with commit always denied. Targets must be unique, visible and of the expected kind; the model cannot supply arbitrary selectors or code. Replay has no provider dependency or model fallback. Takeover invalidates stale work and waits for actual in-flight operations; resume validates the same session's declared anchors. This is a cooperative local protocol, not an OS input lock.
 
-Evidence uses strict allowlists and restricted DOM-derived snapshots, not raw DOM, transcripts, browser storage, screenshots or video. Provider retention is a separate concern (`store: false` is requested). The browser adapter is implemented; desktop and multi-tenant extensions are design-only. No universal website safety or production-bank qualification is claimed. [BUILD_SPEC.md](BUILD_SPEC.md), [CODEX_BUILD_BRIEF.md](CODEX_BUILD_BRIEF.md), and [status](IMPLEMENTATION_STATUS.md) preserve the implementation decisions and history. No deployment or employer email is performed by this project.
+Evidence uses strict allowlists and restricted DOM-derived snapshots, not raw DOM, transcripts, browser storage, screenshots or video. Provider retention is a separate concern (`store: false` is requested). The browser adapter is implemented; desktop and multi-tenant extensions are design-only. No universal website safety or production-bank qualification is claimed. [BUILD_SPEC.md](BUILD_SPEC.md), [CODEX_BUILD_BRIEF.md](CODEX_BUILD_BRIEF.md), and [status](IMPLEMENTATION_STATUS.md) preserve the implementation decisions and history.
