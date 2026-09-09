@@ -1,0 +1,603 @@
+{
+  "schemaVersion": 1,
+  "capabilityId": "prepare-transfer-review",
+  "capabilityVersion": 1,
+  "description": "Prepare the supplied member transfer and stop at verified review",
+  "profile": {
+    "id": "synthetic-bank",
+    "version": 1,
+    "policy": "review-only-v1"
+  },
+  "surface": [
+    "iframe-role",
+    "table-label"
+  ],
+  "contract": {
+    "inputs": {
+      "memberId": "identifier",
+      "sourceAccountRef": "identifier",
+      "destinationAccountRef": "identifier",
+      "amountCents": "positive-policy-cents"
+    },
+    "outputs": {
+      "memberId": "identifier",
+      "sourceAccountRef": "identifier",
+      "destinationAccountRef": "identifier",
+      "amountCents": "positive-policy-cents",
+      "feeCents": "fee-cents",
+      "currency": "USD",
+      "reviewStatus": "AWAITING_CONFIRMATION"
+    }
+  },
+  "exceptions": [
+    {
+      "screen": "not-found",
+      "disposition": "business",
+      "code": "MEMBER_NOT_FOUND"
+    },
+    {
+      "screen": "insufficient",
+      "disposition": "business",
+      "code": "INSUFFICIENT_FUNDS"
+    },
+    {
+      "screen": "validation",
+      "disposition": "business",
+      "code": "VALIDATION_REJECTED"
+    },
+    {
+      "screen": "permission",
+      "disposition": "failure",
+      "code": "PERMISSION_DENIED"
+    },
+    {
+      "screen": "app-error",
+      "disposition": "failure",
+      "code": "APP_ERROR"
+    },
+    {
+      "screen": "expired",
+      "disposition": "intervention",
+      "code": "HUMAN_REQUIRED"
+    },
+    {
+      "screen": "loading",
+      "disposition": "wait",
+      "code": "LOAD_TIMEOUT"
+    }
+  ],
+  "completion": {
+    "screen": "review",
+    "strategy": "visible-table",
+    "labels": [
+      "Member ID",
+      "Source account",
+      "Destination account",
+      "Amount USD",
+      "Fee USD",
+      "Currency",
+      "Review status"
+    ],
+    "checks": [
+      "extract-output-contract",
+      "compare-invocation",
+      "fee-policy",
+      "no-conflicting-error"
+    ]
+  },
+  "bindings": {
+    "target-001": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "textbox",
+      "name": {
+        "kind": "literal",
+        "text": "Member ID"
+      }
+    },
+    "target-002": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "button",
+      "name": {
+        "kind": "literal",
+        "text": "Search"
+      }
+    },
+    "target-003": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "link",
+      "name": {
+        "kind": "literal",
+        "text": "Accounts"
+      }
+    },
+    "target-004": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "link",
+      "name": {
+        "kind": "literal",
+        "text": "Prepare transfer"
+      }
+    },
+    "target-005": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "combobox",
+      "name": {
+        "kind": "literal",
+        "text": "Source account"
+      }
+    },
+    "target-006": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "combobox",
+      "name": {
+        "kind": "literal",
+        "text": "Destination account"
+      }
+    },
+    "target-007": {
+      "strategy": "table-label",
+      "frame": "Workspace",
+      "role": "textbox",
+      "label": "Amount USD"
+    },
+    "target-008": {
+      "strategy": "role",
+      "frame": "Workspace",
+      "role": "button",
+      "name": {
+        "kind": "literal",
+        "text": "Review transfer"
+      }
+    }
+  },
+  "steps": [
+    {
+      "id": "step-001",
+      "operation": {
+        "action": "fill",
+        "targetRef": "target-001",
+        "value": {
+          "kind": "input",
+          "name": "memberId",
+          "transform": "identity"
+        }
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "search"
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-001"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "search"
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-001",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-002",
+      "operation": {
+        "action": "click",
+        "targetRef": "target-002"
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "search"
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-001",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-002"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "member"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-003",
+      "operation": {
+        "action": "click",
+        "targetRef": "target-003"
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "member"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-003"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "accounts"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-004",
+      "operation": {
+        "action": "click",
+        "targetRef": "target-004"
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "accounts"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-004"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-005",
+      "operation": {
+        "action": "select",
+        "targetRef": "target-005",
+        "value": {
+          "kind": "input",
+          "name": "sourceAccountRef",
+          "transform": "identity"
+        }
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-005"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-005",
+          "expected": {
+            "kind": "input",
+            "name": "sourceAccountRef",
+            "transform": "identity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-006",
+      "operation": {
+        "action": "select",
+        "targetRef": "target-006",
+        "value": {
+          "kind": "input",
+          "name": "destinationAccountRef",
+          "transform": "identity"
+        }
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-005",
+          "expected": {
+            "kind": "input",
+            "name": "sourceAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-006"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-005",
+          "expected": {
+            "kind": "input",
+            "name": "sourceAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-006",
+          "expected": {
+            "kind": "input",
+            "name": "destinationAccountRef",
+            "transform": "identity"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-007",
+      "operation": {
+        "action": "fill",
+        "targetRef": "target-007",
+        "value": {
+          "kind": "input",
+          "name": "amountCents",
+          "transform": "usd-decimal"
+        }
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-005",
+          "expected": {
+            "kind": "input",
+            "name": "sourceAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-006",
+          "expected": {
+            "kind": "input",
+            "name": "destinationAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-007"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-005",
+          "expected": {
+            "kind": "input",
+            "name": "sourceAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-006",
+          "expected": {
+            "kind": "input",
+            "name": "destinationAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-007",
+          "expected": {
+            "kind": "input",
+            "name": "amountCents",
+            "transform": "usd-decimal"
+          }
+        }
+      ]
+    },
+    {
+      "id": "step-008",
+      "operation": {
+        "action": "click",
+        "targetRef": "target-008"
+      },
+      "preconditions": [
+        {
+          "kind": "screen",
+          "screen": "transfer"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-005",
+          "expected": {
+            "kind": "input",
+            "name": "sourceAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-006",
+          "expected": {
+            "kind": "input",
+            "name": "destinationAccountRef",
+            "transform": "identity"
+          }
+        },
+        {
+          "kind": "value-equals",
+          "targetRef": "target-007",
+          "expected": {
+            "kind": "input",
+            "name": "amountCents",
+            "transform": "usd-decimal"
+          }
+        },
+        {
+          "kind": "visible",
+          "targetRef": "target-008"
+        }
+      ],
+      "postconditions": [
+        {
+          "kind": "screen",
+          "screen": "review"
+        },
+        {
+          "kind": "member-equals",
+          "expected": {
+            "kind": "input",
+            "name": "memberId",
+            "transform": "identity"
+          }
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "runId": "d0765da1-6f26-45b9-b6ee-74e30c14a064",
+    "origin": "development-fixture",
+    "provider": "fixture",
+    "model": "scripted-development-v1",
+    "authoredConfig": "profile-v1;exceptions-v1;completion-v1",
+    "normalized": false
+  }
+}

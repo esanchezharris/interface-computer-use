@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.runs/
+.reproduction/
+.env
+.env.*
+!.env.example
+*.pdf
+.codegraph
+*.tsbuildinfo
+.DS_Store

@@ -1,0 +1,16 @@
+{
+  "formatter": { "enabled": true, "indentStyle": "space", "lineWidth": 100 },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": {
+        "noNonNullAssertion": "error",
+        "useImportType": "error",
+        "noParameterAssign": "error"
+      },
+      "suspicious": { "noExplicitAny": "error" }
+    }
+  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } }
+}

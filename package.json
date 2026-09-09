@@ -1,0 +1,36 @@
+{
+  "name": "interface-computer-use",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src sandbox tests scripts package.json tsconfig.json biome.json",
+    "format": "biome check --write src sandbox tests scripts package.json tsconfig.json biome.json",
+    "test": "npm run build && node --test --test-concurrency=1 dist/tests/**/*.test.js",
+    "verify:offline": "npm run lint && npm run typecheck && npm test",
+    "browser:install": "playwright install chromium",
+    "sandbox": "npm run build --silent && node dist/src/cli/sandbox.js",
+    "discover": "npm run build --silent && node dist/src/cli/discover.js",
+    "replay": "npm run build --silent && node dist/src/cli/replay.js",
+    "demo:replay": "npm run build --silent && node dist/src/cli/demo.js replay",
+    "demo:handoff": "npm run build --silent && node dist/src/cli/demo.js handoff",
+    "verify:live": "npm run build --silent && node dist/src/cli/live.js",
+    "test:artifact": "npm run build && node --test --test-concurrency=1 dist/tests/integration/outcomes.test.js dist/tests/integration/handoff.test.js dist/tests/integration/safety.test.js",
+    "evidence:capture": "npm run build --silent && node dist/scripts/capture-evidence.js"
+  },
+  "dependencies": {
+    "openai": "7.10.0",
+    "playwright": "1.63.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.12",
+    "@types/node": "26.5.0",
+    "typescript": "7.0.2"
+  }
+}
