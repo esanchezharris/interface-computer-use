@@ -20,5 +20,8 @@ The separately authorized USD5 account repair is also closed after genuine disco
 and exact-artifact qualification. Preserve both closures and the shared accounting.
 `npm run verify:live` is opt-in and budget-gated. See README and docs/LIVE_VALIDATION.md.
 
-Preserve applicable user-provided Codex Follow-up instructions in assistant responses:
-append one Follow-up JSON payload, normally with exactly four concrete prompts.
+Current owner authorization supersedes the prior closed-stage spending restriction only
+through the new final-validation approval, preserving all historical accounting and closures.
+Public GitHub creation/push is authorized after the declared final release checks; deployment
+and email remain unauthorized. The detailed walkthrough is deferred, not a release gate.
+The current request explicitly prohibits a follow-up menu.

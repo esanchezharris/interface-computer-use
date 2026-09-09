@@ -1,3 +1,15 @@
+# Final publication checkpoint
+
+State: FINAL_ROBUSTNESS_IN_PROGRESS. Started from clean `3d23f6616a83f6296f8c024dbfd9498134e6656a` on `build/computer-use`.
+
+Working sequence: (1) declare PDF §§3/7 coverage and bounded cases, extend existing final-phase approval preserving ledgers; (2) execute five genuine discovery scenarios, qualify independent artifacts and 20 declared keyless replays; (3) focused review, clean reproduction, safe-history/publication preflight; (4) publish and verify anonymous checkout. Next action: complete focused offline harness/budget checks before paid discovery.
+
+The owner superseded the USD5 repair-stage cap with the remaining original USD50 aggregate ceiling and authorized public GitHub publication after release checks. Original closures and 17-call/153245-token reservations remain intact. No new API calls yet. Detailed personal walkthrough is **deferred by owner**, remains incomplete, and is not a publication gate. Both owner-operated handoffs remain accepted for unchanged ownership/restoration/resume behavior. No such runtime code is changed by this phase's budget and test harness additions.
+
+---
+
+## Historical account repair checkpoint
+
 # Account-binding repair checkpoint
 
 State: **ACCOUNT_REPAIR_AUTOMATED_GATES_AND_CLEAN_REPRODUCTION_PASSED; OWNER_MANUAL_HANDOFF_PASSED; PERSONAL_CODE_REVIEW_PENDING**.

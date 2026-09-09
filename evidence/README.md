@@ -1,3 +1,21 @@
+# Final requirement-to-evidence map
+
+Acceptance basis: original assignment §§3 and 7, read completely. Final scenario definitions are in `final-evaluation.json`, declared before execution; outcomes will be appended without replacing failed attempts. Earlier evidence below remains historical until explicitly linked to current qualification.
+
+| Requirement | Implemented source | Assertions and existing evidence | Limits |
+|---|---|---|---|
+| 3.1 Goal-driven loop | `src/discovery/run.ts`, `openai.ts`, `surface/observe.ts`, `recording/recorder.ts` | `discovery-errors.test.ts`: malformed/stale/dead-end termination; `discovery-bindings.test.ts`: matching defaults cannot emit; prior genuine run `cf84d841-1d59-48cf-984a-0f8347b0c7c4` | Named screens/transitions authored; live model chooses primitive actions. Five new declared scenarios pending. |
+| 3.2 Structured artifact | `domain/artifact.ts`, `actions.ts`, `account-bindings.ts`, `recorder.ts` | `artifact.test.ts`: unknown version/strategy/reference/policy rejected before browser; `account-bindings.test.ts`: both correct checked symbolic selections required | Linear procedure, finite contract; no executable artifact code. |
+| 3.3 Deterministic replay | `replay/run.ts`, `surface/target.ts`, `executor.ts`, `checks.ts` | `parameterization.test.ts`: four member/direction outputs and reordered/default independence; `safety.test.ts`: fatal model-import hook and immutable exact bytes; `outcomes.test.ts`: typed business/errors, one review request on slow/exhausted waits | Fixed procedure over UI state; new 20-case sample is bounded observation, not production reliability. |
+| 3.4 Safety/policy | `policy/profile.ts`, `session/browser.ts`, `surface/executor.ts` | `policy-effects.test.ts`: unknown/form-method changes blocked before activation; `safety.test.ts`: submit/formaction/routes denied; positive changed-input reviews still succeed | Curated loopback surface, no universal web or OS sandbox claim. |
+| 3.5 Evidence/observability | `evidence/schema.ts`, `store.ts`, `replay/result.ts` | `redaction.test.ts`: sensitive field/text/URL/human/model sentinels excluded and extra event properties rejected; outcome failures include safe snapshot | Restricted DOM-derived structure, no raw transcript or automatic video. |
+| 3.6 Human escalation | `session/controller.ts`, `resume.ts`, `cli/operator.ts` | `handoff.test.ts`: same page/context and wrong restored values; `ownership.test.ts`: actual in-flight settlement and stale work; `review-regressions.test.ts`: real timed-out browser action cannot fire in HUMAN; `owner-handoff.json`: two owner attestations linked to automatic run metadata | Cooperative terminal/browser operator, no OS input lock. Manual observations remain tied to their exact old source/artifact. |
+| 3.7 Heterogeneity/reuse | `domain/actions.ts`, `policy/profile.ts`, `REPORT.md` | Both role/name and table-relative control strategies run inside Workspace iframe (`slice.test.ts`, parameterization); schema/profile incompatibility tests | Browser implemented. Desktop adapters, tenant overrides and drift management are design-only, as permitted by §3.7. |
+
+Runtime categories are deliberately distinct: contract rejection before browser; visible not-found/insufficient/validation business outcomes; bounded loading recovery; permission/app/load/target/checkpoint hard failures; expired-session intervention. No browser/DOM dialogs are authorized as ordinary workflow controls; known review is a page, unknown dialogs are rejected. Final timeout regression injects a transport timeout **after a real UI action**, independently checks one review request and current review outputs; it complements the real blocked-click timeout test.
+
+---
+
 # Current account-repair evidence
 
 **New genuine discovery and repaired-artifact automated qualification passed. Owner manual handoff passed twice; personal code review remains pending.**

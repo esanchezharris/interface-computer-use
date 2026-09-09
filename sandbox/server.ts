@@ -10,6 +10,8 @@ export type SandboxOptions = {
   readonly port?: number;
   readonly fault?: Fault;
   readonly delayMs?: number;
+  // Test-side visible-page perturbation; never passed to the automation runtime.
+  readonly transformPage?: (html: string) => string;
 };
 export type Sandbox = {
   readonly origin: string;
@@ -66,7 +68,7 @@ export async function startSandbox(options: SandboxOptions = {}): Promise<Sandbo
       response.setHeader("Set-Cookie", `sandbox-session=${id}; HttpOnly; SameSite=Strict; Path=/`);
     }
     const send = (body: string): void => {
-      response.end(body);
+      response.end(options.transformPage?.(body) ?? body);
     };
     const reject = (heading = "Validation rejected"): void => send(page.message(heading));
     const method = request.method ?? "GET";

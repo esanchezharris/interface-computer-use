@@ -15,7 +15,9 @@ try {
   const app = await startSandbox({ port: 0 });
   try {
     const learned = await discover({
-      goal: "Find the supplied member and prepare the supplied transfer. Stop at review; never submit.",
+      goal:
+        options.goal ??
+        "Find the supplied member and prepare the supplied transfer. Stop at review; never submit.",
       input: readJSON(options.inputs ?? "examples/member-a.json"),
       model,
       outputPath,

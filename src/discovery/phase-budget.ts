@@ -16,6 +16,18 @@ export const LIVE_PHASE = "assignment-20260908";
 export const MAX_INPUT_TOKENS = 16_384;
 export const RESERVED_USD_PER_MILLION = 50;
 export const REPAIR_STAGE = "account-repair";
+export const FINAL_STAGE = "final-validation";
+export const FinalApproval = z.strictObject({
+  phase: z.literal(LIVE_PHASE),
+  stage: z.literal(FINAL_STAGE),
+  aggregateLimitUsd: z.literal(50),
+  priorCalls: z.literal(17),
+  priorReservedTokens: z.literal(153245),
+  model: z.literal("gpt-5.6-sol"),
+  reasoning: z.literal("low"),
+  maxOutputTokens: z.literal(2000),
+  maxCalls: z.literal(96),
+});
 export const RepairApproval = z.strictObject({
   phase: z.literal(LIVE_PHASE),
   stage: z.literal(REPAIR_STAGE),
@@ -27,12 +39,12 @@ export const RepairApproval = z.strictObject({
   reasoning: z.literal("low"),
   maxOutputTokens: z.literal(2000),
 });
-export type BudgetStage = "selection" | "acceptance" | typeof REPAIR_STAGE;
+export type BudgetStage = "selection" | "acceptance" | typeof REPAIR_STAGE | typeof FINAL_STAGE;
 export class PhaseBudget {
   readonly #directory: string;
   readonly #total: DurableBudget;
   readonly #selection: DurableBudget;
-  constructor(directory = resolve(".runs/budgets")) {
+  constructor(directory = resolve(".runs/budgets"), stage?: BudgetStage) {
     this.#directory = directory;
     const config = {
       model: "standard-two-candidate-phase",
@@ -40,13 +52,40 @@ export class PhaseBudget {
       maxOutputTokens: 4000,
     };
     this.#total = new DurableBudget(
-      { ...config, budgetId: `${LIVE_PHASE}-total`, maxTotalTokens: 1_000_000 },
+      {
+        ...config,
+        maxCalls: stage === FINAL_STAGE ? 96 : 32,
+        budgetId: `${LIVE_PHASE}-total`,
+        maxTotalTokens: 1_000_000,
+      },
       directory,
     );
     this.#selection = new DurableBudget(
       { ...config, budgetId: `${LIVE_PHASE}-selection`, maxTotalTokens: 100_000 },
       directory,
     );
+  }
+  private requireFinalApproval(): void {
+    try {
+      const path = join(this.#directory, `${LIVE_PHASE}-${FINAL_STAGE}.approved.json`);
+      if (statSync(path).size > 4096) throw new Fault("MODEL_UNAVAILABLE");
+      const approval = FinalApproval.parse(JSON.parse(readFileSync(path, "utf8")));
+      for (const name of [
+        `${LIVE_PHASE}.closed`,
+        `${LIVE_PHASE}-${REPAIR_STAGE}.closed`,
+        `${LIVE_PHASE}-total.json`,
+        "live-sol-20260908.json",
+      ])
+        if (!existsSync(join(this.#directory, name))) throw new Fault("MODEL_UNAVAILABLE");
+      const total = this.#total.usage();
+      if (total.calls < approval.priorCalls || total.tokens < approval.priorReservedTokens)
+        throw new Fault("MODEL_UNAVAILABLE");
+      if (existsSync(join(this.#directory, `${LIVE_PHASE}-${FINAL_STAGE}.closed`)))
+        throw new Fault("MODEL_BUDGET_EXHAUSTED");
+    } catch (error) {
+      if (error instanceof Fault) throw error;
+      throw new Fault("MODEL_UNAVAILABLE");
+    }
   }
   usage() {
     const total = this.#total.usage();
@@ -91,7 +130,8 @@ export class PhaseBudget {
       throw new Fault("EVIDENCE_WRITE_FAILED");
     }
     try {
-      if (stage === REPAIR_STAGE) this.requireRepairApproval(tokens);
+      if (stage === FINAL_STAGE) this.requireFinalApproval();
+      else if (stage === REPAIR_STAGE) this.requireRepairApproval(tokens);
       else if (existsSync(join(this.#directory, `${LIVE_PHASE}.closed`)))
         throw new Fault("MODEL_BUDGET_EXHAUSTED");
       if (stage === "selection") await this.#selection.reserve(tokens);

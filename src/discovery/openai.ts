@@ -11,7 +11,7 @@ const ApprovedConfigSchema = BudgetConfigSchema.extend({
   apiKey: z.string().min(1).max(512).regex(/^\S+$/),
   model: z.enum(["gpt-5.6-sol", "gpt-6-astra"]),
   phase: z.literal(LIVE_PHASE),
-  stage: z.enum(["selection", "acceptance", "account-repair"]),
+  stage: z.enum(["selection", "acceptance", "account-repair", "final-validation"]),
   reasoning: z.enum(["low", "medium"]),
 });
 export type ApprovedConfig = Readonly<z.infer<typeof ApprovedConfigSchema>>;
@@ -42,8 +42,12 @@ export function approvedConfig(env: NodeJS.ProcessEnv): ApprovedConfig {
   });
   if (!parsed.success || parsed.data.maxOutputTokens > parsed.data.maxTotalTokens)
     throw new Fault("MODEL_UNAVAILABLE");
+  if (parsed.data.stage !== "final-validation" && parsed.data.maxCalls > 32)
+    throw new Fault("MODEL_UNAVAILABLE");
+  if (parsed.data.stage === "final-validation" && parsed.data.maxCalls !== 96)
+    throw new Fault("MODEL_UNAVAILABLE");
   if (
-    parsed.data.stage === "account-repair" &&
+    ["account-repair", "final-validation"].includes(parsed.data.stage) &&
     (parsed.data.model !== "gpt-5.6-sol" ||
       parsed.data.reasoning !== "low" ||
       parsed.data.maxOutputTokens !== 2000 ||
@@ -82,7 +86,7 @@ class OpenAIModel implements Model {
   readonly #reasoning: ApprovedConfig["reasoning"];
   #lastMetadata: RequestMetadata = {};
   constructor(config: ApprovedConfig, directory: string) {
-    this.#phase = new PhaseBudget(directory);
+    this.#phase = new PhaseBudget(directory, config.stage);
     this.#stage = config.stage;
     this.#reasoning = config.reasoning;
     this.model = config.model;

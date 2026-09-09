@@ -17,7 +17,7 @@ import { Fault } from "../domain/contract.js";
 export const BudgetConfigSchema = z.strictObject({
   budgetId: z.string().regex(/^[a-z0-9][a-z0-9_-]{0,63}$/),
   model: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._:-]{0,99}$/),
-  maxCalls: z.number().int().positive().max(32),
+  maxCalls: z.number().int().positive().max(96),
   maxTotalTokens: z.number().int().positive().max(1_000_000),
   maxOutputTokens: z.number().int().positive().max(4000),
 });
@@ -25,7 +25,7 @@ export type BudgetConfig = Readonly<z.infer<typeof BudgetConfigSchema>>;
 const Ledger = z.strictObject({
   schemaVersion: z.literal(1),
   config: BudgetConfigSchema,
-  calls: z.number().int().min(0).max(32),
+  calls: z.number().int().min(0).max(96),
   tokens: z.number().int().min(0).max(1_000_000),
 });
 type Ledger = z.infer<typeof Ledger>;
